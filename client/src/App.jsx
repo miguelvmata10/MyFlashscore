@@ -24,6 +24,10 @@ function App() {
           </div>
         ))}
       </div>
+      <div className="container">
+            <h1 className="p-5 text-center">Olá, Bootstrap com React!</h1>
+            <button variant="primary">Clique aqui</button>
+        </div>
     </>
   )
 }
