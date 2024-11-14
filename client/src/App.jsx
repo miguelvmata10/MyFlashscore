@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
+import {BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css'
 import axios from "axios"
 
 function App() {
 
+  // teste para recebimento de dados da backend
   const [teste, setTeste] = useState([]);
   const fetchAPI = async () => {
     const response = await axios.get("http://localhost:8080/api"); 
