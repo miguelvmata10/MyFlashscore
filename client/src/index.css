@@ -1,0 +1,6 @@
+body, #root {
+    background-color: #010b0e; 
+    color: #fff;
+    font-family: 'Roboto', sans-serif; 
+    min-height: 100vh; /* Garante que o fundo ocupe toda a altura */
+}
