@@ -9,6 +9,7 @@ const Sidebar = () => {
 
     const [selected, setSelected] = useState('ligas');
     const [countries, setCountries] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const fetchCountries = async () => {
         try {
@@ -18,6 +19,9 @@ const Sidebar = () => {
         }
         catch (error) {
             console.log(error);
+        }
+        finally {
+            setLoading(false);
         }
     }
 
@@ -33,10 +37,16 @@ const Sidebar = () => {
         return button === selected ? "active" : "";
     }
 
+    if (loading) {
+        return <div>
+            Carregando...
+        </div>
+    }
+
     return (
         <>
             <div className='sidebar'>
-                <ButtonGroup size='lg'>
+                <ButtonGroup size='md'>
                     <Button className={isActiveButton('ligas')} onClick={() => handleButtonState('ligas')}>Ligas</Button>
                     <Button className={isActiveButton('paises')} onClick={() => handleButtonState('paises')}>Países</Button>
                 </ButtonGroup> 
