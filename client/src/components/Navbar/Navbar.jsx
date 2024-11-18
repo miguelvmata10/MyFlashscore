@@ -6,8 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 const CustomNavbar = () => (
-    <Navbar expand="lg" className='navbar '>
-        <Navbar.Brand href='/sdf'>
+    <Navbar expand="lg" className='navbar mb-4'>
+        <Navbar.Brand href='/'>
             <img src={logo} className="logo" alt="logo"/>
         </Navbar.Brand>
         
