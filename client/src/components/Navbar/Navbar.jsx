@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 const CustomNavbar = () => (
     <Navbar expand="lg" className='navbar mb-4'>
         <Navbar.Brand href='/'>
-            <img src={logo} className="logo" alt="logo"/>
+            <img src={logo} className="logo ps-3" alt="logo"/>
         </Navbar.Brand>
         
         <div className='ms-auto p-2'>
