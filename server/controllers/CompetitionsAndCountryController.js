@@ -33,7 +33,7 @@ const getLeaguesPerCountry = async (req, res) => {
     try {
         const data = await apiFootballReq('leagues', {code: countryCode});
 
-        if (!data.response || data.response.lenght === 0) {
+        if (!data.response || data.response.length === 0) {
             return res.status(404).json({error: `Nenhuma liga com o respetivo código do país: ${countryCode}`});
         }
 
@@ -44,11 +44,28 @@ const getLeaguesPerCountry = async (req, res) => {
     }
 };
 
+const getLeaguePerID = async (req, res) => {
+    const leagueID = req.params.id;
+
+    try {
+        const data = await apiFootballReq('leagues', {id: leagueID});
+        if (!data.response || data.response.length === 0) {
+            return res.status(404).json({error: `Nenhuma liga com o id definido: ${leagueID}`});
+        }
+        console.log(data.response);
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Erro ao obter a liga: ', error);
+        res.status(500).json({error: 'Erro interno do servidor'});
+    }
+};
+
 
 module.exports = {
     getCountries,
     getLeagues,
     getLeaguesPerCountry,
+    getLeaguePerID,
 };
 
 
