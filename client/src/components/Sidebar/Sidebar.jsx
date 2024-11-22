@@ -48,12 +48,11 @@ const Sidebar = () => {
                 {leagues.map((topLeague) => (
                     <ListGroup.Item key={topLeague.league.id} className=''>
                         <Row>
-                            <Col md={2}>
+                            <Col md={3}>
                                 <Image src={topLeague.league.logo} width={30} height={auto}/>
                             </Col>
-                            <Col md={10}>
-                                {/* Link to={} e depois adicionar no App.jsx a rota*/}
-                                <Link className='topLeague'>
+                            <Col md={9}>
+                                <Link to={`/league/${topLeague.league.id}`} className='topLeague'>
                                     <span>
                                         {topLeague.league.name}
                                     </span>
