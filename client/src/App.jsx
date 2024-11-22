@@ -1,16 +1,31 @@
 import React from 'react'
-import {BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import HomePage from './pages/HomePage';
+import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Container, Row, Col } from "react-bootstrap";
+import Navbar from './components/Navbar/Navbar';
+import Sidebar from './components/Sidebar/Sidebar';
+import Matchlist from './components/Matchlist/Matchlist';
+import League from './components/League/League';
 import './App.css'
+
 
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path='/' element={<HomePage />}/>
-        <Route path="/about" element={<div>Sobre a aplicação</div>} />
-      </Routes>
+      <Container fluid>
+      <Navbar />
+        <Row>
+          <Col md={2}>
+            <Sidebar />
+          </Col>
+          <Col md={10}>
+            <Routes>
+              <Route path='/' element={<Matchlist />}/>
+              <Route path="/league/:leagueID" element={<League />} />
+            </Routes>
+          </Col>
+        </Row>
+      </Container>
     </Router>
   )
 }
