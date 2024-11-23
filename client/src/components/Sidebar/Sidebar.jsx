@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Sidebar.css';
 import api from '../../services/api';
 import Container from 'react-bootstrap/esm/Container';
-import { ListGroup, Image, Row, Col } from 'react-bootstrap';
+import { ButtonGroup, Button, Image, Row, Col } from 'react-bootstrap';
 import { auto } from '@popperjs/core';
 import { Link } from 'react-router-dom';
 
@@ -40,28 +40,18 @@ const Sidebar = () => {
     }
 
     return (
-        <Container className='container'>
-            <ListGroup className=''>
-                <ListGroup.Item className='text-center'>
-                    <h6><b>Top Leagues</b></h6>
-                </ListGroup.Item>
+        <Container className='container p-3 rounded-4 mb-2'>
+            <div className='text-center mb-3'>
+                    <h4><b>Top Leagues</b></h4>
+            </div>
+            <ButtonGroup vertical>
                 {leagues.map((topLeague) => (
-                    <ListGroup.Item key={topLeague.league.id} className=''>
-                        <Row>
-                            <Col md={3}>
-                                <Image src={topLeague.league.logo} width={30} height={auto}/>
-                            </Col>
-                            <Col md={9}>
-                                <Link to={`/league/${topLeague.league.id}`} className='topLeague'>
-                                    <span>
-                                        {topLeague.league.name}
-                                    </span>
-                                </Link>
-                            </Col>
-                        </Row>
-                    </ListGroup.Item>
+                    <Button className='d-flex mb-2' as={Link} to={`/league/${topLeague.league.id}`} key={topLeague.league.id}>
+                        <Image className='' src={topLeague.league.logo} width={25} height={auto}/>
+                        <span>{topLeague.league.name}</span>
+                    </Button>
                 ))}
-            </ListGroup>
+            </ButtonGroup>
         </Container>
     );
 };

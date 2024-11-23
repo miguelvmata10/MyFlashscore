@@ -1,0 +1,18 @@
+.btn-group-vertical .btn {
+    background-color: transparent;
+    border: none;
+}
+.btn-group-vertical .btn:hover {
+    background-color: transparent;
+    color: #ff4037;
+    cursor: pointer; 
+    transform: scale(1.1);          
+}
+
+.btn-group-vertical .btn.active {
+    background-color: transparent;
+    color: #ff4037;
+}
+.btn-group-vertical .btn.active:hover {
+    color: #ff4037;
+}
