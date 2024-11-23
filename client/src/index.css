@@ -1,6 +1,8 @@
 body, #root {
-    background-color: #010b0e; 
+    background-color: #151415; 
     color: #fff;
     font-family: 'Funnel Sans', sans-serif;
-    min-height: 100vh; /* Garante que o fundo ocupe toda a altura */
+    min-height: 100vh; 
 }
+
+
