@@ -1,0 +1,27 @@
+.container {
+    background-color: #353533;
+}
+
+.btn-group {
+    gap: 50px;                  
+}
+
+.btn-group .btn {
+    background-color: transparent;
+    border: none;
+}
+.btn-group .btn:hover {
+    background-color: transparent;
+    color: #ff4037;
+    cursor: pointer; 
+    transform: scale(1.1);          
+}
+
+.btn-group .btn.active {
+    background-color: transparent;
+    color: #ff4037;
+}
+.btn-group .btn.active:hover {
+    color: #ff4037;
+}
+  
