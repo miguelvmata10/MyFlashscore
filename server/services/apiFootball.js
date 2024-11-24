@@ -1,6 +1,7 @@
 const axios = require('axios');
 const redis = require('redis'); // redis para cache
-require('dotenv').config(); // ir buscar os dados da api-key e api-host
+const { apiFootballKey, apiFootballHost } = require('./config');
+
 
 const client = redis.createClient({
   url: 'redis://localhost:6379'
@@ -29,8 +30,8 @@ const apiFootballReq = async (endpoint, params = {}) => {
         method: 'get',
         url: `https://api-football-v1.p.rapidapi.com/v3/${endpoint}`,
         headers: {
-          'x-rapidapi-key': process.env.API_FOOTBALL_KEY,
-          'x-rapidapi-host': process.env.API_FOOTBALL_HOST
+          'x-rapidapi-key': apiFootballKey,
+          'x-rapidapi-host': apiFootballHost
         },
         params: params
       };
@@ -38,9 +39,11 @@ const apiFootballReq = async (endpoint, params = {}) => {
       const response = await axios(config);
       const data = response.data;
 
-      // guarda a resposta na cache de forma persistente
-      await client.set(cackeKey, JSON.stringify(data));
-      console.log("Resposta guardada na cache.");
+      // Armazena a resposta na cache com TTL de 24 horas (86400 segundos)
+      await client.set(cacheKey, JSON.stringify(data), {
+        EX: 86400  
+      });
+      console.log("Resposta guardada na cache com um TTL de 24 horas");
 
       return data;
     } 
