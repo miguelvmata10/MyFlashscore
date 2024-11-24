@@ -16,4 +16,13 @@ router.get('/countries/leagues', competitionAndCountryController.getLeaguesPerCo
 // rota para obter a liga com o id 'id'
 router.get('/leagues/:id', competitionAndCountryController.getLeaguePerID);
 
+// rota para obter a classificação da liga através do id da liga e do ano
+router.get('/standings', competitionAndCountryController.getLeagueStandings);
+
+// rota que retorna os melhores marcadores de uma determinada liga através do id e do ano
+router.get('/league/topScorers', competitionAndCountryController.getLeagueTopScorers);
+
+// rota que retorna os melhores assistentes de uma determinada liga através do id e do ano
+router.get('/league/topAssisters', competitionAndCountryController.getLeagueTopAssists);
+
 module.exports = router;
