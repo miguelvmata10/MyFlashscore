@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
     // ids das top leagues
-    const topLeaguesIDs = [39, 140, 135, 78, 2, 61, 3, 848];
+    const topLeaguesIDs = [39, 140, 135, 78, 2, 94, 61, 3];
 
     const [leagues, setLeagues] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -47,8 +47,8 @@ const Sidebar = () => {
             <ButtonGroup vertical>
                 {leagues.map((topLeague) => (
                     <Button className='d-flex mb-2' as={Link} to={`/league/${topLeague.league.id}`} key={topLeague.league.id}>
-                        <Image className='' src={topLeague.league.logo} width={25} height={auto}/>
-                        <span>{topLeague.league.name}</span>
+                        <Image className='imageResize' src={topLeague.league.logo} />
+                        <span className='ms-2'>{topLeague.league.name}</span>
                     </Button>
                 ))}
             </ButtonGroup>
