@@ -5,4 +5,8 @@ body, #root {
     min-height: 100vh; 
 }
 
-
+.imageResize {
+    width: 30px;          /* Defina a largura da imagem */
+    height: 30px;         /* Defina a altura da imagem */
+    object-fit: contain;  /* Mantém as proporções da imagem */
+}
