@@ -7,8 +7,6 @@ import Matchlist from './components/Matchlist/Matchlist';
 import League from './components/League/League';
 import './App.css'
 
-
-
 function App() {
   return (
     <Router>

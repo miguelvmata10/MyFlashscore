@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Image, Row, Col } from 'react-bootstrap';
 import { auto } from '@popperjs/core';
+import Standings from './Standings';
 
 const League = () => {
     // obter o id pela URL
@@ -43,10 +44,7 @@ const League = () => {
         return <div>Carregando...</div>;
     }
 
-    // colocar um dropdown para escolher a epoca e depois consoante a epoca apresentar os dados
-    // Por predefinição aparece a epoca atual
-    // Se o user escolher outra epoca, o botão de 'Lista' desaparece
-    // Falta também fazer a verificação se é Taça ou liga
+    const currentSeason = leagueData[0].seasons.find(season => season.current);
 
     return (
         <Container className='container p-5 rounded-4'>
@@ -56,6 +54,7 @@ const League = () => {
                 </Col>
                 <Col>
                     <h4 className="mb-0">{leagueData[0].league.name}</h4>
+                    <h6>{currentSeason ? `${currentSeason.year} / ${currentSeason.year + 1}` : 'Nenhuma época atual encontrada'}</h6>
                 </Col>
             </Row>
             <Row>
@@ -69,11 +68,17 @@ const League = () => {
                     <Button className={isActiveButton('lista')} onClick={() => handleButtonState('lista')}>
                         Lista
                     </Button>
+                    <Button className={isActiveButton('marcadores')} onClick={() => handleButtonState('marcadores')}>
+                        Marcadores
+                    </Button>
                     <Button className={isActiveButton('arquivo')} onClick={() => handleButtonState('arquivo')}>
                         Arquivo
                     </Button>
                 </ButtonGroup> 
                 <hr />
+            </Row>
+            <Row>
+                <Standings season={currentSeason.year} leagueID={leagueID} />
             </Row>
         </Container>
     );
