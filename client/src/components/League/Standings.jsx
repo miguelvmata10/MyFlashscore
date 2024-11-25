@@ -33,7 +33,7 @@ const Standings = ({ leagueID, season }) => {
     <div>Carregando...</div>
   }
   return (
-    <Table striped hover responsive variant="dark" className='p-3'>
+    <Table striped hover responsive variant="dark">
       <thead>
         <tr>
           <th>º</th>
@@ -49,24 +49,41 @@ const Standings = ({ leagueID, season }) => {
         </tr>
       </thead>
       <tbody>
-        {teams.map((team) => (
-          <tr className='p-2' key={team.rank}>
-            <td>{team.rank}</td>
-            <td>
-              <Image className='imageResize ' src={team.team.logo} width={30} height={30}/>
-              <span className='ms-3'>{team.team.name}</span>
-            </td>
-            <td>{team.all.played}</td>
-            <td>{team.all.win}</td>
-            <td>{team.all.draw}</td>
-            <td>{team.all.lose}</td>
-            <td>{`${team.all.goals.for}:${team.all.goals.against}`}</td>
-            <td>{team.all.goals.for - team.all.goals.against}</td>
-            <td>{team.points}</td>
-            <td>{team.form}</td>
-          </tr>
-        ))}
+        {teams.map((team) => {
+          const teamData = team?.all; 
+          const teamName = team?.team?.name || 'N/A';
+          const teamLogo = team?.team?.logo || ''; 
+          const rank = team?.rank || 'N/A';
+          const gamesPlayed = teamData?.played ?? 'N/A';
+          const gamesWon = teamData?.win ?? 'N/A';
+          const gamesDrawn = teamData?.draw ?? 'N/A';
+          const gamesLost = teamData?.lose ?? 'N/A';
+          const goalsFor = teamData?.goals?.for ?? 0;
+          const goalsAgainst = teamData?.goals?.against ?? 0;
+          const goalDifference = goalsFor - goalsAgainst;
+          const points = team?.points ?? 'N/A';
+          const form = team?.form || 'N/A';
+
+          return (
+            <tr className="p-2" key={rank}>
+              <td>{rank}</td>
+              <td>
+                <Image className="imageResize" src={teamLogo} alt="Team logo" />
+                <span className="ms-3">{teamName}</span>
+              </td>
+              <td>{gamesPlayed}</td>
+              <td>{gamesWon}</td>
+              <td>{gamesDrawn}</td>
+              <td>{gamesLost}</td>
+              <td>{`${goalsFor}:${goalsAgainst}`}</td>
+              <td>{goalDifference}</td>
+              <td>{points}</td>
+              <td>{form}</td>
+            </tr>
+          );
+        })}
       </tbody>
+
     </Table>
   );
 };
