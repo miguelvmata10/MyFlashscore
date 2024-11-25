@@ -77,10 +77,10 @@ const getLeagueStandings = async (req, res) => {
     }
 };
 
-const getLeagueTopScorers = async () => {
-    const { league, season } = req.body;
+const getLeagueTopScorers = async (req, res) => {
+    const { league, season } = req.query;
     try {
-        const data = await apiFootballReq('/topscorers', {league: league, season: season});
+        const data = await apiFootballReq('players/topscorers', {league: league, season: season});
         if (!data.response || data.response.length === 0) {
             return res.status(404).json({error: `Nenhuma tabela classificativa com os dados: ${league} e ${season}`})
         }
@@ -91,10 +91,10 @@ const getLeagueTopScorers = async () => {
     }
 };
 
-const getLeagueTopAssists = async () => {
-    const { league, season } = req.body;
+const getLeagueTopAssists = async (req, res) => {
+    const { league, season } = req.query;
     try {
-        const data = await apiFootballReq('/topassists', {league: league, season: season});
+        const data = await apiFootballReq('players/topassists', {league: league, season: season});
         if (!data.response || data.response.length === 0) {
             return res.status(404).json({error: `Nenhuma tabela classificativa com os dados: ${league} e ${season}`})
         }
