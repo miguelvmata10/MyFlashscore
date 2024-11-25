@@ -6,7 +6,7 @@ body, #root {
 }
 
 .imageResize {
-    width: 30px;          /* Defina a largura da imagem */
-    height: 30px;         /* Defina a altura da imagem */
+    width: 30px;          
+    height: 30px;         
     object-fit: contain;  /* Mantém as proporções da imagem */
 }
