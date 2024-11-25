@@ -15,10 +15,10 @@ client.connect()
 const apiFootballReq = async (endpoint, params = {}) => {
 
     // cria uma chave única que combina o endpoint e os parâmetros
-    const cackeKey = `apiFootball:${endpoint}:${JSON.stringify(params)}`;
+    const cacheKey = `apiFootball:${endpoint}:${JSON.stringify(params)}`;
 
     try {
-      const cacheData = await client.get(cackeKey);
+      const cacheData = await client.get(cacheKey);
 
       // se os dados estão em cache, retorna esses dados
       if (cacheData) {
