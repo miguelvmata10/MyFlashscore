@@ -41,10 +41,14 @@ const Statistics = ({leagueID, season}) => {
   }, [leagueID, season]);
 
   if (loading) {
-    <div>Carregando...</div>
+    return <div>Carregando...</div>
   }
 
   const dataToDisplay = selected === 'marcadores' ? topScorers : topAssisters;
+
+  if (!dataToDisplay || dataToDisplay.length === 0) {
+    return <div>Não temos dados para esta época. Sorry!</div>
+  }
 
   return (
     <Container className='container rounded-4'>
