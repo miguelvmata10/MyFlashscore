@@ -6,7 +6,6 @@ import useButtonGroup from '../../hooks/useButtonGroup';
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
 import { Image, Row, Col } from 'react-bootstrap';
 import Standings from './Standings';
 import Statistics from './Statistics';
@@ -15,25 +14,14 @@ import ListOfGames from './ListOfGames';
 
 const League = () => {
     const { leagueID } = useParams();
-    const [leagueData, setLeagueData] = useState(null);
-    const [availableSeasons, setAvailableSeasons] = useState(null);
-    const [selectedSeason, setSelectedSeason] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [ leagueData, setLeagueData ] = useState(null);
+    const [ loading, setLoading ] = useState(true);
     const { selected, handleButtonState, isActiveButton } = useButtonGroup('classificacoes');
 
     const fetchLeagueData = async () => {
         try {
             const response = await api.get(`/competitions/leagues/${leagueID}`);
             setLeagueData(response.data.response);
-
-            const seasons = response.data.response[0]?.seasons.map((season) => season.year);
-            setAvailableSeasons(seasons);
-
-            // Definir a temporada atual
-            const currentSeason = response.data.response[0]?.seasons.find((season) => season.current);
-            if (currentSeason) {
-                setSelectedSeason(currentSeason.year);
-            }
         } catch (error) {
             console.error('Erro ao obter os dados da liga: ', error);
         } finally {
@@ -48,25 +36,23 @@ const League = () => {
     const renderComponent = () => {
         switch (selected) {
             case 'classificacoes':
-                return <Standings season={selectedSeason} leagueID={leagueID} />;
+                return <Standings season={currentSeason.year} leagueID={leagueID} />;
             case 'resultados':
                 return <Results />;
             case 'lista':
                 return <ListOfGames />;
             case 'marcadores':
-                return <Statistics season={selectedSeason} leagueID={leagueID} />;
+                return <Statistics season={currentSeason.year} leagueID={leagueID} />;
             default:
                 return <div>Erro</div>;
         }
     };
 
-    const handleDropdownSelect = (eventKey) => {
-        setSelectedSeason(eventKey);
-    };
-
     if (loading) {
         return <div>Carregando...</div>;
     }
+
+    const currentSeason = leagueData[0].seasons.find(season => season.current);
 
     return (
         <Container className="container p-5 rounded-4">
@@ -76,16 +62,7 @@ const League = () => {
                 </Col>
                 <Col>
                     <h4 className="mb-2">{leagueData[0]?.league?.name}</h4>
-                    <Dropdown onSelect={handleDropdownSelect} size="sm">
-                        <Dropdown.Toggle variant="secondary" size="sm" id="dropdown-basic">
-                            {selectedSeason ? `${selectedSeason} / ${parseInt(selectedSeason) + 1}` : 'Selecionar temporada'}
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {availableSeasons?.map((season) => (    
-                                <Dropdown.Item eventKey={season}>{`${season} / ${season + 1}`}</Dropdown.Item> 
-                            ))}
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    <h6>{currentSeason ? `${currentSeason.year} / ${currentSeason.year + 1}` : 'Nenhuma época atual encontrada'}</h6>
                 </Col>
             </Row>
             <Row>
