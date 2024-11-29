@@ -77,6 +77,7 @@ const getLeagueStandings = async (req, res) => {
     }
 };
 
+// Endpoint que retorna os melhores marcadores da liga numa determinada época
 const getLeagueTopScorers = async (req, res) => {
     const { league, season } = req.query;
     try {
@@ -91,6 +92,7 @@ const getLeagueTopScorers = async (req, res) => {
     }
 };
 
+// Endpoint que retorna os melhores assistentes da liga numa determinada época
 const getLeagueTopAssists = async (req, res) => {
     const { league, season } = req.query;
     try {
