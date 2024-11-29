@@ -5,8 +5,22 @@ body, #root {
     min-height: 100vh; 
 }
 
+.container {
+    background-color: #353533;
+}
+
 .imageResize {
     width: 30px;          
     height: 30px;         
     object-fit: contain;  /* Mantém as proporções da imagem */
+}
+
+.customLink {
+    text-decoration: none;
+    color: inherit; 
+  }
+  
+.customLink:hover {
+    text-decoration: underline; 
+    cursor: pointer; 
 }

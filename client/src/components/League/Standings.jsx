@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Image } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import api from '../../services/api';
 
 const Standings = ({ leagueID, season }) => {
@@ -52,6 +53,7 @@ const Standings = ({ leagueID, season }) => {
         {teams.map((team) => {
           const teamData = team?.all; 
           const teamName = team?.team?.name || 'N/A';
+          const teamID = team?.team?.id || 'N/A';
           const teamLogo = team?.team?.logo || ''; 
           const rank = team?.rank || 'N/A';
           const gamesPlayed = teamData?.played ?? 'N/A';
@@ -69,7 +71,11 @@ const Standings = ({ leagueID, season }) => {
               <td>{rank}</td>
               <td>
                 <Image className="imageResize" src={teamLogo} alt="Team logo" />
-                <span className="ms-3">{teamName}</span>
+                <span className="ms-3">
+                  <Link to={`/team/${teamID}`} className="customLink">
+                    {teamName}
+                  </Link>
+                </span>
               </td>
               <td>{gamesPlayed}</td>
               <td>{gamesWon}</td>
