@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import Sidebar from './components/Sidebar/Sidebar';
 import Matchlist from './components/Matchlist/Matchlist';
 import League from './components/League/League';
+import Team from './components/Team/Team';
 import './App.css'
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
           <Col md={10}>
             <Routes>
               <Route path='/' element={<Matchlist />}/>
-              <Route path="/league/:leagueID" element={<League />} />
+              <Route path='/league/:leagueID' element={<League />} />
+              <Route path='/team/:teamID' element={<Team />} />
             </Routes>
           </Col>
         </Row>
