@@ -40,8 +40,12 @@ const apiFootballReq = async (endpoint, params = {}) => {
       const data = response.data;
 
       // Armazena a resposta na cache com TTL de 24 horas (86400 segundos)
-      await client.set(cacheKey, JSON.stringify(data), 'EX', 86400);
+      await client.setEx(cacheKey, 86400, JSON.stringify(data));
       console.log("Resposta guardada na cache com um TTL de 24 horas");
+
+      // Verifica o tempo restante
+      const ttl = await client.ttl(cacheKey);
+      console.log(`TTL restante: ${ttl} segundos`);
 
       return data;
     } 
