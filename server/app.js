@@ -16,7 +16,7 @@ app.use(cors(corsOption)) // Apply CORS settings to enable controlled access to 
 app.use('/api/competitions', competitionAndCountryRoutes);
 // app.use('/api/game', gameRoutes);
 // app.use('/api/people', peopleRoutes);
-// app.use('/api/teams', teamsRoutes);
+app.use('/api/teams', teamsRoutes);
 
 app.listen(8080, () => {
     console.log("Listening in port 8080!")
