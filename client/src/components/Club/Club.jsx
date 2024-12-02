@@ -1,33 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import api from '../../services/api';
 import useButtonGroup from '../../hooks/useButtonGroup';
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Image, Row, Col } from 'react-bootstrap';
 import Squad from './Squad';
+import useApiRequest from '../../hooks/useApiRequest';
+import { fetchClubData } from '../../services/TeamsService';
 
 const Club = () => {
     const { teamID } = useParams();
-    const [ clubData, setClubData ] = useState(null);
-    const [ loading, setLoading ] = useState(true);
     const { selected, handleButtonState, isActiveButton } = useButtonGroup('equipa');
 
-    const fetchClubData = async () => {
-        try {
-            const response = await api.get(`/teams/info/${teamID}`);
-            setClubData(response.data.response);
-        } catch (error) {
-            console.error('Erro ao obter os dados do clube: ', error);
-        } finally {
-            setLoading(false);
-        }
-    }
+    const { data: clubData, loading, error, fetchData } = useApiRequest(fetchClubData);
 
     useEffect(() => {
-        fetchClubData();
-    }, [teamID]);
+        if (teamID) {
+            fetchData(teamID);
+        }
+    }, [teamID, fetchData]);
+
+    if (loading) return <p>Carregando...</p>;
+    if (error) return <p>Erro: {error.message}</p>;
+    if (!clubData) return <p>Nenhum dado disponível.</p>;
 
     const renderComponent = () => {
         switch (selected) {
@@ -37,10 +33,6 @@ const Club = () => {
                 return <div>Erro</div>;
         }
     };
-
-    if (loading) {
-        return <div>Carregando...</div>;
-    }
 
     return (
         <Container className="container p-5 rounded-4">

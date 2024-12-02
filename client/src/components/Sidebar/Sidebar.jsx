@@ -1,30 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import './Sidebar.css';
-import api from '../../services/api';
+import api from '../../services/apiServices/api';
 import Container from 'react-bootstrap/esm/Container';
 import { ButtonGroup, Button, Image, Row, Col } from 'react-bootstrap';
-import { auto } from '@popperjs/core';
 import { Link } from 'react-router-dom';
+
+import useApiRequest from '../../hooks/useApiRequest';
+import { fetchAllLeagues } from '../../services/CompetitionService';
 
 const Sidebar = () => {
     // ids das top leagues
     const topLeaguesIDs = [39, 140, 135, 78, 2, 94, 61, 3];
-
-    const [leagues, setLeagues] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    // Função para obter as ligas da API
-    const fetchAllLeagues = async () => {
-        try {
-            const response = await api.get('/competitions/leagues');
-            const allLeagues = response.data.response;
-            setLeagues(filterTopLeagues(allLeagues, topLeaguesIDs)); 
-        } catch (error) {
-            console.error('Erro ao obter as ligas: ', error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const [ leagues, setLeagues ] = useState([]);
+    const { data: leagueData, loading, error, fetchData } = useApiRequest(fetchAllLeagues);
 
     // Função para filtrar as principais ligas da lista global de ligas
     const filterTopLeagues = (allLeagues, topLeaguesIDs) => {
@@ -32,12 +20,18 @@ const Sidebar = () => {
     }
 
     useEffect(() => {
-        fetchAllLeagues();
+        fetchData();  
     }, []);
 
-    if (loading) {
-        return <div>Carregando...</div>; 
-    }
+    useEffect(() => {
+        if (leagueData) {
+            setLeagues(filterTopLeagues(leagueData, topLeaguesIDs));
+        }
+    }, [leagueData]);
+
+    if (loading) return <p>Carregando...</p>;
+    if (error) return <p>Erro: {error.message}</p>;
+    if (!leagueData) return <p>Nenhum dado disponível.</p>;
 
     return (
         <Container className='container p-3 rounded-4 mb-2'>

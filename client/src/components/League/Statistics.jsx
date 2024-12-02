@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../services/api';
 import useButtonGroup from '../../hooks/useButtonGroup';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -7,42 +6,26 @@ import { Table, Image, Row, Col } from 'react-bootstrap';
 import Container from 'react-bootstrap/esm/Container';
 import './Statistics.css';
 
+import useApiRequest from '../../hooks/useApiRequest';
+import { fetchTopScorers, fetchTopAssisters } from '../../services/CompetitionService';
+
 const Statistics = ({leagueID, season}) => {
 
-  const [ topScorers, setTopScorers ] = useState([]);
-  const [ topAssisters, setTopAssisters ] = useState([]);
   const { selected, handleButtonState, isActiveButton } = useButtonGroup('marcadores');
-  const [ loading, setLoading ] = useState(true);
 
-  // Função genérica para ir buscar os dados à API => TALVEZ COLOCAR NUM FICHEIRO À PARTE PARA USAR NOUTROS COMPS
-  const fetchData = async (endpoint, setter) => {
-    try {
-      const response = await api.get(endpoint, {
-        params: {
-          league: leagueID,
-          season: season,
-        },
-      });
-      setter(response.data.response); 
-    } catch (error) {
-      console.error(`Erro ao obter dados de ${endpoint}:`, error.response || error.message);
-    } finally {
-      setLoading(false); 
-    }
-  };
-  
-  const fetchTopScorers = () => fetchData('/competitions/league/topScorers', setTopScorers);
-  console.log('MELHORES MARCADORES: ', topScorers);
-  const fetchTopAssisters = () => fetchData('/competitions/league/topAssisters', setTopAssisters);
+  const { data: topScorers, loading: loadingScorers, error: errorScorers, fetchData: fetchScorers } = useApiRequest(fetchTopScorers);
+  const { data: topAssisters, loading: loadingAssisters, error: errorAssisters, fetchData: fetchAssisters } = useApiRequest(fetchTopAssisters);
 
   useEffect(() => {
-    fetchTopScorers();
-    fetchTopAssisters();
-  }, [leagueID, season]);
+    if (leagueID && season) {
+        fetchScorers(leagueID, season);
+        fetchAssisters(leagueID, season);
+    }
+  }, [leagueID, season, fetchScorers, fetchAssisters]);
 
-  if (loading) {
-    return <div>Carregando...</div>
-  }
+  if (loadingScorers || loadingAssisters) return <p>Carregando...</p>;
+  if (errorScorers) return <p>Erro: {errorScorers.message}</p>;
+  if (errorAssisters) return <p>Erro: {errorAssisters.message}</p>;
 
   const dataToDisplay = selected === 'marcadores' ? topScorers : topAssisters;
 

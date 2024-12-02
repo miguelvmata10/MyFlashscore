@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './League.css';
 import { useParams } from 'react-router-dom';
-import api from '../../services/api';
 import useButtonGroup from '../../hooks/useButtonGroup';
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
@@ -12,26 +11,24 @@ import Statistics from './Statistics';
 import Results from './Results';
 import ListOfGames from './ListOfGames';
 
+import useApiRequest from '../../hooks/useApiRequest';
+import { fetchLeagueData } from '../../services/CompetitionService';
+
 const League = () => {
     const { leagueID } = useParams();
-    const [ leagueData, setLeagueData ] = useState(null);
-    const [ loading, setLoading ] = useState(true);
     const { selected, handleButtonState, isActiveButton } = useButtonGroup('classificacoes');
 
-    const fetchLeagueData = async () => {
-        try {
-            const response = await api.get(`/competitions/leagues/${leagueID}`);
-            setLeagueData(response.data.response);
-        } catch (error) {
-            console.error('Erro ao obter os dados da liga: ', error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const { data: leagueData, loading, error, fetchData } = useApiRequest(fetchLeagueData);
 
     useEffect(() => {
-        fetchLeagueData();
-    }, [leagueID]);
+        if (leagueID) {
+            fetchData(leagueID);
+        }
+    }, [leagueID, fetchData]);
+
+    if (loading) return <p>Carregando...</p>;
+    if (error) return <p>Erro: {error.message}</p>;
+    if (!leagueData) return <p>Nenhum dado disponível.</p>;
 
     const renderComponent = () => {
         switch (selected) {
@@ -47,10 +44,6 @@ const League = () => {
                 return <div>Erro</div>;
         }
     };
-
-    if (loading) {
-        return <div>Carregando...</div>;
-    }
 
     const currentSeason = leagueData[0].seasons.find(season => season.current);
 
