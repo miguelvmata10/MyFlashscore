@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Image } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
-
+import PlayerCard from './PlayerCard';
 import { fetchSquadInfo } from '../../services/TeamsService';
 import useApiRequest from '../../hooks/useApiRequest';
 
@@ -31,74 +31,22 @@ const Squad = ({teamID}) => {
         <>
             <h4>Guarda-redes</h4>
             {goalkeepers.map(player => (
-                <Card key={player.id} style={{ width: '18rem' }}>
-                    <Card.Img 
-                        variant="top" 
-                        src={player.photo} 
-                        style={{ maxWidth: '120px', height: '120px', objectFit: 'cover' }} 
-                    />
-                    <Card.Body>
-                        <Card.Title>{player.name}</Card.Title>
-                        <Card.Text>
-                            Número: {player.number}<br />
-                            Idade: {player.age}
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                <PlayerCard key={player.id} photo={player.photo} name={player.name} number={player.number} age={player.age} />
             ))}
             
             <h4>Defesas</h4>
             {defenders.map(player => (
-                <Card key={player.id} style={{ width: '18rem' }}>
-                    <Card.Img 
-                        variant="top" 
-                        src={player.photo} 
-                        style={{ maxWidth: '120px', height: '120px', objectFit: 'cover' }} 
-                    />
-                    <Card.Body>
-                        <Card.Title>{player.name}</Card.Title>
-                        <Card.Text>
-                            Número: {player.number}<br />
-                            Idade: {player.age}
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                <PlayerCard key={player.id} photo={player.photo} name={player.name} number={player.number} age={player.age} />
             ))}
     
             <h4>Médios</h4>
             {midfielders.map(player => (
-                <Card key={player.id} style={{ width: '18rem'}}>
-                    <Card.Img 
-                        variant="top" 
-                        src={player.photo} 
-                        style={{ maxWidth: '120px', height: '120px', objectFit: 'cover' }} 
-                    />
-                    <Card.Body>
-                        <Card.Title>{player.name}</Card.Title>
-                        <Card.Text>
-                            Número: {player.number}<br />
-                            Idade: {player.age}
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                <PlayerCard key={player.id} photo={player.photo} name={player.name} number={player.number} age={player.age} />
             ))}
     
             <h4>Avançados</h4>
             {forwards.map(player => (
-                <Card key={player.id} style={{ width: '18rem'}}>
-                    <Card.Img 
-                        variant="top" 
-                        src={player.photo} 
-                        style={{ maxWidth: '120px', height: '120px', objectFit: 'cover' }} 
-                    />
-                    <Card.Body>
-                        <Card.Title>{player.name}</Card.Title>
-                        <Card.Text>
-                            Número: {player.number}<br />
-                            Idade: {player.age}
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                <PlayerCard key={player.id} photo={player.photo} name={player.name} number={player.number} age={player.age} />
             ))}
         </>
     );
