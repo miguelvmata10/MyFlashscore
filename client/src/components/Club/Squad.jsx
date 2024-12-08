@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image } from 'react-bootstrap';
-import { Link } from "react-router-dom";
-import Card from 'react-bootstrap/Card';
+import { Row, Col } from 'react-bootstrap';
 import PlayerCard from './PlayerCard';
 import { fetchSquadInfo } from '../../services/TeamsService';
 import useApiRequest from '../../hooks/useApiRequest';
@@ -30,24 +28,40 @@ const Squad = ({teamID}) => {
     return (
         <>
             <h4>Guarda-redes</h4>
-            {goalkeepers.map(player => (
-                <PlayerCard key={player.id} photo={player.photo} name={player.name} number={player.number} age={player.age} />
-            ))}
+            <Row className='g-3'>
+                {goalkeepers.map(player => (
+                    <Col key={player.id} md={4}>
+                        <PlayerCard id={player.id} photo={player.photo} name={player.name} number={player.number} age={player.age} />
+                    </Col>
+                ))}
+            </Row>
             
             <h4>Defesas</h4>
-            {defenders.map(player => (
-                <PlayerCard key={player.id} photo={player.photo} name={player.name} number={player.number} age={player.age} />
-            ))}
+            <Row className='g-3'>
+                {defenders.map(player => (
+                    <Col key={player.id} md={4}>
+                        <PlayerCard id={player.id} photo={player.photo} name={player.name} number={player.number} age={player.age} />
+                    </Col>
+                ))}
+            </Row>
     
             <h4>Médios</h4>
-            {midfielders.map(player => (
-                <PlayerCard key={player.id} photo={player.photo} name={player.name} number={player.number} age={player.age} />
-            ))}
+            <Row className='g-3'>
+                {midfielders.map(player => (
+                    <Col key={player.id} md={4}>
+                        <PlayerCard id={player.id} photo={player.photo} name={player.name} number={player.number} age={player.age} />
+                    </Col>
+                ))}
+            </Row>
     
             <h4>Avançados</h4>
-            {forwards.map(player => (
-                <PlayerCard key={player.id} photo={player.photo} name={player.name} number={player.number} age={player.age} />
-            ))}
+            <Row className='g-3'>
+                {forwards.map(player => (
+                    <Col key={player.id} md={4}>
+                        <PlayerCard id={player.id} photo={player.photo} name={player.name} number={player.number} age={player.age} />
+                    </Col>
+                ))}
+            </Row>
         </>
     );
 }
