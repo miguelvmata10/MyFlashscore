@@ -6,7 +6,7 @@ const useApiRequest = (apiFunction) => {
     const [error, setError] = useState(null);
 
     const fetchData = useCallback(
-        async (...params) => {  // Agora podemos passar múltiplos parâmetros
+        async (...params) => {  // Agora posso passar múltiplos parâmetros
             setLoading(true);
             setError(null);
             try {

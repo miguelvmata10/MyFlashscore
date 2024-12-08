@@ -18,7 +18,7 @@ body, #root {
 .customLink {
     text-decoration: none;
     color: inherit; 
-  }
+}
   
 .customLink:hover {
     text-decoration: underline; 

@@ -15,7 +15,7 @@ app.use(cors(corsOption)) // Apply CORS settings to enable controlled access to 
 // middlewares para as routes
 app.use('/api/competitions', competitionAndCountryRoutes);
 // app.use('/api/game', gameRoutes);
-// app.use('/api/people', peopleRoutes);
+app.use('/api/people', peopleRoutes);
 app.use('/api/teams', teamsRoutes);
 
 app.listen(8080, () => {
