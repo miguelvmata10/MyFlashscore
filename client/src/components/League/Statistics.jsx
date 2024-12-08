@@ -5,7 +5,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Table, Image, Row, Col } from 'react-bootstrap';
 import Container from 'react-bootstrap/esm/Container';
 import './Statistics.css';
-
+import { Link } from "react-router-dom";
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchTopScorers, fetchTopAssisters } from '../../services/CompetitionService';
 
@@ -71,7 +71,11 @@ const Statistics = ({leagueID, season}) => {
                   <td>{index + 1}</td>
                   <td>
                     <Image className='imageResize' src={playerData.photo} />
-                    <span className='ms-3'>{playerData?.name || 'N/A'}</span>
+                    <span className='ms-3'>
+                      <Link to={`/player/${playerData?.id}`} className="customLink">
+                        {playerData?.name || 'N/A'}
+                      </Link>
+                    </span>
                   </td>
                   <td>{teamName}</td>
                   <td>{gamesAppearances}</td>
