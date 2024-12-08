@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Matchlist from './components/Matchlist/Matchlist';
 import League from './components/League/League';
 import Club from './components/Club/Club';
+import PlayerProfile from './components/Player/PlayerProfile';
 import './App.css'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
               <Route path='/' element={<Matchlist />}/>
               <Route path='/league/:leagueID' element={<League />} />
               <Route path='/team/:teamID' element={<Club />} />
+              <Route path='/player/:playerID' element={<PlayerProfile />} />
             </Routes>
           </Col>
         </Row>
