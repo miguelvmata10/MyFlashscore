@@ -24,3 +24,15 @@ body, #root {
     text-decoration: underline; 
     cursor: pointer; 
 }
+
+.btn-custom {
+    background-color: #ff4037 !important;
+    border: none !important;
+    color: white;
+    padding: 8px 20px !important;
+}
+
+.btn-custom:hover {
+    background-color: #c41c14 !important;
+}
+
