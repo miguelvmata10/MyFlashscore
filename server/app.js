@@ -9,6 +9,7 @@ const competitionAndCountryRoutes = require("./routes/CompetitionAndCountryRoute
 const gameRoutes = require("./routes/GameRoutes");
 const peopleRoutes = require("./routes/PeopleRoute");
 const teamsRoutes = require("./routes/TeamsRoutes");
+const searchRoutes = require("./routes/SearchRoute");
 
 app.use(cors(corsOption)) // Apply CORS settings to enable controlled access to the API
 
@@ -17,6 +18,7 @@ app.use('/api/competitions', competitionAndCountryRoutes);
 // app.use('/api/game', gameRoutes);
 app.use('/api/people', peopleRoutes);
 app.use('/api/teams', teamsRoutes);
+app.use('/api/search', searchRoutes);
 
 app.listen(8080, () => {
     console.log("Listening in port 8080!")
