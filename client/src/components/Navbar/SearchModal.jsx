@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { Modal, Button as BootstrapButton } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { Link } from 'react-router-dom';
 import ToastNotification from '../SearchResults/ToastNotification';
 
 const SearchModal = ({ show, onClose }) => {
 
+    const navigate = useNavigate();
     const [ name, setName ] = useState('Jogador');
     const [ inputValue, setInputValue ] = useState('');
     const [ error, setError ] = useState('');
@@ -18,14 +19,19 @@ const SearchModal = ({ show, onClose }) => {
         setName(selectedName);
     };
 
-    const handleSearch = () => {
+    const handleSearch = (e) => {
+        e.preventDefault();
         if (inputValue.trim() === '') {
             setError('Por favor, escreva algo antes de pesquisar.');
+            setShowToast(true);
+        } else if (inputValue.trim().length < 3) {
+            setError('Tem de escrever pelo menos 3 caracteres.');
             setShowToast(true);
         } else {
             setError('');
             setShowToast(false);
             onClose();
+            navigate(`/results/${name}/${encodeURIComponent(inputValue)}`);
         }
     }
 
@@ -67,12 +73,8 @@ const SearchModal = ({ show, onClose }) => {
             </Modal.Body>
             <Modal.Footer className="bg-dark text-white">
                 <BootstrapButton 
-                    as={Link}
-                    to={`/results/${name}/${encodeURIComponent(inputValue)}`} 
                     className='btn-custom'
-                    onClick={(e) => {
-                        handleSearch();
-                    }}>
+                    onClick={handleSearch}>
                         Pesquisar
                 </BootstrapButton>
             </Modal.Footer>
