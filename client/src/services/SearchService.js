@@ -1,5 +1,5 @@
 import { apiRequest } from "./apiServices/apiService";
 
-export const fetchSearchPlayers = () => {
-    return apiRequest('/search/players');
+export const fetchSearchData = (type, inputName) => {
+    return apiRequest(`/search/${type}/${inputName}`);
 };
