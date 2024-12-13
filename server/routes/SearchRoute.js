@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const searchController = require("../controllers/SearchController");
 
-router.get('/players', searchController.getSearchPlayers);
+// Rota para obter os jogadores com o nome dado pelo user 
+router.get('/:type/:inputValue', searchController.searchEntity);
 
 module.exports = router;
