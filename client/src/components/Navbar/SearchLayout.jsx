@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SearchButton from './SearchButton';
-import SearchModal from './SearchModal';
+import SearchModal from '../Search/SearchModal';
 
 const SearchLayout = () => {
     const [showModal, setShowModal] = useState(false);
