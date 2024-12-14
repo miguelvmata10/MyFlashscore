@@ -36,3 +36,27 @@ body, #root {
     background-color: #c41c14 !important;
 }
 
+/* estilização para grupos de botões */
+.btn-group {
+    gap: 50px;                  
+}
+
+.btn-group .btn {
+    background-color: transparent;
+    border: none;
+}
+.btn-group .btn:hover {
+    background-color: transparent;
+    color: #ff4037;
+    cursor: pointer; 
+    transform: scale(1.01);          
+}
+
+.btn-group .btn.active {
+    background-color: transparent;
+    color: #ff4037;
+}
+.btn-group .btn.active:hover {
+    color: #ff4037;
+}
+
