@@ -6,7 +6,8 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Matchlist from './components/Matchlist/Matchlist';
 import League from './components/League/League';
 import Club from './components/Club/Club';
-import PlayerProfile from './components/Player/PlayerProfile';
+import PlayerProfile from './components/Members/PlayerProfile';
+import CoachProfile from './components/Members/CoachProfile';
 import SearchResults from './components/Search/SearchResults';
 import './App.css'
 
@@ -25,6 +26,7 @@ function App() {
               <Route path='/league/:leagueID' element={<League />} />
               <Route path='/team/:teamID' element={<Club />} />
               <Route path='/player/:playerID' element={<PlayerProfile />} />
+              <Route path='/coach/:coachID' element={<CoachProfile />}/>
               <Route path='/:name/:inputValue' element={<SearchResults />}/>
             </Routes>
           </Col>
