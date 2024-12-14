@@ -1,5 +1,5 @@
 /* Estilo principal para o Card */
-.playerCard.card {
+.teamMemberCard.card {
     background-color: #414142; 
     border-radius: 8px; 
     margin-bottom: 15px;
@@ -7,21 +7,21 @@
     transition: border-color 0.3s ease; /* Suaviza a mudança da borda */ 
   }
   
-.playerCard.card:hover {
+.teamMemberCard.card:hover {
     cursor: pointer;
     transform: scale(1.01); 
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
     border-color: white; 
 }
 
-.playerCard .cardImage {
+.teamMemberCard .cardImage {
     width: 80px; 
     height: 80px; 
     border-radius: 50%;
     object-fit: cover; 
 }
 
-.playerCard .playerCardBody {
+.teamMemberCard .teamMemberCardBody {
     color: white; 
     padding: 10px; 
 }
