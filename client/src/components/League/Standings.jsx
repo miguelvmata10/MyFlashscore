@@ -5,7 +5,6 @@ import useApiRequest from '../../hooks/useApiRequest';
 import { fetchLeagueStanding } from '../../services/CompetitionService';
 
 const Standings = ({ leagueID, season }) => {
-    // Passando diretamente a função 'fetchLeagueStanding' para o hook
     const { data: teams, loading, error, fetchData } = useApiRequest(fetchLeagueStanding);
 
     useEffect(() => {
