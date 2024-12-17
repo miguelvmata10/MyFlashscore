@@ -11,3 +11,7 @@ export const fetchSquadInfo = (teamID) => {
 export const fetchTeamCoach = (teamID) => {
     return apiRequest('/teams/coach', {params: {team: teamID}});
 };
+
+export const fetchTeamLeagues = (teamID) => {
+    return apiRequest(`/teams/teamLeagues/${teamID}`);
+};

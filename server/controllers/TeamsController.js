@@ -44,8 +44,24 @@ const getSquadCoach = async (req, res) => {
     }
 };
 
+// Endpoint que retorna as ligas que uma determinada equipa está inserida 
+const getTeamLeagues = async (req, res) => {
+    const team = req.params.teamID;
+    try {
+        const data = await apiFootballReq('leagues', {team: team});
+        if (!data.response || data.response.length === 0) {
+            return res.status(404).json({error: `Nenhum dado encontrado em: ${team}.`})
+        }
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Erro ao obter as ligas: ', error);
+        res.status(500).json({error: 'Erro interno do servidor'});
+    }
+};
+
 module.exports = {
     getTeamsInfo,
     getSquadPlayers,
     getSquadCoach,
+    getTeamLeagues,
 }
