@@ -44,6 +44,7 @@ const League = () => {
         }
     };
 
+    // armazena o ano da temporada atual em current season
     const currentSeason = leagueData[0].seasons.find(season => season.current);
 
     return (
@@ -71,7 +72,10 @@ const League = () => {
                     >
                         Resultados
                     </Button>
-                    <Button className={isActiveButton('lista')} onClick={() => handleButtonState('lista')}>
+                    <Button 
+                        className={isActiveButton('lista')}
+                        onClick={() => handleButtonState('lista')}
+                    >
                         Lista
                     </Button>
                     <Button
