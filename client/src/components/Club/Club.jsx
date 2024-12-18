@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Image, Row, Col } from 'react-bootstrap';
 import Squad from './Squad';
-import SquadStatistics from './SquadStatistics';
+import TeamLeaguesSelector from './TeamLeaguesSelector';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchClubData } from '../../services/TeamsService';
 
@@ -31,7 +31,7 @@ const Club = () => {
             case 'equipa':
                 return <Squad teamID={teamID} />;
             case 'estatisticas':
-                return <SquadStatistics />
+                return <TeamLeaguesSelector />
             default:
                 return <div>Erro</div>;
         }
