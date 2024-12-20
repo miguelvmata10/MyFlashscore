@@ -59,9 +59,28 @@ const getTeamLeagues = async (req, res) => {
     }
 };
 
+const getTeamStatistics = async (req, res) => {
+    const team = req.params.teamID;
+    const { league, season } = req.query;
+    try {
+        const data = await apiFootballReq('teams/statistics', {
+            team: team,
+            league: league,
+            season: season});
+        if (!data.response || data.response.length === 0) {
+            return res.status(404).json({error: `Não há dados estatisticos para a equipa ${team} na liga ${league} em ${season}.`})
+        }
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Erro ao obter as estatisticas da equipa: ', error);
+        res.status(500).json({error: 'Erro interno do servidor'});
+    }
+}
+
 module.exports = {
     getTeamsInfo,
     getSquadPlayers,
     getSquadCoach,
     getTeamLeagues,
+    getTeamStatistics,
 }
