@@ -7,6 +7,8 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Image, Row, Col } from 'react-bootstrap';
 import Squad from './Squad';
 import TeamLeaguesSelector from './TeamLeaguesSelector';
+import Results from './Results';
+import List from './List';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchClubData } from '../../services/TeamsService';
 
@@ -32,6 +34,10 @@ const Club = () => {
                 return <Squad teamID={teamID} />;
             case 'estatisticas':
                 return <TeamLeaguesSelector />
+            case 'lista':
+                return <List />
+            case 'resultados':
+                return <Results />
             default:
                 return <div>Erro</div>;
         }
@@ -67,10 +73,10 @@ const Club = () => {
                         Estatisticas
                     </Button>
                     <Button
-                        className={isActiveButton('transferencias')}
-                        onClick={() => handleButtonState('transferencias')}
+                        className={isActiveButton('lista')}
+                        onClick={() => handleButtonState('lista')}
                     >
-                        Transferências
+                        Lista
                     </Button>
                     <Button 
                         className={isActiveButton('resultados')} 
