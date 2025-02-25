@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Row, Col, Container } from 'react-bootstrap';
-import Accordion from 'react-bootstrap/Accordion';
 import { fetchTeamStatistics } from '../../services/TeamsService';
 import useApiRequest from '../../hooks/useApiRequest';
 import { Doughnut, Bar, Line } from 'react-chartjs-2';
@@ -292,7 +291,7 @@ const SquadStatistics = ({leagueID, season}) => {
         tooltip: {
             callbacks: {
                 label: function (tooltipItem) {
-                    return `Total de Gols: ${tooltipItem.raw}`;
+                    return `Total de Golos: ${tooltipItem.raw}`;
                 },
             },
         },
@@ -318,7 +317,6 @@ const SquadStatistics = ({leagueID, season}) => {
     },
   };
 
-  // TODO: APENAS COLOCAR EM GRÁFICO AQUILO QUE REALMENTE TEM DE SER COLOCADO NESSE FORMATO...O RESTO FICA NUM CONTAINER NO TOPO DA PÁGINA
   return (
       <>
         <Container className="p-2 mt-2 rounded-4">
