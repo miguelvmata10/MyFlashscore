@@ -7,3 +7,7 @@ export const fetchPlayerData = (playerID) => {
 export const fetchCoachData = (coachID) => {
     return apiRequest(`/people/coachData/${coachID}`);
 }
+
+export const fetchCoachTrophies = (coachID) => {
+    return apiRequest(`/people/coachTrophies/${coachID}`);
+}
