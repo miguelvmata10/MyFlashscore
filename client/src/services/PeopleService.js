@@ -11,3 +11,11 @@ export const fetchCoachData = (coachID) => {
 export const fetchCoachTrophies = (coachID) => {
     return apiRequest(`/people/coachTrophies/${coachID}`);
 }
+
+export const fetchPlayerTransfers = (playerID) => {
+    return apiRequest(`/people/playerTransfers/${playerID}`);
+}
+
+export const fetchPlayerTrophies = (playerID) => {
+    return apiRequest(`/people/playerTrophies/${playerID}`);
+}

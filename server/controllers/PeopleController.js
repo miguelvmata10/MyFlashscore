@@ -42,9 +42,38 @@ const getCoachTrophies = async (req, res) => {
     }
 }
 
+const getPlayerTranfers = async (req, res) => {
+    const playerID = req.params.id;
+    try {
+        const data = await apiFootballReq('transfers', {player: playerID});
+        if (!data.response || data.response.length === 0) {
+            return res.status(404).json({error: `Nenhum jogador com o id definido: ${playerID}`});
+        }
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Erro ao obter o jogador: ', error);
+        res.status(500).json({error: 'Erro interno do servidor'});
+    }
+}
+
+const getPlayerTrophies = async (req, res) => {
+    const playerID = req.params.id;
+    try {
+        const data = await apiFootballReq('trophies', {player: playerID});
+        if (!data.response || data.response.length === 0) {
+            return res.status(404).json({error: `Nenhum jogador com o id definido: ${playerID}`});
+        }
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Erro ao obter o jogador: ', error);
+        res.status(500).json({error: 'Erro interno do servidor'});
+    }
+}
 
 module.exports = {
     getPlayerProfileByID,
     getCoachProfileByID,
     getCoachTrophies,
+    getPlayerTranfers,
+    getPlayerTrophies,
 }

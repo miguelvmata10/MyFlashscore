@@ -19,7 +19,8 @@ export const CoachCarrer = ({carrer}) => {
               <tr key={index}>
                 <td>{job.start}</td>
                 <td>{job.end ? job.end : '-'}</td>
-                <td><Image className="imageResize me-2" src={job.team.logo}/>
+                <td>
+                  <Image className="imageResize me-2" src={job.team.logo}/>
                   <Link to={`/team/${job.team.id}`} className="customLink ms-1">{job.team.name}</Link>
                 </td>
               </tr>
@@ -29,7 +30,7 @@ export const CoachCarrer = ({carrer}) => {
     );
 }
 
-export const CoachTrophies = ({}) => {
+export const CoachTrophies = () => {
   const { coachID } = useParams();
   const { data: coachTrophies, loading, error, fetchData } = useApiRequest(fetchCoachTrophies);
 
@@ -47,23 +48,29 @@ export const CoachTrophies = ({}) => {
   const filteredCoachTrophies = coachTrophies.filter(trophy => trophy.place === 'Winner');
 
   return (
-    <Table striped hover responsive variant="dark">
-      <thead>
-          <tr>
-            <th>Época</th>
-            <th>País</th>
-            <th>Competição</th>
-          </tr>
-      </thead>
-      <tbody>
-        {filteredCoachTrophies.map((trophy, index) => (
-          <tr key={index}>
-            <td>{trophy.season}</td>
-            <td>{trophy.country}</td>
-            <td>{trophy.league}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+    <>
+      <h2 className='mb-3'><b>{filteredCoachTrophies.length} troféus ganhos</b></h2>
+
+      {filteredCoachTrophies.length > 0 && (
+        <Table striped hover responsive variant="dark">
+          <thead>
+              <tr>
+                <th>Época</th>
+                <th>País</th>
+                <th>Competição</th>
+              </tr>
+          </thead>
+          <tbody>
+            {filteredCoachTrophies.map((trophy, index) => (
+              <tr key={index}>
+                <td>{trophy.season}</td>
+                <td>{trophy.country}</td>
+                <td>{trophy.league}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+    </>
   );
 }

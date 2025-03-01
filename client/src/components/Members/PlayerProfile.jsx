@@ -6,6 +6,7 @@ import { fetchPlayerData } from '../../services/PeopleService';
 import { Container, Image, Row, Col } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
+import { PlayerCarrer, PlayerTrophies } from './PlayerCarrer';
 
 const PlayerProfile = () => {
     const { playerID } = useParams();
@@ -28,9 +29,9 @@ const PlayerProfile = () => {
             case 'estatisticas':
                 return <div>Estatisticas</div>;
             case 'trofeus':
-                return <div>Trofeus</div>;
+                return <PlayerTrophies />
             case 'transferencias':
-                return <div>Transferencias</div>;
+                return <PlayerCarrer />
             case 'dadosPessoais':
                 return <div>DadosPessoais</div>;
             default:
