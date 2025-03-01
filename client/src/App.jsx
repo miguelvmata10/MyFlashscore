@@ -14,20 +14,20 @@ import './App.css'
 function App() {
   return (
     <Router>
-      <Container fluid>
-      <Navbar />
+      <Container>
+        <Navbar />
         <Row>
-          <Col sm={12} md={2}>
+          <Col xs={12} md={3} >
             <Sidebar />
           </Col>
-          <Col md={10}>
+          <Col xs={12} md={9} className="menu p-3 rounded-4 mb-2">
             <Routes>
-              <Route path='/' element={<Matchlist />}/>
+              <Route path='/' element={<Matchlist />} />
               <Route path='/league/:leagueID' element={<League />} />
               <Route path='/team/:teamID' element={<Club />} />
               <Route path='/player/:playerID' element={<PlayerProfile />} />
-              <Route path='/coach/:coachID' element={<CoachProfile />}/>
-              <Route path='/:name/:inputValue' element={<SearchResults />}/>
+              <Route path='/coach/:coachID' element={<CoachProfile />} />
+              <Route path='/:name/:inputValue' element={<SearchResults />} />
             </Routes>
           </Col>
         </Row>

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './Sidebar.css';
-import api from '../../services/apiServices/api';
 import Container from 'react-bootstrap/esm/Container';
 import { ButtonGroup, Button, Image, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -34,9 +32,9 @@ const Sidebar = () => {
     if (!leagueData) return <p>Nenhum dado disponível.</p>;
 
     return (
-        <Container className='container p-3 rounded-4 mb-2'>
+        <Container className='sidebarContainer p-3 rounded-4 mb-2'>
             <div className='text-center mb-3'>
-                    <h4><b>Top Leagues</b></h4>
+                <h4><b>Top Leagues</b></h4>
             </div>
             <ButtonGroup vertical>
                 {leagues.map((topLeague) => (
