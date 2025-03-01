@@ -5,13 +5,17 @@ body, #root {
     min-height: 100vh; 
 }
 
-.container {
+* {
+    font-size: 0.95rem;
+}
+
+.menu, .sidebarContainer {
     background-color: #353533;
 }
 
 .imageResize {
-    width: 30px;          
-    height: 30px;         
+    width: 26px;          
+    height: 26px;         
     object-fit: contain;  /* Mantém as proporções da imagem */
 }
 
@@ -41,22 +45,25 @@ body, #root {
     gap: 50px;                  
 }
 
-.btn-group .btn {
+/* Regras comuns para ambos .btn-group e .btn-group-vertical */
+.btn-group .btn, .btn-group-vertical .btn {
     background-color: transparent;
     border: none;
 }
-.btn-group .btn:hover {
+
+.btn-group .btn:hover, .btn-group-vertical .btn:hover {
     background-color: transparent;
     color: #ff4037;
-    cursor: pointer; 
+    cursor: pointer;
     transform: scale(1.01);          
 }
 
-.btn-group .btn.active {
+.btn-group .btn.active, .btn-group-vertical .btn.active {
     background-color: transparent;
     color: #ff4037;
 }
-.btn-group .btn.active:hover {
+
+.btn-group .btn.active:hover, .btn-group-vertical .btn.active:hover {
+    background-color: transparent;
     color: #ff4037;
 }
-
