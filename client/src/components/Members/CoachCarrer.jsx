@@ -5,7 +5,7 @@ import { fetchCoachTrophies } from '../../services/PeopleService';
 import useApiRequest from '../../hooks/useApiRequest';
 
 export const CoachCarrer = ({carrer}) => {
-    return (
+    return carrer.length > 0 ? (
         <Table striped hover responsive variant="dark">
           <thead>
               <tr>
@@ -27,7 +27,7 @@ export const CoachCarrer = ({carrer}) => {
             ))}
           </tbody>
         </Table>
-    );
+    ) : <h3><b>Sem dados de carreira</b></h3>
 }
 
 export const CoachTrophies = () => {
