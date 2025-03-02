@@ -20,8 +20,6 @@ const SearchResults = () => {
     if (error) return <p>Erro: {error.message}</p>;
     if (!searchData) return <p>Nenhum dado disponível.</p>;
 
-    console.log('DADOS CRL: ', searchData);
-
     return (
       <Container className='container p-5 rounded-4' >
         <SearchResultsList data={searchData} name={name}/>

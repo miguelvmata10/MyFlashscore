@@ -6,7 +6,7 @@ import { fetchPlayerData } from '../../services/PeopleService';
 import { Container, Image, Row, Col } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
-import { PlayerCarrer, PlayerTrophies } from './PlayerCarrer';
+import { PlayerCarrer, PlayerTrophies, PlayerDetails } from './PlayerCarrer';
 
 const PlayerProfile = () => {
     const { playerID } = useParams();
@@ -17,7 +17,6 @@ const PlayerProfile = () => {
         if (playerID) {
             fetchData(playerID);
         }
-        console.log('DADOS DO JOGADOR: ', playerData);
     }, [playerID, fetchData]);
 
     if (loading) return <p>Carregando...</p>;
@@ -32,27 +31,12 @@ const PlayerProfile = () => {
                 return <PlayerTrophies />
             case 'transferencias':
                 return <PlayerCarrer />
-            case 'dadosPessoais':
-                return <div>DadosPessoais</div>;
+            case 'detalhes':
+                return <PlayerDetails details={playerData[0]}/>
             default:
                 return <div>Erro</div>;
         }
     };
-
-    const translateToPortuguese = (position) => {
-        switch (position) {
-            case 'Goalkeeper':
-                return 'Guarda-redes';
-            case 'Defender':
-                return 'Defesa';
-            case 'Midfielder':
-                return 'Médio';
-            case 'Attacker':
-                return 'Avançado';
-            default:
-                return 'N/A';
-        }
-    }
 
     const player = playerData[0].player;
     
@@ -60,14 +44,10 @@ const PlayerProfile = () => {
         <Container className="container p-5 rounded-4">
             <Row className="align-items-center mb-3">
                 <Col xs="auto">
-                    <Image src={player.photo} width={150} alt="Foto do jogador" style={{ borderRadius: '10%' }}/>
+                    <Image src={player.photo} width={110} alt="Foto do jogador" style={{ borderRadius: '10%' }}/>
                 </Col>
                 <Col>
                     <h3 className="mb-2">{player.name}</h3>
-                    <span>Número: {player.number}</span><br />
-                    <span>Posição: {translateToPortuguese(player.position)}</span><br />
-                    <span>Idade: {player.age}</span><br />
-                    <span>Nacionalidade: {player.birth.country}</span>
                 </Col>
             </Row>
             <Row>
@@ -91,10 +71,10 @@ const PlayerProfile = () => {
                         Transferências
                     </Button>
                     <Button
-                        className={isActiveButton('dadosPessoais')}
-                        onClick={() => handleButtonState('dadosPessoais')}
+                        className={isActiveButton('detalhes')}
+                        onClick={() => handleButtonState('detalhes')}
                     >
-                        Dados pessoais
+                        Detalhes
                     </Button>
                 </ButtonGroup>
                 <hr />
