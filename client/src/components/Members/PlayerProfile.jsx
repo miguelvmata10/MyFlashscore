@@ -6,7 +6,7 @@ import { fetchPlayerData } from '../../services/PeopleService';
 import { Container, Image, Row, Col } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
-import { PlayerCarrer, PlayerTrophies, PlayerDetails } from './PlayerCarrer';
+import { PlayerCarrer, PlayerTrophies, PlayerDetails, PlayerSeasonSelector } from './PlayerCarrer';
 
 const PlayerProfile = () => {
     const { playerID } = useParams();
@@ -26,7 +26,7 @@ const PlayerProfile = () => {
     const renderComponent = () => {
         switch (selected) {
             case 'estatisticas':
-                return <div>Estatisticas</div>;
+                return <PlayerSeasonSelector />;
             case 'trofeus':
                 return <PlayerTrophies />
             case 'transferencias':

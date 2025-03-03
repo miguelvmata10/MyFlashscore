@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Image, Row, Col, Table, Card  } from 'react-bootstrap';
+import { Container, Image, Row, Col, Table, Card, Accordion, Dropdown } from 'react-bootstrap';
 import { Link, useParams } from "react-router-dom";
-import { fetchPlayerTransfers, fetchPlayerTrophies } from '../../services/PeopleService';
-import useApiRequest from '../../hooks/useApiRequest';
+import { fetchPlayerTransfers, fetchPlayerTrophies, fetchPlayerSeasons, fetchPlayerStatistics} from '../../services/PeopleService';
+import useApiRequest from '../../hooks/useApiRequest'; 
 
 export const PlayerCarrer = () => {
     const { playerID } = useParams();
@@ -52,7 +52,7 @@ export const PlayerCarrer = () => {
                                 {transfer.teams.in.name}
                             </Link>
                         </td>
-                        <td>{transfer.type}</td>
+                        <td><b>{transfer.type}</b></td>
                     </tr>
                 ))}
             </tbody>
@@ -106,6 +106,7 @@ export const PlayerTrophies = () => {
 }
 
 export const PlayerDetails = ({details}) => {
+    const { playerID } = useParams();
     const translateToPortuguese = (position) => {
         switch (position) {
             case 'Goalkeeper':
@@ -180,3 +181,92 @@ export const PlayerDetails = ({details}) => {
         </Container>
     )
 }
+
+export const PlayerSeasonSelector = () => {
+    const { playerID } = useParams();
+    const [ selectedSeason, setSelectedSeason ] = useState(null);
+    const { data: playerSeasons, loading, error, fetchData } = useApiRequest(fetchPlayerSeasons);
+  
+    useEffect(() => {
+        if (playerID) {
+            fetchData(playerID);
+        }
+
+    }, [playerID, fetchData]);
+
+    const decreasingOrdering = (seasonsArray) => {
+        if (seasonsArray && Array.isArray(seasonsArray)) {  // Verifica se é um array válido
+            return seasonsArray.sort((a, b) => b - a);
+        }
+        return [];  // Retorna um array vazio se playerSeasons for inválido
+    }
+    
+    const seasonsOrdered = decreasingOrdering(playerSeasons);
+
+    useEffect(() => {
+        if (seasonsOrdered.length > 0 && selectedSeason === null) {
+            setSelectedSeason(seasonsOrdered[0]);
+        }
+    }, [seasonsOrdered, selectedSeason]);
+
+    if (loading) return <p>Carregando...</p>;
+    if (error) return <p>Erro: {error.message}</p>;
+    if (!playerSeasons) return <p>Nenhum dado disponível.</p>;
+
+    const handleDropdownSelect = (eventKey) => {
+        setSelectedSeason(eventKey);
+    }
+
+    return (
+        <Container>
+            <Row>
+                <Dropdown onSelect={handleDropdownSelect}>
+                    <Dropdown.Toggle variant="danger" id="dropdown-basic">
+                        {selectedSeason ? (
+                            <>
+                                {selectedSeason}
+                            </>
+                        ) : (
+                            "Selecione uma época"
+                        )}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu className="bg-dark text-white" style={{ maxHeight: "300px" }}>
+                        {seasonsOrdered.map((season) => (
+                            <Dropdown.Item key={season} eventKey={season} className="bg-dark text-white">
+                                {season}
+                            </Dropdown.Item>
+                        ))}
+                    </Dropdown.Menu>
+                </Dropdown>
+            </Row>
+            <Row>
+                <PlayerStatistics season={selectedSeason}/>
+            </Row>
+        </Container>
+    );
+};
+
+export const PlayerStatistics = ({season}) => {
+    const { playerID } = useParams();
+    const { data: playerStatistics, loading, error, fetchData } = useApiRequest(fetchPlayerStatistics);
+  
+    useEffect(() => {
+        if (playerID && season) {
+            fetchData(playerID, season);
+        }
+
+    }, [playerID, season, fetchData]);
+
+    if (loading) return <p>Carregando...</p>;
+    if (error) return <p>Erro: {error.message}</p>;
+    if (!playerStatistics) return <p>Nenhum dado disponível.</p>;
+
+    console.log(playerStatistics);
+    
+    return (
+        <div>PlayerCarrer</div>
+    )
+}
+
+
+

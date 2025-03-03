@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { Row, Container } from 'react-bootstrap';
+import { Row, Container, Image } from 'react-bootstrap';
 import { fetchTeamLeagues } from '../../services/TeamsService';
 import useApiRequest from '../../hooks/useApiRequest';
 import SquadStatistics from './SquadStatistics';
@@ -10,6 +10,7 @@ const TeamLeaguesSelector = () => {
     const { teamID } = useParams()
     const { data: leagues, loading, error, fetchData } = useApiRequest(fetchTeamLeagues);
     const [ selectedLeague, setSelectedLeague ] = useState(null);
+    const [ selectedLeagueLogo, setSelectedLeagueLogo ] = useState(null);
     const [ selectedLeagueID, setSelectedLeagueID ] = useState(null);
     const [ selectedLeagueSeason, setSelectedLeagueSeason ] = useState(null);
 
@@ -48,6 +49,7 @@ const TeamLeaguesSelector = () => {
     useEffect(() => {
         if (currentTeamLeagues.length > 0 && selectedLeague === null) {
             setSelectedLeague(currentTeamLeagues[0].name);
+            setSelectedLeagueLogo(currentTeamLeagues[0].logo)
             setSelectedLeagueID(currentTeamLeagues[0].id);
             setSelectedLeagueSeason(currentTeamLeagues[0].season);
         }
@@ -58,13 +60,13 @@ const TeamLeaguesSelector = () => {
     if (!leagues) return <p>Nenhum dado disponível.</p>;
 
     const handleDropdownSelect = (eventKey) => {
-        setSelectedLeague(eventKey);
-
         // para poder atualizar os dados a serem passados para apresentar as estatisticas no componente 'SquadStatistics'
         const selectedLeague = currentTeamLeagues.find(league => league.name === eventKey);
         if (selectedLeague) {
             setSelectedLeagueID(selectedLeague.id);
             setSelectedLeagueSeason(selectedLeague.season);
+            setSelectedLeagueLogo(selectedLeague.logo);
+            setSelectedLeague(selectedLeague.name);
         }
     }
 
@@ -73,12 +75,19 @@ const TeamLeaguesSelector = () => {
             <Row>
                 <Dropdown onSelect={handleDropdownSelect}>
                     <Dropdown.Toggle variant="danger" id="dropdown-basic">
-                        {selectedLeague || "Selecione uma liga"}
+                        {selectedLeague ? (
+                            <>
+                                <Image className="imageResize me-2" src={selectedLeagueLogo} />
+                                {selectedLeague}
+                            </>
+                        ) : (
+                            "Selecione uma liga"
+                        )}
                     </Dropdown.Toggle>
                     <Dropdown.Menu className="bg-dark text-white">
                         {currentTeamLeagues.map((league) => (
                             <Dropdown.Item key={league.id} eventKey={league.name} className="bg-dark text-white">
-                                {league.name}
+                                <Image className="imageResize me-2" src={league.logo} /> {league.name}
                             </Dropdown.Item>
                         ))}
                     </Dropdown.Menu>
