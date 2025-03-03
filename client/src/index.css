@@ -2,7 +2,8 @@ body, #root {
     background-color: #151415; 
     color: #fff;
     font-family: 'Funnel Sans', sans-serif;
-    min-height: 100vh; 
+    min-height: 100vh;
+    overflow: auto; 
 }
 
 * {
