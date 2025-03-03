@@ -19,3 +19,13 @@ export const fetchPlayerTransfers = (playerID) => {
 export const fetchPlayerTrophies = (playerID) => {
     return apiRequest(`/people/playerTrophies/${playerID}`);
 }
+
+export const fetchPlayerSeasons = (playerID) => {
+    return apiRequest(`/people/playerSeasons/${playerID}`);
+}
+
+export const fetchPlayerStatistics = (playerID, season) => {
+    return apiRequest(`/people/playerStatistics/${playerID}`, {params: {
+        season: season,
+    }});
+}

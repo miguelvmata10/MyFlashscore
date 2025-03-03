@@ -19,4 +19,10 @@ router.get('/playerTransfers/:id', peopleController.getPlayerTranfers);
 // rota para obter os dados de um jogador de acordo com o seu id
 router.get('/playerTrophies/:id', peopleController.getPlayerTrophies);
 
+// rota para obter as épocas disponiveis de um jogador de acordo com o seu id
+router.get('/playerSeasons/:id', peopleController.getPlayerSeasonsAvailable);
+
+// rota para obter os dados estatísticos de um jogador de acordo com o seu id
+router.get('/playerStatistics/:id', peopleController.getPlayerStatistics);
+
 module.exports = router;
