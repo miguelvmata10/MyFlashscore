@@ -1,7 +1,6 @@
 import React from 'react';
-import { Row, Col, Container } from 'react-bootstrap';
-import SearchCard from './SearchCard';
-import { Link } from "react-router-dom";
+import { Row, Col } from 'react-bootstrap';
+import ElementCard from '../CommonUI/ElementCard';
 
 const SearchResultsList = ({data, name}) => {
     const renderData = () => {
@@ -15,19 +14,23 @@ const SearchResultsList = ({data, name}) => {
             return <p>Nenhum dado disponível.</p>;
         }
 
+        console.log(data.jogador);
+
         switch (name) {
             case 'Jogador':
                 return (
                     <Row className='g-3'>
                         {data.jogador.map((player) => (
                             <Col key={player.player.id} md={4}>
-                                <Link to={`/player/${player.player.id}`} className='customCardLink'>
-                                    <SearchCard 
-                                        id={player.player.id} 
-                                        photo={player.player.photo} 
-                                        name={player.player.name}  
-                                    />
-                                </Link>
+                                <ElementCard 
+                                    role='player'
+                                    id={player.player.id}
+                                    photo={player.player.photo}
+                                    name={player.player.name}
+                                    number={player.player.number}
+                                    age={player.player.age}
+                                    key={player.player.id}
+                                />
                             </Col>
                         ))}
                     </Row>
@@ -37,13 +40,13 @@ const SearchResultsList = ({data, name}) => {
                     <Row className='g-3'>
                         {data.treinador.map((coach) => (
                             <Col key={coach.id} md={4}>
-                                <Link to={`/coach/${coach.id}`} className='customCardLink'>
-                                    <SearchCard 
-                                        id={coach.id} 
-                                        photo={coach.photo} 
-                                        name={coach.name}  
-                                    />
-                                </Link>
+                                <ElementCard 
+                                    role='coach'
+                                    id={coach.id}
+                                    photo={coach.photo}
+                                    name={coach.name}
+                                    key={coach.id}
+                                />
                             </Col>
                         ))}
                     </Row>
@@ -53,13 +56,13 @@ const SearchResultsList = ({data, name}) => {
                     <Row className='g-3'>
                         {data.clube.map((team) => (
                             <Col key={team.team.id} md={4}>
-                                <Link to={`/team/${team.team.id}`} className='customCardLink'>
-                                    <SearchCard 
-                                        id={team.team.id} 
-                                        photo={team.team.logo} 
-                                        name={team.team.name}  
-                                    />
-                                </Link>
+                                <ElementCard 
+                                    role='team'
+                                    id={team.team.id}
+                                    photo={team.team.logo}
+                                    name={team.team.name}
+                                    key={team.team.id}
+                                />
                             </Col>
                         ))}
                     </Row>
@@ -69,13 +72,13 @@ const SearchResultsList = ({data, name}) => {
                     <Row className='g-3'>
                         {data.competicao.map((league) => (
                             <Col key={league.league.id} md={4}>
-                                <Link to={`/league/${league.league.id}`} className='customCardLink'>
-                                    <SearchCard 
-                                        id={league.league.id} 
-                                        photo={league.league.logo} 
-                                        name={league.league.name}  
-                                    />
-                                </Link>
+                                <ElementCard 
+                                    role='league'
+                                    id={league.league.id}
+                                    photo={league.league.logo}
+                                    name={league.league.name}
+                                    key={league.league.id}
+                                />
                             </Col>
                         ))}
                     </Row>

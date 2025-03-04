@@ -5,7 +5,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import ToastNotification from './ToastNotification';
+import ToastNotification from '../CommonUI/ToastNotification';
 
 const SearchModal = ({ show, onClose }) => {
 
@@ -72,7 +72,7 @@ const SearchModal = ({ show, onClose }) => {
 
     return (
         <>
-            <ToastNotification showToast={showToast} setShowToast={setShowToast} error={error}/>
+            <ToastNotification showToast={showToast} setShowToast={setShowToast} error={error} />
             <Modal show={show} onHide={handleClose} size="md" centered>
             <Modal.Header closeButton className="bg-dark text-white" style={{ borderBottom: 'none' }}>
                 <Modal.Title id="contained-modal-title-vcenter">

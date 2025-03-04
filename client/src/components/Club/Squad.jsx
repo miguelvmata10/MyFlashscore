@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import TeamMemberCard from './TeamMemberCard';
+import ElementCard from '../CommonUI/ElementCard';
 import { fetchSquadInfo } from '../../services/TeamsService';
 import useApiRequest from '../../hooks/useApiRequest';
 
@@ -31,13 +31,14 @@ const Squad = ({teamID}) => {
             <Row className='g-1'>
                 {goalkeepers.map(player => (
                     <Col key={player.id} md={4}>
-                        <TeamMemberCard 
+                        <ElementCard 
+                            role='player'
                             id={player.id}
                             photo={player.photo}
                             name={player.name}
                             number={player.number}
                             age={player.age}
-                            role='player'
+                            key={player.id}
                         />
                     </Col>
                 ))}
@@ -46,13 +47,14 @@ const Squad = ({teamID}) => {
             <Row className='g-1'>
                 {defenders.map(player => (
                     <Col key={player.id} md={4}>
-                        <TeamMemberCard
+                        <ElementCard
+                            role='player'
                             id={player.id}
                             photo={player.photo}
                             name={player.name}
                             number={player.number}
                             age={player.age}
-                            role='player'
+                            key={player.id}
                         />
                     </Col>
                 ))}
@@ -62,13 +64,14 @@ const Squad = ({teamID}) => {
             <Row className='g-1'>
                 {midfielders.map(player => (
                     <Col key={player.id} md={4}>
-                        <TeamMemberCard
+                        <ElementCard
+                            role='player'
                             id={player.id}
                             photo={player.photo}
                             name={player.name}
                             number={player.number}
                             age={player.age}
-                            role='player'
+                            key={player.id}
                         />
                     </Col>
                 ))}
@@ -78,13 +81,14 @@ const Squad = ({teamID}) => {
             <Row className='g-1'>
                 {forwards.map(player => (
                     <Col key={player.id} md={4}>
-                        <TeamMemberCard
+                        <ElementCard
+                            role='player'
                             id={player.id}
                             photo={player.photo}
                             name={player.name}
                             number={player.number}
                             age={player.age}
-                            role='player'
+                            key={player.id}
                         />
                     </Col>
                 ))}
