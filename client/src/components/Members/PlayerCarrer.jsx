@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Image, Row, Col, Table, Card, Accordion, Dropdown } from 'react-bootstrap';
 import { Link, useParams } from "react-router-dom";
 import { fetchPlayerTransfers, fetchPlayerTrophies, fetchPlayerSeasons, fetchPlayerStatistics} from '../../services/PeopleService';
+import ElementCard from '../CommonUI/ElementCard';
 import useApiRequest from '../../hooks/useApiRequest'; 
 
 export const PlayerCarrer = () => {
@@ -221,7 +222,7 @@ export const PlayerSeasonSelector = () => {
         <Container>
             <Row>
                 <Dropdown onSelect={handleDropdownSelect}>
-                    <Dropdown.Toggle variant="danger" id="dropdown-basic">
+                    <Dropdown.Toggle variant="danger" id="dropdown-basic" className='mb-3'>
                         {selectedSeason ? (
                             <>
                                 {selectedSeason}
@@ -249,6 +250,7 @@ export const PlayerSeasonSelector = () => {
 export const PlayerStatistics = ({season}) => {
     const { playerID } = useParams();
     const { data: playerStatistics, loading, error, fetchData } = useApiRequest(fetchPlayerStatistics);
+    const [ uniqueClubs, setUniqueClubs ] = useState({});
   
     useEffect(() => {
         if (playerID && season) {
@@ -257,14 +259,84 @@ export const PlayerStatistics = ({season}) => {
 
     }, [playerID, season, fetchData]);
 
+    useEffect(() => {
+        if (!playerStatistics || playerStatistics.length === 0) return; 
+            const stats = playerStatistics[0].statistics;
+            const uniqueClubs = {};
+            
+            stats.forEach(({team}) => {
+                if (!uniqueClubs[team.id]) {
+                    uniqueClubs[team.id] = {
+                        id: team.id,
+                        name: team.name,
+                        logo: team.logo
+                    }
+                }
+            });
+
+            setUniqueClubs(uniqueClubs);
+        
+    }, [playerStatistics]);
+
     if (loading) return <p>Carregando...</p>;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!playerStatistics) return <p>Nenhum dado disponível.</p>;
-
-    console.log(playerStatistics);
+    if (!playerStatistics || playerStatistics.length === 0) return <p>Nenhum dado disponível.</p>;
+    
+    const stats = playerStatistics[0].statistics;
     
     return (
-        <div>PlayerCarrer</div>
+        <Container>
+            {/* Clubes onde o jogador jogou na época */}
+            <Row>
+                {Object.values(uniqueClubs).map((club) => (
+                    <Col>
+                        <ElementCard 
+                            role='team'
+                            id={club.id}
+                            photo={club.logo}
+                            name={club.name}
+                            key={club.id}
+                        />
+                    </Col>
+                ))}
+            </Row>
+            
+            {/* Estatísticas por liga */}
+            <Accordion>
+                {stats.map((stat, index) => (
+                    <Accordion.Item eventKey={index.toString()} key={index} className='bg-transparent'>
+                        <Accordion.Header>
+                            <Image src={stat.league.logo} className="me-2 imageResize" />
+                            {stat.league.name} ({stat.league.season})
+                        </Accordion.Header>
+                        <Accordion.Body>
+                            <Table striped bordered hover responsive variant="dark">
+                                <thead>
+                                    <tr>
+                                        <th>Jogos</th>
+                                        <th>Minutos</th>
+                                        <th>Gols</th>
+                                        <th>Assistências</th>
+                                        <th>Cartões Amarelos</th>
+                                        <th>Cartões Vermelhos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{stat.games.appearences}</td>
+                                        <td>{stat.games.minutes}</td>
+                                        <td>{stat.goals.total}</td>
+                                        <td>{stat.goals.assists}</td>
+                                        <td>{stat.cards.yellow}</td>
+                                        <td>{stat.cards.red}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                ))}
+            </Accordion>
+        </Container> 
     )
 }
 
