@@ -16,7 +16,9 @@ const ElementCard = ({ role, id, photo, name, number, age }) => {
               <Card.Img 
                   src={photo} 
                   className={`cardImage ${roleClass}`}
-                  alt={`Imagem do ${name}`} 
+                  alt={`Imagem do ${name}`}
+                  // Lazy loading ativado devido a limites imposto no nº de reqs por segundo da API 
+                  loading="lazy"
               />
             </Col>
             <Col>
