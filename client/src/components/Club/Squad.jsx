@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 import ElementCard from '../CommonUI/ElementCard';
 import { fetchSquadInfo } from '../../services/TeamsService';
 import useApiRequest from '../../hooks/useApiRequest';
+import LoadingScreen from '../CommonUI/LoadingScreen';
 
 const Squad = ({teamID}) => {
     const { data: teamData, loading: teamloading, error: teamError, fetchData: fetchTeamData } = useApiRequest(fetchSquadInfo);
@@ -13,7 +14,7 @@ const Squad = ({teamID}) => {
         }
     }, [teamID, fetchTeamData]);
 
-    if (teamloading) return <p>Carregando...</p>;
+    if (teamloading) return <LoadingScreen />;
     if (teamError) return <p>Erro: {teamError.message}</p>;
     if (!teamData) return <p>Nenhum dado para a equipa disponível.</p>;
 
@@ -30,7 +31,7 @@ const Squad = ({teamID}) => {
             <h4>Guarda-redes</h4>
             <Row className='g-1'>
                 {goalkeepers.map(player => (
-                    <Col key={player.id} md={4}>
+                    <Col md={4}>
                         <ElementCard 
                             role='player'
                             id={player.id}
@@ -46,7 +47,7 @@ const Squad = ({teamID}) => {
             <h4>Defesas</h4>
             <Row className='g-1'>
                 {defenders.map(player => (
-                    <Col key={player.id} md={4}>
+                    <Col md={4}>
                         <ElementCard
                             role='player'
                             id={player.id}
@@ -63,7 +64,7 @@ const Squad = ({teamID}) => {
             <h4>Médios</h4>
             <Row className='g-1'>
                 {midfielders.map(player => (
-                    <Col key={player.id} md={4}>
+                    <Col md={4}>
                         <ElementCard
                             role='player'
                             id={player.id}
@@ -80,7 +81,7 @@ const Squad = ({teamID}) => {
             <h4>Avançados</h4>
             <Row className='g-1'>
                 {forwards.map(player => (
-                    <Col key={player.id} md={4}>
+                    <Col md={4}>
                         <ElementCard
                             role='player'
                             id={player.id}

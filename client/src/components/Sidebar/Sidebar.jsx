@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchAllLeagues } from '../../services/CompetitionService';
+import LoadingScreen from '../CommonUI/LoadingScreen';
 
 const Sidebar = () => {
     // ids das top leagues
@@ -27,7 +28,7 @@ const Sidebar = () => {
         }
     }, [leagueData]);
 
-    if (loading) return <p>Carregando...</p>;
+    if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!leagueData) return <p>Nenhum dado disponível.</p>;
 

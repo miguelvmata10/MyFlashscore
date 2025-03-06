@@ -5,6 +5,7 @@ import { Row, Container, Image } from 'react-bootstrap';
 import { fetchTeamLeagues } from '../../services/TeamsService';
 import useApiRequest from '../../hooks/useApiRequest';
 import SquadStatistics from './SquadStatistics';
+import LoadingScreen from '../CommonUI/LoadingScreen';
 
 const TeamLeaguesSelector = () => {
     const { teamID } = useParams()
@@ -55,7 +56,7 @@ const TeamLeaguesSelector = () => {
         }
     }, [currentTeamLeagues, selectedLeague]);
 
-    if (loading) return <p>Carregando...</p>;
+    if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!leagues) return <p>Nenhum dado disponível.</p>;
 

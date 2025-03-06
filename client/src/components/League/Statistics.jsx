@@ -6,6 +6,7 @@ import { Table, Image, Row, Col } from 'react-bootstrap';
 import Container from 'react-bootstrap/esm/Container';
 import './Statistics.css';
 import { Link } from "react-router-dom";
+import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchTopScorers, fetchTopAssisters } from '../../services/CompetitionService';
 
@@ -23,7 +24,7 @@ const Statistics = ({leagueID, season}) => {
     }
   }, [leagueID, season, fetchScorers, fetchAssisters]);
 
-  if (loadingScorers || loadingAssisters) return <p>Carregando...</p>;
+  if (loadingScorers || loadingAssisters) return <LoadingScreen />;
   if (errorScorers) return <p>Erro: {errorScorers.message}</p>;
   if (errorAssisters) return <p>Erro: {errorAssisters.message}</p>;
 

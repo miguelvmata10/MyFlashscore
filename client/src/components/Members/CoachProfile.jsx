@@ -7,6 +7,7 @@ import { Container, Image, Row, Col } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import { CoachCarrer, CoachTrophies } from './CoachCarrer';
+import LoadingScreen from '../CommonUI/LoadingScreen';
 
 const CoachProfile = () => {
   const { coachID } = useParams();
@@ -19,7 +20,7 @@ const CoachProfile = () => {
       }
   }, [coachID, fetchData]);
 
-  if (loading) return <p>Carregando...</p>;
+  if (loading) return <LoadingScreen />;
   if (error) return <p>Erro: {error.message}</p>;
   if (!coachData) return <p>Nenhum dado disponível.</p>;
 

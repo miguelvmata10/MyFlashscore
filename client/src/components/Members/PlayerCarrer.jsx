@@ -3,6 +3,7 @@ import { Container, Image, Row, Col, Table, Card, Accordion, Dropdown } from 're
 import { Link, useParams } from "react-router-dom";
 import { fetchPlayerTransfers, fetchPlayerTrophies, fetchPlayerSeasons, fetchPlayerStatistics} from '../../services/PeopleService';
 import ElementCard from '../CommonUI/ElementCard';
+import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest'; 
 
 export const PlayerCarrer = () => {
@@ -23,7 +24,7 @@ export const PlayerCarrer = () => {
     }, [playerTransfers]);
 
     
-    if (loading) return <p>Carregando...</p>;
+    if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!playerTransfers) return <p>Nenhum dado disponível.</p>;
     
@@ -71,7 +72,7 @@ export const PlayerTrophies = () => {
         }
     }, [playerID, fetchData]);
   
-    if (loading) return <p>Carregando...</p>;
+    if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!playerTrophies) return <p>Nenhum dado disponível.</p>;
   
@@ -107,7 +108,6 @@ export const PlayerTrophies = () => {
 }
 
 export const PlayerDetails = ({details}) => {
-    const { playerID } = useParams();
     const translateToPortuguese = (position) => {
         switch (position) {
             case 'Goalkeeper':
@@ -210,7 +210,7 @@ export const PlayerSeasonSelector = () => {
         }
     }, [seasonsOrdered, selectedSeason]);
 
-    if (loading) return <p>Carregando...</p>;
+    if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!playerSeasons) return <p>Nenhum dado disponível.</p>;
 
@@ -278,7 +278,7 @@ export const PlayerStatistics = ({season}) => {
         
     }, [playerStatistics]);
 
-    if (loading) return <p>Carregando...</p>;
+    if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!playerStatistics || playerStatistics.length === 0) return <p>Nenhum dado disponível.</p>;
     

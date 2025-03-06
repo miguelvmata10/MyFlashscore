@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Row, Col, Container } from 'react-bootstrap';
 import { fetchTeamStatistics } from '../../services/TeamsService';
+import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest';
 import { Doughnut, Bar, Line } from 'react-chartjs-2';
 import {
@@ -44,7 +45,7 @@ const SquadStatistics = ({leagueID, season}) => {
       }
   }, [teamID, leagueID, season, fetchData])
 
-  if (loading) return <p>Carregando...</p>;
+  if (loading) return <LoadingScreen />;
   if (error) return <p>Erro: {error.message}</p>;
   if (!statistics) return <p>Nenhum dado disponível.</p>;
 

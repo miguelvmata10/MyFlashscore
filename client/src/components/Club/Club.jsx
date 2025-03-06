@@ -11,6 +11,7 @@ import Results from './Results';
 import List from './List';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchClubData } from '../../services/TeamsService';
+import LoadingScreen from '../CommonUI/LoadingScreen';
 
 const Club = () => {
     const { teamID } = useParams();
@@ -24,7 +25,7 @@ const Club = () => {
         }
     }, [teamID, fetchData]);
 
-    if (loading) return <p>Carregando...</p>;
+    if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!clubData) return <p>Nenhum dado disponível.</p>;
 
@@ -55,7 +56,7 @@ const Club = () => {
                     <span>Capacidade: {clubData[0]?.venue?.capacity}</span>
                 </Col>
                 <Col xs="auto">
-                    <Image src={clubData[0]?.venue?.image} width={200} style={{ borderRadius: '10%' }} />
+                    <Image src={clubData[0]?.venue?.image} width={160} style={{ borderRadius: '10%' }} />
                 </Col>
             </Row>
             <Row>

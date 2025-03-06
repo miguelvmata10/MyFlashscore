@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Table, Image } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import useApiRequest from '../../hooks/useApiRequest';
+import LoadingScreen from '../CommonUI/LoadingScreen';
 import { fetchLeagueStanding } from '../../services/CompetitionService';
 
 const Standings = ({ leagueID, season }) => {
@@ -13,7 +14,7 @@ const Standings = ({ leagueID, season }) => {
         }
     }, [leagueID, season, fetchData]);
 
-    if (loading) return <p>Carregando...</p>;
+    if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!teams) return <p>Nenhum dado disponível.</p>;
     

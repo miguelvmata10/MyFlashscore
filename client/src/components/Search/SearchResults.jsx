@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchSearchData } from '../../services/SearchService';
 import SearchResultsList from './SearchResultsList';
+import LoadingScreen from '../CommonUI/LoadingScreen';
 
 const SearchResults = () => {
     const { name, inputValue } = useParams();
@@ -16,7 +17,7 @@ const SearchResults = () => {
       }
     }, [name, inputValue, fetchData]);
    
-    if (loading) return <p>Carregando...</p>;
+    if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!searchData) return <p>Nenhum dado disponível.</p>;
 

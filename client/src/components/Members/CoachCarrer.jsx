@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Table, Image } from 'react-bootstrap';
 import { Link, useParams } from "react-router-dom";
 import { fetchCoachTrophies } from '../../services/PeopleService';
+import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest';
 
 export const CoachCarrer = ({carrer}) => {
@@ -40,7 +41,7 @@ export const CoachTrophies = () => {
       }
   }, [coachID, fetchData]);
 
-  if (loading) return <p>Carregando...</p>;
+  if (loading) return <LoadingScreen />;
   if (error) return <p>Erro: {error.message}</p>;
   if (!coachTrophies) return <p>Nenhum dado disponível.</p>;
 

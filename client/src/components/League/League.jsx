@@ -9,6 +9,7 @@ import Standings from './Standings';
 import Statistics from './Statistics';
 import Results from './Results';
 import ListOfGames from './ListOfGames';
+import LoadingScreen from '../CommonUI/LoadingScreen';
 
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchLeagueData } from '../../services/CompetitionService';
@@ -25,7 +26,7 @@ const League = () => {
         }
     }, [leagueID, fetchData]);
 
-    if (loading) return <p>Carregando...</p>;
+    if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!leagueData) return <p>Nenhum dado disponível.</p>;
 
