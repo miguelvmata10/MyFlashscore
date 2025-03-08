@@ -25,7 +25,9 @@ export const fetchPlayerSeasons = (playerID) => {
 }
 
 export const fetchPlayerStatistics = (playerID, season) => {
-    return apiRequest(`/people/playerStatistics/${playerID}`, {params: {
-        season: season,
-    }});
+    return apiRequest(`/people/playerStatistics/${playerID}`, {
+        params: {
+            season: season,
+        }
+    });
 }
