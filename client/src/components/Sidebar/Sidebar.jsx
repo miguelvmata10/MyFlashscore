@@ -7,9 +7,7 @@ import useApiRequest from '../../hooks/useApiRequest';
 import { fetchAllLeagues } from '../../services/CompetitionService';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 
-const Sidebar = () => {
-    // ids das top leagues
-    const topLeaguesIDs = [39, 140, 135, 78, 2, 94, 61, 3];
+const Sidebar = ({topLeaguesIDs}) => {
     const [ leagues, setLeagues ] = useState([]);
     const { data: leagueData, loading, error, fetchData } = useApiRequest(fetchAllLeagues);
 
