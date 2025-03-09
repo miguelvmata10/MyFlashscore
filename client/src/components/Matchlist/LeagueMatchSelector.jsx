@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Image, Row, Col, Button, ButtonGroup, Container } from 'react-bootstrap';
 import LoadingScreen from '../CommonUI/LoadingScreen';
-
+import MatchList from './MatchList';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchGamesPerDay } from '../../services/GameService';
 
-const GamesList = ({date, topLeaguesIDs}) => {
+const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
     const [ topLeagueGames, setTopLeagueGames] = useState([]);
     const [ otherLeagueGames, setOtherLeagueGames] = useState([]);
     const { data: games, loading, error, fetchData } = useApiRequest(fetchGamesPerDay);
@@ -44,6 +44,7 @@ const GamesList = ({date, topLeaguesIDs}) => {
                 if (!acc[leagueId]) {
                     acc[leagueId] = {
                         id: leagueId,
+                        flag: league.flag,
                         name: league ? league.name : "Outras ligas",  
                         games: []  
                     };
@@ -63,19 +64,30 @@ const GamesList = ({date, topLeaguesIDs}) => {
     }, [games, topLeaguesIDs]);
 
     useEffect(() => {
-        setTopLeagueGames(gamesByLeague.prioritizedLeagueGames);
-        setOtherLeagueGames(gamesByLeague.otherLeagueGames);
+        setTopLeagueGames(Object.values(gamesByLeague.prioritizedLeagueGames || {}));
+        setOtherLeagueGames(Object.values(gamesByLeague.otherLeagueGames || {}));
     }, [gamesByLeague]);
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!games) return <p>Nenhum dado disponível.</p>;
-
-    console.log('TOP: ', topLeagueGames);
-    console.log('OTHER: ', otherLeagueGames);
     
     return (
-        <div>GamesList</div>
+        <Container className='p-4'>
+            {topLeagueGames.length > 0 && (
+                <>
+                    <h5>Principais ligas</h5>
+                    <MatchList leagueGames={topLeagueGames} type='topLeagues'/>
+                </>
+            )}
+
+            {otherLeagueGames.length > 0 && (
+                <>
+                    <h5>Outras ligas</h5>
+                    <MatchList leagueGames={otherLeagueGames} type='otherLeagues'/>
+                </>
+            )}
+        </Container>
     )
 }
-export default GamesList
+export default LeagueMatchSelector

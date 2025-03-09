@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Dropdown } from 'react-bootstrap';
-import GamesList from "./GamesList";
+import LeagueMatchSelector from "./LeagueMatchSelector";
 
 const MatchDateSelector = ({topLeaguesIDs}) => {
   
@@ -10,6 +10,9 @@ const MatchDateSelector = ({topLeaguesIDs}) => {
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
+
+    // const weekday = date.toLocaleDateString('pt-PT', {weekday: 'long'});
+
     return `${year}-${month}-${day}`;
   }
 
@@ -42,7 +45,7 @@ const MatchDateSelector = ({topLeaguesIDs}) => {
   }
   return ( 
     <Container>
-      <Row>
+      <Row className="text-end me-3">
           <Dropdown onSelect={handleDropdownSelect}>
               <Dropdown.Toggle variant="danger" id="dropdown-basic">
                   {selectedDate ? (
@@ -63,7 +66,7 @@ const MatchDateSelector = ({topLeaguesIDs}) => {
           </Dropdown>
       </Row>
       <Row>
-        <GamesList date={selectedDate} topLeaguesIDs={topLeaguesIDs} />
+        <LeagueMatchSelector date={selectedDate} topLeaguesIDs={topLeaguesIDs} />
       </Row>
     </Container>
   )
