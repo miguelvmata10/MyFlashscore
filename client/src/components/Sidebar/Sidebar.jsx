@@ -33,7 +33,7 @@ const Sidebar = ({topLeaguesIDs}) => {
     return (
         <Container className='sidebarContainer p-3 rounded-4 mb-2'>
             <div className='text-center mb-3'>
-                <h4><b>Top Leagues</b></h4>
+                <h4><b>Principais ligas</b></h4>
             </div>
             <ButtonGroup vertical>
                 {leagues.map((topLeague) => (
