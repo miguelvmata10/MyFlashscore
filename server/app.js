@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const apiFootballReq = require('./services/apiFootball');
 const cors = require("cors"); // Import CORS module to manage cross-origin requests
 const corsOption = {
     origin: ["http://localhost:5173"] // Specifies allowed origins, only "http://localhost:5173" can access the API
