@@ -4,6 +4,7 @@ import LoadingScreen from '../CommonUI/LoadingScreen';
 import MatchList from './MatchList';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchGamesPerDay } from '../../services/GameService';
+import './MatchList.css';
 
 const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
     const [ topLeagueGames, setTopLeagueGames] = useState([]);
@@ -66,17 +67,19 @@ const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
     useEffect(() => {
         setTopLeagueGames(Object.values(gamesByLeague.prioritizedLeagueGames || {}));
         setOtherLeagueGames(Object.values(gamesByLeague.otherLeagueGames || {}));
-    }, [gamesByLeague]);
+    }, [gamesByLeague, games]);
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!games) return <p>Nenhum dado disponível.</p>;
     
     return (
-        <Container className='p-4'>
+        <Container className=''>
             {topLeagueGames.length > 0 && (
                 <>
-                    <h5>Principais ligas</h5>
+                    <h5 className='border-start border-danger border-4 ps-2 py-1 bg-transparent bg-opacity-50 rounded-start'>
+                        Principais ligas
+                    </h5>
                     <MatchList leagueGames={topLeagueGames} type='topLeagues'/>
                 </>
             )}

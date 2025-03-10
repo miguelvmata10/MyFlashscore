@@ -1,25 +1,21 @@
 import { Image, Row, Col, Card} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import './GameCard.css';
 
 const GameCard = ({GameData}) => {
   return (
-    <Card>
+    <Card className='bg-transparent text-white gameCard border-2 border-dark'>
       <Card.Body>
         <Row>
             <Col className='text-end'>
-                <Link to={`/team/${GameData.teams.home.id}`} className="customLink me-1">
-                    <span>{GameData.teams.home.name}</span>
-                </Link>
-                <Image src={GameData.teams.home.logo} className='imageResize'/>
+              <span className='me-1'>{GameData.teams.home.name}</span>
+              <Image src={GameData.teams.home.logo} className='imageResize'/>
             </Col>
             <Col className='text-center'>
-                <span>{GameData.goals.home} - {GameData.goals.away}</span>
+                <h6>{GameData.goals.home} - {GameData.goals.away}</h6>
             </Col>
             <Col className='text-start'>
-                <Image src={GameData.teams.away.logo} className='imageResize'/>
-                <Link to={`/team/${GameData.teams.away.id}`} className="customLink ms-1">
-                    <span>{GameData.teams.away.name}</span>
-                </Link>
+              <Image src={GameData.teams.away.logo} className='imageResize'/>
+              <span className='ms-1'>{GameData.teams.away.name}</span>
             </Col>
         </Row>
       </Card.Body>
