@@ -9,6 +9,7 @@ import Club from './components/Club/Club';
 import PlayerProfile from './components/Members/PlayerProfile';
 import CoachProfile from './components/Members/CoachProfile';
 import SearchResults from './components/Search/SearchResults';
+import GameMenu from './components/Game/GameMenu';
 
 function App() {
   // ids das top leagues
@@ -30,6 +31,7 @@ function App() {
               <Route path='/player/:playerID' element={<PlayerProfile />} />
               <Route path='/coach/:coachID' element={<CoachProfile />} />
               <Route path='/:name/:inputValue' element={<SearchResults />} />
+              <Route path='/game/:fixtureID' element={<GameMenu />} />
             </Routes>
           </Col>
         </Row>
