@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Dropdown } from 'react-bootstrap';
+import { BsCalendar3 } from 'react-icons/bs'; 
 import LeagueMatchSelector from "./LeagueMatchSelector";
 
 const MatchDateSelector = ({topLeaguesIDs}) => {
@@ -11,9 +12,25 @@ const MatchDateSelector = ({topLeaguesIDs}) => {
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
 
-    // const weekday = date.toLocaleDateString('pt-PT', {weekday: 'long'});
-
     return `${year}-${month}-${day}`;
+  }
+
+  // Para exibição no botão - formato mais amigável
+  const formatDisplayDate = (dateString) => {
+    const date = new Date(dateString);
+    
+    // Array com abreviações dos dias da semana 
+    const weekdays = ['DO', 'SE', 'TE', 'QU', 'QI', 'SE', 'SA'];
+    
+    // Obtém a abreviação do dia da semana
+    const weekday = weekdays[date.getDay()];
+    
+    // Obtém dia, mês e ano no formato desejado
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString().slice(-2); // Apenas os últimos 2 dígitos
+    
+    return `${weekday}, ${day}/${month}/${year}`;
   }
 
   // devido às limitações no nº de reqs diários na API apenas serão mostrados 
@@ -43,32 +60,39 @@ const MatchDateSelector = ({topLeaguesIDs}) => {
       setSelectedDate(eventKey);
     }
   }
+  
   return ( 
     <Container>
-      <Row className="text-end me-3">
-          <Dropdown onSelect={handleDropdownSelect}>
-              <Dropdown.Toggle variant="danger" id="dropdown-basic">
-                  {selectedDate ? (
-                      <>
-                          {selectedDate}
-                      </>
-                  ) : (
-                      "Selecione uma data"
-                  )}
-              </Dropdown.Toggle>
-              <Dropdown.Menu className="bg-dark text-white">
-                  {lastSevenDays.map((day) => (
-                      <Dropdown.Item key={day} eventKey={day} className="bg-dark text-white">
-                          {day}
-                      </Dropdown.Item>
-                  ))}
-              </Dropdown.Menu>
-          </Dropdown>
-      </Row>
-      <Row>
-        <LeagueMatchSelector date={selectedDate} topLeaguesIDs={topLeaguesIDs} />
-      </Row>
+      <div className="ps-5 pe-5 pb-5 pt-3">
+        <Row className="text-end">
+            <Dropdown onSelect={handleDropdownSelect} className="mb-2">
+                <Dropdown.Toggle 
+                  variant="danger" 
+                  id="dropdown-basic"
+                  className="date-selector-btn"
+                >
+                    <BsCalendar3 className="me-2" />
+                    {selectedDate ? formatDisplayDate(selectedDate) : "Selecione uma data"}
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="bg-dark text-white">
+                    {lastSevenDays.map((day) => (
+                        <Dropdown.Item 
+                          key={day} 
+                          eventKey={day} 
+                          className="bg-dark text-white"
+                        >
+                            {formatDisplayDate(day)}
+                        </Dropdown.Item>
+                    ))}
+                </Dropdown.Menu>
+            </Dropdown>
+        </Row>
+        <Row>
+          <LeagueMatchSelector date={selectedDate} topLeaguesIDs={topLeaguesIDs} />
+        </Row>
+      </div>
     </Container>
   )
 }
+
 export default MatchDateSelector
