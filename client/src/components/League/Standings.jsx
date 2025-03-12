@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { Table, Image } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import useApiRequest from '../../hooks/useApiRequest';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import { fetchLeagueStanding } from '../../services/CompetitionService';
 
-const Standings = ({ leagueID, season }) => {
+const Standings = ({ season }) => {
+    const { leagueID } = useParams();
     const { data: teams, loading, error, fetchData } = useApiRequest(fetchLeagueStanding);
 
     useEffect(() => {
