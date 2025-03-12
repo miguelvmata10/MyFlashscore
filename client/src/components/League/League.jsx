@@ -6,11 +6,9 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Image, Row, Col } from 'react-bootstrap';
 import Standings from './Standings';
-import Statistics from './Statistics';
-import Results from './Results';
-import ListOfGames from './ListOfGames';
+import TopScorersAndAssists from './TopScorersAndAssists';
+import LeagueMatches from './LeagueMatches';
 import LoadingScreen from '../CommonUI/LoadingScreen';
-
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchLeagueData } from '../../services/CompetitionService';
 
@@ -33,13 +31,13 @@ const League = () => {
     const renderComponent = () => {
         switch (selected) {
             case 'classificacoes':
-                return <Standings season={currentSeason.year} leagueID={leagueID} />;
+                return <Standings season={currentSeason.year} />;
             case 'resultados':
-                return <Results />;
+                return <LeagueMatches type='pastGames' />;
             case 'lista':
-                return <ListOfGames />;
+                return <LeagueMatches type='upcomingGames' />;
             case 'marcadores':
-                return <Statistics season={currentSeason.year} leagueID={leagueID} />;
+                return <TopScorersAndAssists season={currentSeason.year} />;
             default:
                 return <div>Erro</div>;
         }
