@@ -5,9 +5,10 @@ import { Row, Container, Image } from 'react-bootstrap';
 import { fetchTeamLeagues } from '../../services/TeamsService';
 import useApiRequest from '../../hooks/useApiRequest';
 import SquadStatistics from './SquadStatistics';
+import Results from './Results';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 
-const TeamLeaguesSelector = () => {
+const TeamLeaguesSelector = ({componentToRender}) => {
     const { teamID } = useParams()
     const { data: leagues, loading, error, fetchData } = useApiRequest(fetchTeamLeagues);
     const [ selectedLeague, setSelectedLeague ] = useState(null);
@@ -95,7 +96,11 @@ const TeamLeaguesSelector = () => {
                 </Dropdown>
             </Row>
             <Row>
-                <SquadStatistics leagueID={selectedLeagueID} season={selectedLeagueSeason}/>
+                {componentToRender === 'SquadStatistics' ? (
+                    <SquadStatistics leagueID={selectedLeagueID} season={selectedLeagueSeason}/>
+                ) : componentToRender === 'SquadResults' ? (
+                    <Results leagueID={selectedLeagueID} season={selectedLeagueSeason} />
+                ) : null }
             </Row>
         </Container>
   )
