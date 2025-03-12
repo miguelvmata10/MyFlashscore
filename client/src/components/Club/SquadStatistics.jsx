@@ -43,7 +43,7 @@ const SquadStatistics = ({leagueID, season}) => {
       if (teamID && leagueID && season) {
           fetchData(teamID, leagueID, season);    
       }
-  }, [teamID, leagueID, season, fetchData])
+    }, [teamID, leagueID, season, fetchData])
 
   if (loading) return <LoadingScreen />;
   if (error) return <p>Erro: {error.message}</p>;
