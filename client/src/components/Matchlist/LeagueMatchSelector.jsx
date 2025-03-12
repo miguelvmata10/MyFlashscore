@@ -8,7 +8,6 @@ import './MatchList.css';
 
 const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
     const [ topLeagueGames, setTopLeagueGames] = useState([]);
-    const [ otherLeagueGames, setOtherLeagueGames] = useState([]);
     const { data: games, loading, error, fetchData } = useApiRequest(fetchGamesPerDay);
 
     useEffect(() => {
@@ -20,53 +19,36 @@ const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
     const gamesByLeague = useMemo(() => {
         if (!games) return {};
 
-        const prioritizeGames = games.reduce((acc, game) => {
-            const league = game.league;
-            const leagueId = league ? league.id : 'outros';
-
-            const isPriority = topLeaguesIDs.includes(leagueId);
-
-            if (!acc[isPriority ? 'priority' : 'other']) {
-                acc[isPriority ? 'priority' : 'other'] = [];
-            }
-
-            acc[isPriority ? 'priority' : 'other'].push(game);
-
-            return acc;
-        }, {priority: [], other: []});
+        // Filtra apenas os jogos das ligas prioritárias
+        const priorityGames = games.filter((game) => topLeaguesIDs.includes(game.league?.id));
 
         const organizeGameLeaguesByID = (gamesArray) => {
             return gamesArray.reduce((acc, game) => {
-                // Verifica se a liga existe e usa o ID como chave, se não, usa "Outras ligas"
                 const league = game.league;
-                const leagueId = league ? league.id : 'outros';
-        
+                const leagueId = league.id;
+    
                 // Verifica se a chave já existe no acumulador 
                 if (!acc[leagueId]) {
                     acc[leagueId] = {
                         id: leagueId,
                         flag: league.flag,
-                        name: league ? league.name : "Outras ligas",  
+                        name: league.name,  
                         games: []  
                     };
                 }
-        
+    
                 // Adiciona o jogo ao array da liga correspondente
                 acc[leagueId].games.push(game);
                 return acc;
             }, {});
-        }
+        };
 
-        const prioritizedLeagueGames = organizeGameLeaguesByID(prioritizeGames.priority);
-        const otherLeagueGames = organizeGameLeaguesByID(prioritizeGames.other);
-
-        return {prioritizedLeagueGames, otherLeagueGames};
+        return organizeGameLeaguesByID(priorityGames);
 
     }, [games, topLeaguesIDs]);
 
     useEffect(() => {
-        setTopLeagueGames(Object.values(gamesByLeague.prioritizedLeagueGames || {}));
-        setOtherLeagueGames(Object.values(gamesByLeague.otherLeagueGames || {}));
+        setTopLeagueGames(Object.values(gamesByLeague));
     }, [gamesByLeague, games]);
 
     if (loading) return <LoadingScreen />;
@@ -84,12 +66,12 @@ const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
                 </>
             )}
 
-            {otherLeagueGames.length > 0 && (
+            {/* {otherLeagueGames.length > 0 && (
                 <>
                     <h5>Outras ligas</h5>
                     <MatchList leagueGames={otherLeagueGames} type='otherLeagues'/>
                 </>
-            )}
+            )} */}
         </Container>
     )
 }
