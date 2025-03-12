@@ -9,30 +9,35 @@ export const fetchLeagueData = (leagueID) => {
 };
 
 export const fetchLeagueStanding = (leagueID, season) => {
-    return apiRequest('/competitions/standings', {
+    return apiRequest(`/competitions/standings/${leagueID}`, {
         params: {
-            league: leagueID,
             season: season
         }
     });
 };
 
 export const fetchTopScorers = (leagueID, season) => {
-    return apiRequest('/competitions/league/topScorers', {
+    return apiRequest(`/competitions/league/topScorers/${leagueID}`, {
         params: {
-            league: leagueID,
             season: season
         }
     });
 };
 
 export const fetchTopAssisters = (leagueID, season) => {
-    return apiRequest('/competitions/league/topAssisters', {
+    return apiRequest(`/competitions/league/topAssisters/${leagueID}`, {
         params: {
-            league: leagueID,
             season: season
         }
     });
+};
+
+export const fetchLeagueResults = (leagueID) => {
+    return apiRequest(`/competitions/league/results/${leagueID}`);
+};
+
+export const fetchLeagueList = (leagueID) => {
+    return apiRequest(`/competitions/league/list/${leagueID}`);
 };
 
 

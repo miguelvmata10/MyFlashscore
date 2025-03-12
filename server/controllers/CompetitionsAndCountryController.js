@@ -1,8 +1,5 @@
 const apiFootballReq = require('../services/apiFootball');
 
-// TODO: Refactor dos controladores, há muitos controladores com a mesma estrututura => ABSTRAIR
-
-
 // Endpoint para ir buscar todos os países disponiveis
 const getCountries = async (req, res) => {
     try {
@@ -64,9 +61,10 @@ const getLeaguePerID = async (req, res) => {
 
 // Endpoint que retorna a tabela classificativa de acordo com o id da liga e a season
 const getLeagueStandings = async (req, res) => {
-    const { league, season } = req.query;
+    const leagueID = req.params.id;
+    const { season } = req.query;
     try {
-        const data = await apiFootballReq('standings' , {league: league, season: season});
+        const data = await apiFootballReq('standings' , {league: leagueID, season: season});
         if (!data.response || data.response.length === 0) {
             return res.status(404).json({error: `Nenhuma tabela classificativa com os dados: ${league} e ${season}`})
         }
@@ -79,9 +77,10 @@ const getLeagueStandings = async (req, res) => {
 
 // Endpoint que retorna os melhores marcadores da liga numa determinada época
 const getLeagueTopScorers = async (req, res) => {
-    const { league, season } = req.query;
+    const leagueID = req.params.id;
+    const { season } = req.query;
     try {
-        const data = await apiFootballReq('players/topscorers', {league: league, season: season});
+        const data = await apiFootballReq('players/topscorers', {league: leagueID, season: season});
         if (!data.response || data.response.length === 0) {
             return res.status(404).json({error: `Nenhuma tabela classificativa com os dados: ${league} e ${season}`})
         }
@@ -94,9 +93,10 @@ const getLeagueTopScorers = async (req, res) => {
 
 // Endpoint que retorna os melhores assistentes da liga numa determinada época
 const getLeagueTopAssists = async (req, res) => {
-    const { league, season } = req.query;
+    const leagueID = req.params.id;
+    const { season } = req.query;
     try {
-        const data = await apiFootballReq('players/topassists', {league: league, season: season});
+        const data = await apiFootballReq('players/topassists', {league: leagueID, season: season});
         if (!data.response || data.response.length === 0) {
             return res.status(404).json({error: `Nenhuma tabela classificativa com os dados: ${league} e ${season}`})
         }
@@ -107,6 +107,36 @@ const getLeagueTopAssists = async (req, res) => {
     }
 };
 
+const getLastLeagueGames = async (req, res) => {
+    const leagueID = req.params.id;
+    const last = 20;
+    try {
+        const data = await apiFootballReq('fixtures', {league: leagueID, last: last});
+        if (!data.response || data.response.length === 0) {
+            return res.status(404).json({error: `Não há jogos para: ${league}`})
+        }
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Erro ao obter os resultados: ', error);
+        res.status(500).json({error: 'Erro interno do servidor'});
+    }
+}
+
+const getNextLeagueGames = async (req, res) => {
+    const leagueID = req.params.id;
+    const next = 20;
+    try {
+        const data = await apiFootballReq('fixtures', {league: leagueID, next: next});
+        if (!data.response || data.response.length === 0) {
+            return res.status(404).json({error: `Não há jogos para: ${league}`})
+        }
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Erro ao obter os resultados: ', error);
+        res.status(500).json({error: 'Erro interno do servidor'});
+    }
+}
+
 module.exports = {
     getCountries,
     getLeagues,
@@ -115,6 +145,8 @@ module.exports = {
     getLeagueStandings,
     getLeagueTopScorers,
     getLeagueTopAssists,
+    getLastLeagueGames,
+    getNextLeagueGames
 };
 
 

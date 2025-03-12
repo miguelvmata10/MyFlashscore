@@ -17,12 +17,18 @@ router.get('/countries/leagues', competitionAndCountryController.getLeaguesPerCo
 router.get('/leagues/:id', competitionAndCountryController.getLeaguePerID);
 
 // rota para obter a classificação da liga através do id da liga e do ano
-router.get('/standings', competitionAndCountryController.getLeagueStandings);
+router.get('/standings/:id', competitionAndCountryController.getLeagueStandings);
 
 // rota que retorna os melhores marcadores de uma determinada liga através do id e do ano
-router.get('/league/topScorers', competitionAndCountryController.getLeagueTopScorers);
+router.get('/league/topScorers/:id', competitionAndCountryController.getLeagueTopScorers);
 
 // rota que retorna os melhores assistentes de uma determinada liga através do id e do ano
-router.get('/league/topAssisters', competitionAndCountryController.getLeagueTopAssists);
+router.get('/league/topAssisters/:id', competitionAndCountryController.getLeagueTopAssists);
+
+// rota que retorna os últimos 20 jogos da respetiva liga 
+router.get('/league/results/:id', competitionAndCountryController.getLastLeagueGames);
+
+// rota que retorna os próximos 20 jogos da respetiva liga
+router.get('/league/list/:id', competitionAndCountryController.getNextLeagueGames);
 
 module.exports = router;
