@@ -18,3 +18,10 @@ export const fetchTeamStatistics = (teamID, league, season) => {
         season: season,
     }});
 };
+
+export const fetchTeamResults = (teamID, league, season) => {
+    return apiRequest(`/teams/teamResults/${teamID}`, {params: {
+        league: league,
+        season: season,
+    }});
+};

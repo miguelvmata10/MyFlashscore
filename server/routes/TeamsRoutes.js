@@ -13,7 +13,10 @@ router.get('/squad', teamsController.getSquadPlayers);
 // rota que retorna as ligas em que uma equipa está inserida
 router.get('/teamLeagues/:teamID', teamsController.getTeamLeagues);
 
-// rota que retorna as ligas em que uma equipa está inserida
+// rota que retorna as estatisticas de uma equipa 
 router.get('/teamStatistics/:teamID', teamsController.getTeamStatistics);
+
+// rota que retorna os resultados de uma equipa numa determinada liga
+router.get('/teamResults/:teamID', teamsController.getSquadResults);
 
 module.exports = router;
