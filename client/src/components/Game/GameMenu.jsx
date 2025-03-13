@@ -9,6 +9,7 @@ import LoadingScreen from '../CommonUI/LoadingScreen';
 import GameLineups from './GameLineups';
 import GameSummary from './GameSummary';
 import GameStatistics from './GameStatistics';
+import './GameStyles.css'
 
 const GameMenu = () => {
   const { fixtureID } = useParams();
@@ -26,11 +27,14 @@ const GameMenu = () => {
   if (!gameData) return <p>Nenhum dado disponível.</p>;
 
   const game = gameData[0];
+  console.log('papapapa: ', game);
 
   const renderComponent = () => {
     switch (selected) {
       case 'sumario':
-          return <GameSummary summary={game.events} />;
+          // passar o id da equipa da casa via prop para saber que eventos mostrar 
+          // em que lado do ecrã no menu de <GameSummary> 
+          return <GameSummary events={game.events} homeTeam={game.teams.home.id} />;
       case 'formacoes':
           return <GameLineups lineups={game.lineups} />
       case 'estatisticas':
@@ -40,11 +44,9 @@ const GameMenu = () => {
     };
   }
 
-  console.log('dados do jogo: slb', gameData[0]);
-
   return (
     <Container className="container p-5 rounded-4">
-      <Row className="align-items-start justify-content-center py-3 mb-4">
+      <Row className="align-items-start justify-content-center py-3">
         <Col className="text-center">
           <div className="bg-white rounded-4 d-inline-flex justify-content-center align-items-center p-2" 
             style={{ width: '100px', height: '100px', maxWidth: '100%', aspectRatio: '1/1' }}>
@@ -85,9 +87,9 @@ const GameMenu = () => {
           </Link>
         </Col>
       </Row>
-
+      <hr />
       <Row>
-        <ButtonGroup size="md">
+        <ButtonGroup className='custom-button mb-4 w-50' size="md">
           <Button
               className={isActiveButton('sumario')}
               onClick={() => handleButtonState('sumario')}
@@ -107,7 +109,6 @@ const GameMenu = () => {
               Estatísticas
           </Button>
         </ButtonGroup>
-        <hr />
       </Row>
       <Row>
         {renderComponent()}
