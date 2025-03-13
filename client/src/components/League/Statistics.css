@@ -16,5 +16,6 @@
 }
 .custom-button .btn.active:hover {
     color: #ffffff;
+    background-color: #ff4037;
 }
 
