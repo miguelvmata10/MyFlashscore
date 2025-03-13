@@ -22,8 +22,6 @@ const LeagueMatches = ({ type }) => {
   if (error) return <p>Erro: {error.message}</p>;
   if (!games) return <p>Nenhum dado disponível.</p>;
 
-  console.log("johos cahgasdhasfd: ", games.length);
-
   return (
     <Container className='mt-4'>
       <div>
