@@ -7,3 +7,7 @@ export const fetchGamesPerDay = (date) => {
         }
     });
 };
+
+export const fetchGame = (fixtureID) => {
+    return apiRequest(`game/${fixtureID}`);
+}
