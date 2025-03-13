@@ -17,13 +17,13 @@ function App() {
 
   return (
     <Router>
-      <Container>
+      <Container className='ps-5 pb-5 pe-5'>
         <Navbar />
-        <Row>
-          <Col xs={12} md={3} >
+        <Row className='ps-5 pb-5 pe-5'>
+          <Col xs={12} sm={0} md={3} >
             <Sidebar topLeaguesIDs={topLeaguesIDs}/>
           </Col>
-          <Col xs={12} md={9} className="menu p-3 rounded-4 mb-2">
+          <Col xs={12} sm={12} md={9} className="menu p-3 rounded-4 mb-2">
             <Routes>
               <Route path='/' element={<MatchDateSelector topLeaguesIDs={topLeaguesIDs}/>} />
               <Route path='/league/:leagueID' element={<League />} />
