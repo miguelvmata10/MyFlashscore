@@ -56,7 +56,6 @@ body, #root {
     background-color: transparent;
     color: #ff4037;
     cursor: pointer;
-    transform: scale(1.01);          
 }
 
 .btn-group .btn.active, .btn-group-vertical .btn.active {
