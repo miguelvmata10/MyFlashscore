@@ -1,6 +1,6 @@
 import { Image, Row, Col, Card} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './GameCard.css';
+import './GameStyles.css';
 
 const GameCard = ({GameData, key}) => {
   return (
