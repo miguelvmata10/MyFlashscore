@@ -25,7 +25,7 @@ const Club = () => {
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!clubData) return <p>Nenhum dado disponível.</p>;
+    if (!clubData || clubData.length === 0) return <p>Nenhum dado disponível.</p>;
 
     const renderComponent = () => {
         switch (selected) {

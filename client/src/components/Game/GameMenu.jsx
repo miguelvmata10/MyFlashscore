@@ -24,7 +24,7 @@ const GameMenu = () => {
 
   if (loading) return <LoadingScreen />;
   if (error) return <p>Erro: {error.message}</p>;
-  if (!gameData) return <p>Nenhum dado disponível.</p>;
+  if (!gameData || gameData.length === 0) return <p>Nenhum dado disponível.</p>;
 
   const game = gameData[0];
   console.log('papapapa: ', game);
@@ -45,7 +45,7 @@ const GameMenu = () => {
   }
 
   return (
-    <Container className="container p-5 rounded-4">
+    <Container className="container ps-5 pe-5 pt-5">
       <Row className="align-items-start justify-content-center py-3">
         <Col className="text-center">
           <div className="bg-white rounded-4 d-inline-flex justify-content-center align-items-center p-2" 

@@ -18,7 +18,7 @@ const Results = ({leagueID, season}) => {
 
   if (loading) return <LoadingScreen />;
   if (error) return <p>Erro: {error.message}</p>;
-  if (!results) return <p>Nenhum dado disponível.</p>;
+  if (!results || results.length === 0) return <p>Nenhum dado disponível.</p>;
 
   return (
     <Container className='mt-4'>

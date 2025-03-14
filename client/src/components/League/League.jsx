@@ -26,7 +26,7 @@ const League = () => {
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!leagueData) return <p>Nenhum dado disponível.</p>;
+    if (!leagueData || leagueData.length === 0) return <p>Nenhum dado disponível.</p>;
 
     const renderComponent = () => {
         switch (selected) {
