@@ -11,8 +11,6 @@ const MatchList = ({leagueGames, type}) => {
     const defaultActiveKeys = type === 'topLeagues' ? Array.from({ length: leagueGames.length }, (_, index) => String(index))
     : [];
 
-    console.log('keys:', defaultActiveKeys)
-    console.log('LIGA DATA: ', leagueGames);
     return (
         <Accordion defaultActiveKey={defaultActiveKeys} alwaysOpen={accordionAlwaysOpen}>
             {leagueGames.map((league, index) => (
