@@ -5,6 +5,7 @@ import MatchList from './MatchList';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchGamesPerDay } from '../../services/GameService';
 import './MatchList.css';
+import NotFound from '../CommonUI/NotFound';
 
 const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
     const [ topLeagueGames, setTopLeagueGames] = useState([]);
@@ -53,7 +54,7 @@ const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!games) return <p>Nenhum dado disponível.</p>;
+    if (!games || games.length === 0 ) return <NotFound />;
     
     return (
         <Container className=''>

@@ -5,6 +5,7 @@ import { fetchPlayerTransfers, fetchPlayerTrophies, fetchPlayerSeasons, fetchPla
 import ElementCard from '../CommonUI/ElementCard';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest'; 
+import NotFound from '../CommonUI/NotFound';
 
 export const PlayerCarrer = () => {
     const { playerID } = useParams();
@@ -26,7 +27,7 @@ export const PlayerCarrer = () => {
     
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!playerTransfers) return <p>Nenhum dado disponível.</p>;
+    if (!playerTransfers || playerTransfers.length === 0 ) return <NotFound />;
     
     return transfers.length > 0 ? (
         <Table striped hover responsive variant="dark">
@@ -74,7 +75,7 @@ export const PlayerTrophies = () => {
   
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!playerTrophies) return <p>Nenhum dado disponível.</p>;
+    if (!playerTrophies || playerTrophies.length === 0 ) return <NotFound />;
   
     // necessário filtrar apenas os troféus ganhos, pois a API retorna campeonatos ganhos e vice-campeonatos
     const filteredPlayerTrophies = playerTrophies.filter(trophy => trophy.place === 'Winner');
@@ -212,7 +213,7 @@ export const PlayerSeasonSelector = () => {
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!playerSeasons) return <p>Nenhum dado disponível.</p>;
+    if (!playerSeasons || playerSeasons.length === 0 ) return <NotFound />;
 
     const handleDropdownSelect = (eventKey) => {
         setSelectedSeason(eventKey);
@@ -280,7 +281,7 @@ export const PlayerStatistics = ({season}) => {
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!playerStatistics || playerStatistics.length === 0) return <p>Nenhum dado disponível.</p>;
+    if (!playerStatistics || playerStatistics.length === 0) return <NotFound />;
     
     const stats = playerStatistics[0].statistics;
     

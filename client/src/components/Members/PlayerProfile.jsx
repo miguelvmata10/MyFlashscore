@@ -8,6 +8,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import { PlayerCarrer, PlayerTrophies, PlayerDetails, PlayerSeasonSelector } from './PlayerCarrer';
 import LoadingScreen from '../CommonUI/LoadingScreen';
+import NotFound from '../CommonUI/NotFound';
 
 const PlayerProfile = () => {
     const { playerID } = useParams();
@@ -22,7 +23,7 @@ const PlayerProfile = () => {
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!playerData) return <p>Nenhum dado disponível.</p>;
+    if (!playerData || playerData.length === 0 ) return <NotFound />;
 
     const renderComponent = () => {
         switch (selected) {

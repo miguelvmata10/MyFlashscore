@@ -5,6 +5,7 @@ import useApiRequest from '../../hooks/useApiRequest';
 import { fetchSearchData } from '../../services/SearchService';
 import SearchResultsList from './SearchResultsList';
 import LoadingScreen from '../CommonUI/LoadingScreen';
+import NotFound from '../CommonUI/NotFound';
 
 const SearchResults = () => {
     const { name, inputValue } = useParams();
@@ -19,7 +20,7 @@ const SearchResults = () => {
    
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!searchData) return <p>Nenhum dado disponível.</p>;
+    if (!searchData || searchData.length === 0 ) return <NotFound />;
 
     return (
       <Container className='container p-5 rounded-4' >

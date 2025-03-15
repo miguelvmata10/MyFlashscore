@@ -7,6 +7,7 @@ import useApiRequest from '../../hooks/useApiRequest';
 import SquadStatistics from './SquadStatistics';
 import Results from './Results';
 import LoadingScreen from '../CommonUI/LoadingScreen';
+import NotFound from '../CommonUI/NotFound';
 
 const TeamLeaguesSelector = ({componentToRender}) => {
     const { teamID } = useParams()
@@ -59,7 +60,7 @@ const TeamLeaguesSelector = ({componentToRender}) => {
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!leagues) return <p>Nenhum dado disponível.</p>;
+    if (!leagues || leagues.length === 0 ) return <NotFound />;
 
     const handleDropdownSelect = (eventKey) => {
         // para poder atualizar os dados a serem passados para apresentar as estatisticas no componente 'SquadStatistics'

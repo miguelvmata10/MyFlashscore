@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchTopScorers, fetchTopAssisters } from '../../services/CompetitionService';
+import NotFound from '../CommonUI/NotFound';
 
 const TopScorersAndAssists = ({ season }) => {
   const { leagueID } = useParams();
@@ -28,6 +29,8 @@ const TopScorersAndAssists = ({ season }) => {
   if (loadingScorers || loadingAssisters) return <LoadingScreen />;
   if (errorScorers) return <p>Erro: {errorScorers.message}</p>;
   if (errorAssisters) return <p>Erro: {errorAssisters.message}</p>;
+  if (!topScorers || topScorers.length === 0 ) return <NotFound />;
+  if (!topAssisters || topAssisters.length === 0 ) return <NotFound />;
 
   const dataToDisplay = selected === 'marcadores' ? topScorers : topAssisters;
 

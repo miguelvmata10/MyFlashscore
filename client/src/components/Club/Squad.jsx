@@ -4,6 +4,7 @@ import ElementCard from '../CommonUI/ElementCard';
 import { fetchSquadInfo } from '../../services/TeamsService';
 import useApiRequest from '../../hooks/useApiRequest';
 import LoadingScreen from '../CommonUI/LoadingScreen';
+import NotFound from '../CommonUI/NotFound';
 
 const Squad = ({teamID}) => {
     const { data: teamData, loading: teamloading, error: teamError, fetchData: fetchTeamData } = useApiRequest(fetchSquadInfo);
@@ -16,7 +17,7 @@ const Squad = ({teamID}) => {
 
     if (teamloading) return <LoadingScreen />;
     if (teamError) return <p>Erro: {teamError.message}</p>;
-    if (!teamData) return <p>Nenhum dado para a equipa disponível.</p>;
+    if (!teamData || teamData.length === 0) return <NotFound />;
 
     // Verifica se squad e squad[0] existem antes de tentar acessar players
     const players = teamData && teamData[0] ? teamData[0].players : [];

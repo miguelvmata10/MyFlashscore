@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchAllLeagues } from '../../services/CompetitionService';
 import LoadingScreen from '../CommonUI/LoadingScreen';
+import NotFound from '../CommonUI/NotFound';
 
 const Sidebar = ({topLeaguesIDs}) => {
     const [ leagues, setLeagues ] = useState([]);
@@ -28,7 +29,7 @@ const Sidebar = ({topLeaguesIDs}) => {
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!leagueData) return <p>Nenhum dado disponível.</p>;
+    if (!leagueData || leagueData.length === 0 ) return <NotFound />;
 
     return (
         <Container className='sidebarContainer p-3 rounded-4 mb-2'>

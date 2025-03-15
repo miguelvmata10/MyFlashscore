@@ -10,6 +10,7 @@ import TeamLeaguesSelector from './TeamLeaguesSelector';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchClubData } from '../../services/TeamsService';
 import LoadingScreen from '../CommonUI/LoadingScreen';
+import NotFound from '../CommonUI/NotFound';
 
 const Club = () => {
     const { teamID } = useParams();
@@ -25,7 +26,7 @@ const Club = () => {
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!clubData || clubData.length === 0) return <p>Nenhum dado disponível.</p>;
+    if (!clubData || clubData.length === 0) return <NotFound />;
 
     const renderComponent = () => {
         switch (selected) {

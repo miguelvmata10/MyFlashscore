@@ -5,6 +5,7 @@ import useApiRequest from '../../hooks/useApiRequest';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import { fetchLeagueResults, fetchLeagueList } from '../../services/CompetitionService';
 import GameCard from '../Game/GameCard';
+import NotFound from '../CommonUI/NotFound';
 
 const LeagueMatches = ({ type }) => {
   const { leagueID } = useParams()
@@ -20,7 +21,7 @@ const LeagueMatches = ({ type }) => {
 
   if (loading) return <LoadingScreen />;
   if (error) return <p>Erro: {error.message}</p>;
-  if (!games) return <p>Nenhum dado disponível.</p>;
+  if (!games || games.length === 0 ) return <NotFound />;
 
   return (
     <Container className='mt-4'>

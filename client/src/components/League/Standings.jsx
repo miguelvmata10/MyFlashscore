@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import useApiRequest from '../../hooks/useApiRequest';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import { fetchLeagueStanding } from '../../services/CompetitionService';
+import NotFound from '../CommonUI/NotFound';
 
 const Standings = ({ season }) => {
     const { leagueID } = useParams();
@@ -18,7 +19,7 @@ const Standings = ({ season }) => {
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!teams) return <p>Nenhum dado disponível.</p>;
+    if (!teams || teams.length === 0 ) return <NotFound />;
     
     return (
         <Table striped hover responsive variant="dark">

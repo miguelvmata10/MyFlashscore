@@ -11,6 +11,7 @@ import LeagueMatches from './LeagueMatches';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchLeagueData } from '../../services/CompetitionService';
+import NotFound from '../CommonUI/NotFound';
 
 const League = () => {
     const { leagueID } = useParams();
@@ -26,7 +27,7 @@ const League = () => {
 
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
-    if (!leagueData || leagueData.length === 0) return <p>Nenhum dado disponível.</p>;
+    if (!leagueData || leagueData.length === 0) return <NotFound />;
 
     const renderComponent = () => {
         switch (selected) {

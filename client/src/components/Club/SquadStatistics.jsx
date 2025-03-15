@@ -4,6 +4,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 import { fetchTeamStatistics } from '../../services/TeamsService';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest';
+import NotFound from '../CommonUI/NotFound';
 import { Doughnut, Bar, Line } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -47,7 +48,7 @@ const SquadStatistics = ({leagueID, season}) => {
 
   if (loading) return <LoadingScreen />;
   if (error) return <p>Erro: {error.message}</p>;
-  if (!statistics) return <p>Nenhum dado disponível.</p>;
+  if (!statistics || statistics.length === 0 ) return <NotFound />;
 
   // Jogos -> vitórias, derrotas e empates em casa e fora
   const barGameData = {

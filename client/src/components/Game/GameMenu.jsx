@@ -9,6 +9,7 @@ import LoadingScreen from '../CommonUI/LoadingScreen';
 import GameLineups from './GameLineups';
 import GameSummary from './GameSummary';
 import GameStatistics from './GameStatistics';
+import NotFound from '../CommonUI/NotFound';
 import './GameStyles.css'
 
 const GameMenu = () => {
@@ -24,7 +25,7 @@ const GameMenu = () => {
 
   if (loading) return <LoadingScreen />;
   if (error) return <p>Erro: {error.message}</p>;
-  if (!gameData || gameData.length === 0) return <p>Nenhum dado disponível.</p>;
+  if (!gameData || gameData.length === 0) return <NotFound />;
 
   const game = gameData[0];
   console.log('papapapa: ', game);

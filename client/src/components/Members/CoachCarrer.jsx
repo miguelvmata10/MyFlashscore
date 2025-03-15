@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { fetchCoachTrophies } from '../../services/PeopleService';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest';
+import NotFound from '../CommonUI/NotFound';
 
 export const CoachCarrer = ({carrer}) => {
     return carrer.length > 0 ? (
@@ -43,7 +44,7 @@ export const CoachTrophies = () => {
 
   if (loading) return <LoadingScreen />;
   if (error) return <p>Erro: {error.message}</p>;
-  if (!coachTrophies) return <p>Nenhum dado disponível.</p>;
+  if (!coachTrophies || coachTrophies.length === 0 ) return <NotFound />;
 
   // necessário filtrar apenas os troféus ganhos, pois a API retorna campeonatos ganhos e vice-campeonatos
   const filteredCoachTrophies = coachTrophies.filter(trophy => trophy.place === 'Winner');
