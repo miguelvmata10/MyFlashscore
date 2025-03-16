@@ -37,7 +37,7 @@ const GameMenu = () => {
           // em que lado do ecrã no menu de <GameSummary> 
           return <GameSummary events={game.events} homeTeam={game.teams.home.id} />;
       case 'formacoes':
-          return <GameLineups lineups={game.lineups} />
+          return <GameLineups lineups={game.lineups} players={game.players} />
       case 'estatisticas':
           return <GameStatistics stats={game.statistics} />
       default:
