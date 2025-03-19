@@ -34,7 +34,7 @@ const Club = () => {
                 return <Squad teamID={teamID} />;
             case 'estatisticas':
                 return <TeamLeaguesSelector componentToRender='SquadStatistics'/>
-            case 'resultados':
+            case 'jogos':
                 return <TeamLeaguesSelector componentToRender='SquadResults'/>
             default:
                 return <div>Erro</div>;
@@ -71,10 +71,10 @@ const Club = () => {
                         Estatisticas
                     </Button>
                     <Button 
-                        className={isActiveButton('resultados')} 
-                        onClick={() => handleButtonState('resultados')}
+                        className={isActiveButton('jogos')} 
+                        onClick={() => handleButtonState('jogos')}
                     >
-                        Resultados
+                        Jogos
                     </Button>
                 </ButtonGroup>
                 <hr />
