@@ -45,6 +45,18 @@ const GameMenu = () => {
     };
   }
 
+  const formatDate = (date) => {
+    const formattedDate = new Date(date);
+
+    const year = formattedDate.getFullYear();
+    const month = String(formattedDate.getMonth() + 1).padStart(2, '0');
+    const day = String(formattedDate.getDate()).padStart(2, '0');
+    const hours = String(formattedDate.getHours()).padStart(2, '0');
+    const minutes = String(formattedDate.getMinutes()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}h${minutes}`;
+  }
+
   return (
     <Container className="container ps-5 pe-5 pt-5">
       <Row className="align-items-start justify-content-center py-3">
@@ -66,9 +78,11 @@ const GameMenu = () => {
         </Col>
         
         <Col className="text-center">
+          <span className='text-secondary'>{formatDate(game.fixture.date)}</span>
           <h2 className="display-4 text-danger fw-bold">
             {game.score.fulltime.home} - {game.score.fulltime.away}
           </h2>
+          <h6 className="text-danger fw-bold">{game.fixture.status.short}</h6>
         </Col>
         
         <Col className="text-center">
