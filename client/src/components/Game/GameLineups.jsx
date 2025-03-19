@@ -1,14 +1,17 @@
-import { Image, Row, Col, Badge, Container } from 'react-bootstrap';
-import FootballField from '../../assets/GameImages/FootballField.png';
+import { Row, Col, Badge, Container } from 'react-bootstrap';
+import default_player_photo from '../../assets/FallbackImages/default_player_photo.png';
 import { Link } from 'react-router-dom';
+
 
 const formatBadge = (rating) => {
   if (rating >= 0 && rating <= 4.9) {
     return 'danger';
   } else if (rating >= 5.0 && rating <= 6.9) {
     return 'warning';
-  } else if (rating >= 7.0 && rating <= 10.0) {
+  } else if (rating >= 7.0 && rating <= 8.9) {
     return 'success';
+  } else if (rating >= 9.0 && rating <= 10.0) {
+    return 'primary';
   } else {
     return 'secondary';
   }
@@ -17,7 +20,7 @@ const formatBadge = (rating) => {
 const PlayersList = ({ teamData, type, title }) => {
   return (
     <>
-      <div className='d-flex justify-content-center rounded-3 p-2 mb-3' style={{ backgroundColor: '#4e4e4b', color: 'white' }}>
+      <div className='d-flex justify-content-center rounded-3 p-2 mb-3 mt-3' style={{ backgroundColor: '#4e4e4b', color: 'white' }}>
         <span>{title}</span>
       </div>
       <Row className='mb-3'>
@@ -66,10 +69,13 @@ const GameLineups = ({ lineups, players }) => {
 
   const mergedData = lineups.map(team => {
     const mergeData = ( playerList ) => {
+
+      if (!playerList || !Array.isArray(playerList)) return []; // Garante que playerList é um array válido
+      
       return playerList.map(({ player }) => {
         const playerData = players
           .flatMap(p => p.players)
-          .find(p => p.player.id === player.id);
+          .find(p => p.player.id === player.id) || {};
 
           return {
             id: player.id,
@@ -77,12 +83,12 @@ const GameLineups = ({ lineups, players }) => {
             number: player.number,
             grid: player.grid,
             pos: player.pos,
-            photo: playerData.player.photo,
-            captain: playerData.statistics[0]?.games?.captain || false,
-            rating: playerData.statistics[0]?.games?.rating 
-                      ? parseFloat(playerData.statistics[0]?.games?.rating).toFixed(1) // para ter uma casa decimal (7 -> 7.0) 
+            photo: playerData.player?.photo || default_player_photo,
+            captain: playerData.statistics?.[0]?.games?.captain || false,
+            rating: playerData.statistics?.[0]?.games?.rating 
+                      ? parseFloat(playerData.statistics?.[0]?.games?.rating).toFixed(1) // para ter uma casa decimal (7 -> 7.0) 
                       : 'N/A',
-            substitute: playerData.statistics[0]?.games?.substitute
+            substitute: playerData.statistics?.[0]?.games?.substitute || null
           };
       }); 
     };
@@ -98,7 +104,7 @@ const GameLineups = ({ lineups, players }) => {
     };
   });
 
-  console.log('adadadasdasdasdas', mergedData);
+  console.log('mergedData:', mergedData);
 
   return (
     <Container fluid>
@@ -113,18 +119,14 @@ const GameLineups = ({ lineups, players }) => {
             <h6 className='m-0 text-center'>Formações</h6>
             <span className='fw-bold'>{mergedData[1].teamFormation}</span>
           </div>
-          <div className='mb-4 overflow-auto'>
-            <Image
-              src={FootballField}
-              className="d-block mx-auto"
-              style={{ width: "750px", height: "420px", maxWidth: "none" }}
-            />
-          </div>
+          {/* <TacticalFormationDisplay homeTeamData={mergedData[0]} awayTeamData={mergedData[1]} /> */}
           <PlayersList teamData={mergedData} type='startXI' title='Equipa inicial' />
           <PlayersList teamData={mergedData} type='substitutes' title='Suplentes' />
         </div>
+        
       )}
     </Container>
   )
 }
+
 export default GameLineups
