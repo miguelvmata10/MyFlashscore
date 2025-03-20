@@ -1,5 +1,5 @@
 import { Row, Col, Badge, Container } from 'react-bootstrap';
-import default_player_photo from '../../assets/FallbackImages/default_player_photo.png';
+import default_player_logo from '../../assets/FallbackImages/default_player_logo.png';
 import { Link } from 'react-router-dom';
 
 
@@ -83,7 +83,7 @@ const GameLineups = ({ lineups, players }) => {
             number: player.number,
             grid: player.grid,
             pos: player.pos,
-            photo: playerData.player?.photo || default_player_photo,
+            photo: playerData.player?.photo || default_player_logo,
             captain: playerData.statistics?.[0]?.games?.captain || false,
             rating: playerData.statistics?.[0]?.games?.rating 
                       ? parseFloat(playerData.statistics?.[0]?.games?.rating).toFixed(1) // para ter uma casa decimal (7 -> 7.0) 
