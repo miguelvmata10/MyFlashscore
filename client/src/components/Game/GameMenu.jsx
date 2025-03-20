@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Image, Row, Col, ButtonGroup, Button, Container } from 'react-bootstrap';
+import { Row, Col, ButtonGroup, Button, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import useButtonGroup from '../../hooks/useButtonGroup';
@@ -11,6 +11,7 @@ import GameSummary from './GameSummary';
 import GameStatistics from './GameStatistics';
 import NotFound from '../CommonUI/NotFound';
 import './GameStyles.css'
+import FallbackImage from '../CommonUI/FallbackImage';
 
 const GameMenu = () => {
   const { fixtureID } = useParams();
@@ -63,9 +64,9 @@ const GameMenu = () => {
         <Col className="text-center">
           <div className="bg-white rounded-4 d-inline-flex justify-content-center align-items-center p-2" 
             style={{ width: '100px', height: '100px', maxWidth: '100%', aspectRatio: '1/1' }}>
-              <Image 
+              <FallbackImage 
               src={game.teams.home.logo} 
-              loading='lazy' 
+              type='team'
               fluid 
               className="mx-auto" 
               style={{ maxWidth: '80%', maxHeight: '80%' }}
@@ -89,9 +90,9 @@ const GameMenu = () => {
         <Col className="text-center">
           <div className="bg-white rounded-4 d-inline-flex justify-content-center align-items-center p-2" 
             style={{ width: '100px', height: '100px', maxWidth: '100%', aspectRatio: '1/1' }}>
-              <Image 
+              <FallbackImage 
               src={game.teams.away.logo}
-              loading='lazy' 
+              type='team' 
               fluid 
               className="mx-auto" 
               style={{ maxWidth: '80%', maxHeight: '80%' }}

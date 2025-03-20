@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom';
 import useButtonGroup from '../../hooks/useButtonGroup';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchCoachData } from '../../services/PeopleService';
-import { Container, Image, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import { CoachCarrer, CoachTrophies } from './CoachCarrer';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
+import FallbackImage from '../CommonUI/FallbackImage';
 
 const CoachProfile = () => {
   const { coachID } = useParams();
@@ -42,7 +43,7 @@ const CoachProfile = () => {
         <Container className="container p-5 rounded-4">
             <Row className="align-items-center mb-3">
                 <Col xs="auto">
-                    <Image src={coach.photo} width={110} loading='lazy' alt="Foto do treinador" style={{ borderRadius: '10%' }}/>
+                    <FallbackImage src={coach.photo} width={110} type='player' alt="Foto do treinador" style={{ borderRadius: '10%' }}/>
                 </Col>
                 <Col>
                 <h3 className="mb-2">{coach.name}</h3>

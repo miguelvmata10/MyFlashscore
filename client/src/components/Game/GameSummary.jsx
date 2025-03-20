@@ -7,6 +7,7 @@ import Substitution from '../../assets/GameImages/Substitution_card.png';
 import Var from '../../assets/GameImages/VAR.png';
 import Goal_PenaltyMissed from '../../assets/GameImages/Goal_Penalty_missed.png';
 import { useMemo } from 'react';
+import FallbackImage from '../CommonUI/FallbackImage';
 
 // homeTeam é passado via prop apenas para determinar os dados que serão mostrados
 // no lado direito e esquerdo do ecrã (esquerda -> equipa da casa, direita -> equipa visitante )
@@ -89,7 +90,7 @@ const GameSummary = ({ events, homeTeam }) => {
           <Link to={`/player/${event.player.id}`} className='customLink'>
             {event.player.name} 
           </Link>
-          {eventImage && <Image src={eventImage} loading='lazy' style={{ width: '25px', height: '25px', objectFit: 'contain' }}/>}
+          {eventImage && <FallbackImage src={eventImage} style={{ width: '25px', height: '25px', objectFit: 'contain' }}/>}
           {formatTime(event.time.elapsed, event.time.extra)}
         </div>
       );
@@ -97,7 +98,7 @@ const GameSummary = ({ events, homeTeam }) => {
     return (
       <div className='text-start gap-2'>
         {formatTime(event.time.elapsed, event.time.extra)}
-        {eventImage && <Image src={eventImage} loading='lazy' style={{ width: '25px', height: '25px', objectFit: 'contain' }} />}
+        {eventImage && <FallbackImage src={eventImage} style={{ width: '25px', height: '25px', objectFit: 'contain' }} />}
         <Link to={`/player/${event.player.id}`} className='customLink'>
             {event.player.name} 
         </Link>

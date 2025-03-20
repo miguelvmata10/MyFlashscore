@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { Table, Image } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { Link, useParams } from "react-router-dom";
 import { fetchCoachTrophies } from '../../services/PeopleService';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest';
 import NotFound from '../CommonUI/NotFound';
+import FallbackImage from '../CommonUI/FallbackImage';
 
 export const CoachCarrer = ({carrer}) => {
     return carrer.length > 0 ? (
@@ -22,7 +23,7 @@ export const CoachCarrer = ({carrer}) => {
                 <td>{job.start}</td>
                 <td>{job.end ? job.end : '-'}</td>
                 <td>
-                  <Image className="imageResize me-2" loading='lazy' src={job.team.logo}/>
+                  <FallbackImage className="imageResize me-2" type='team' src={job.team.logo}/>
                   <Link to={`/team/${job.team.id}`} className="customLink ms-1">{job.team.name}</Link>
                 </td>
               </tr>

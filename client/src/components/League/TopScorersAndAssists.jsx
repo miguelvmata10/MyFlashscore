@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import useButtonGroup from '../../hooks/useButtonGroup';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { Table, Image, Row } from 'react-bootstrap';
+import { Table, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import './Statistics.css';
@@ -11,6 +11,7 @@ import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchTopScorers, fetchTopAssisters } from '../../services/CompetitionService';
 import NotFound from '../CommonUI/NotFound';
+import FallbackImage from '../CommonUI/FallbackImage';
 
 const TopScorersAndAssists = ({ season }) => {
   const { leagueID } = useParams();
@@ -75,7 +76,7 @@ const TopScorersAndAssists = ({ season }) => {
                 <tr key={playerData?.id} className='p-2'>
                   <td>{index + 1}</td>
                   <td>
-                    <Image className='imageResize' loading='lazy' src={playerData.photo} />
+                    <FallbackImage className='imageResize' type='player' src={playerData.photo} />
                     <span className='ms-3'>
                       <Link to={`/player/${playerData?.id}`} className="customLink">
                         {playerData?.name || 'N/A'}

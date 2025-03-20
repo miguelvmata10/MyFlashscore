@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Image, Row, Col, Table, Card, Accordion, Dropdown } from 'react-bootstrap';
+import { Container, Row, Col, Table, Card, Accordion, Dropdown } from 'react-bootstrap';
 import { Link, useParams } from "react-router-dom";
 import { fetchPlayerTransfers, fetchPlayerTrophies, fetchPlayerSeasons, fetchPlayerStatistics} from '../../services/PeopleService';
 import ElementCard from '../CommonUI/ElementCard';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest'; 
 import NotFound from '../CommonUI/NotFound';
+import FallbackImage from '../CommonUI/FallbackImage';
 
 export const PlayerCarrer = () => {
     const { playerID } = useParams();
@@ -44,13 +45,13 @@ export const PlayerCarrer = () => {
                     <tr key={index}>
                         <td>{transfer.date}</td>
                         <td>
-                            <Image className="imageResize me-2" loading='lazy' src={transfer.teams.out.logo} />
+                            <FallbackImage className="imageResize me-2" type='team' src={transfer.teams.out.logo} />
                             <Link to={`/team/${transfer.teams.out.id}`} className="customLink ms-1">
                                 {transfer.teams.out.name}
                             </Link>
                         </td>
                         <td>
-                            <Image className="imageResize me-2" loading='lazy' src={transfer.teams.in.logo} />
+                            <FallbackImage className="imageResize me-2" type='team' src={transfer.teams.in.logo} />
                             <Link to={`/team/${transfer.teams.in.id}`} className="customLink ms-1">
                                 {transfer.teams.in.name}
                             </Link>
@@ -307,7 +308,7 @@ export const PlayerStatistics = ({season}) => {
                 {stats.map((stat, index) => (
                     <Accordion.Item eventKey={index.toString()} key={index} className='bg-transparent'>
                         <Accordion.Header>
-                            <Image src={stat.league.logo} loading='lazy' className="me-2 imageResize" />
+                            <FallbackImage src={stat.league.logo} type='league' className="me-2 imageResize" />
                             {stat.league.name} ({stat.league.season})
                         </Accordion.Header>
                         <Accordion.Body>

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { Row, Container, Image } from 'react-bootstrap';
+import { Row, Container } from 'react-bootstrap';
 import { fetchTeamLeagues } from '../../services/TeamsService';
 import useApiRequest from '../../hooks/useApiRequest';
 import SquadStatistics from './SquadStatistics';
 import Results from './Results';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
+import FallbackImage from '../CommonUI/FallbackImage';
 
 const TeamLeaguesSelector = ({componentToRender}) => {
     const { teamID } = useParams()
@@ -80,7 +81,7 @@ const TeamLeaguesSelector = ({componentToRender}) => {
                     <Dropdown.Toggle variant="danger" id="dropdown-basic">
                         {selectedLeague ? (
                             <>
-                                <Image className="imageResize me-2" loading='lazy' src={selectedLeagueLogo} />
+                                <FallbackImage type='league' className="imageResize me-2" src={selectedLeagueLogo} />
                                 {selectedLeague}
                             </>
                         ) : (
@@ -90,7 +91,7 @@ const TeamLeaguesSelector = ({componentToRender}) => {
                     <Dropdown.Menu className="bg-dark text-white">
                         {currentTeamLeagues.map((league) => (
                             <Dropdown.Item key={league.id} eventKey={league.name} className="bg-dark text-white">
-                                <Image className="imageResize me-2" loading='lazy' src={league.logo} /> {league.name}
+                                <FallbackImage className="imageResize me-2" type='league' src={league.logo} /> {league.name}
                             </Dropdown.Item>
                         ))}
                     </Dropdown.Menu>

@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import { Table, Image } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import useApiRequest from '../../hooks/useApiRequest';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import { fetchLeagueStanding } from '../../services/CompetitionService';
 import NotFound from '../CommonUI/NotFound';
+import FallbackImage from '../CommonUI/FallbackImage';
 
 const Standings = ({ season }) => {
     const { leagueID } = useParams();
@@ -58,7 +59,7 @@ const Standings = ({ season }) => {
                   <tr className="p-2" key={rank}>
                       <td>{rank}</td>
                       <td>
-                          <Image className="imageResize" loading='lazy' src={teamLogo} alt="Team logo" />
+                          <FallbackImage className="imageResize" type='team' src={teamLogo} alt="Team logo" />
                           <span className="ms-3">
                               <Link to={`/team/${teamID}`} className="customLink">
                                   {teamName}

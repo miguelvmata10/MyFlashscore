@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom';
 import useButtonGroup from '../../hooks/useButtonGroup';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchPlayerData } from '../../services/PeopleService';
-import { Container, Image, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import { PlayerCarrer, PlayerTrophies, PlayerDetails, PlayerSeasonSelector } from './PlayerCarrer';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
+import FallbackImage from '../CommonUI/FallbackImage';
 
 const PlayerProfile = () => {
     const { playerID } = useParams();
@@ -46,7 +47,7 @@ const PlayerProfile = () => {
         <Container className="container p-5 rounded-4">
             <Row className="align-items-center mb-3">
                 <Col xs="auto">
-                    <Image src={player.photo} width={110} loading='lazy' alt="Foto do jogador" style={{ borderRadius: '10%' }}/>
+                    <FallbackImage src={player.photo} width={110} type='player' alt="Foto do jogador" style={{ borderRadius: '10%' }}/>
                 </Col>
                 <Col>
                     <h3 className="mb-2">{player.name}</h3>

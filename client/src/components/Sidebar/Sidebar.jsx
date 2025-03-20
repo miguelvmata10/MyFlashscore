@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/esm/Container';
-import { ButtonGroup, Button, Image } from 'react-bootstrap';
+import { ButtonGroup, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchAllLeagues } from '../../services/CompetitionService';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
+import FallbackImage from '../CommonUI/FallbackImage';
 
 const Sidebar = ({topLeaguesIDs}) => {
     const [ leagues, setLeagues ] = useState([]);
@@ -39,7 +40,7 @@ const Sidebar = ({topLeaguesIDs}) => {
             <ButtonGroup vertical>
                 {leagues.map((topLeague) => (
                     <Button className='d-flex mb-2' as={Link} to={`/league/${topLeague.league.id}`} key={topLeague.league.id}>
-                        <Image className='imageResize' loading='lazy' src={topLeague.league.logo} />
+                        <FallbackImage className='imageResize' type='league' src={topLeague.league.logo} />
                         <span className='ms-2'>{topLeague.league.name}</span>
                     </Button>
                 ))}

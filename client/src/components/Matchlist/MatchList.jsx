@@ -1,8 +1,8 @@
-import { Accordion, Image } from 'react-bootstrap';
+import { Accordion } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import GameCard from '../Game/GameCard';
 import './Matchlist.css';
-import default_leagueOrCountry_logo from '../../assets/FallbackImages/default_leagueOrCountry_logo.png';
+import FallbackImage from '../CommonUI/FallbackImage';
 
 const MatchList = ({leagueGames, type}) => {
     // apenas as top leagues estarão abertas por default
@@ -15,7 +15,11 @@ const MatchList = ({leagueGames, type}) => {
             {leagueGames.map((league, index) => (
                 <Accordion.Item eventKey={String(index)} key={index} className='bg-transparent mb-2'>
                     <Accordion.Header>
-                        <Image src={league.flag} loading="lazy" className="imageResize me-1" onError={(e) => (e.currentTarget.src = default_leagueOrCountry_logo)} />
+                        <FallbackImage 
+                            src={league.flag}
+                            type='country'
+                            className="imageResize me-1"
+                        />
                         <Link to={`/league/${league.id}`} className="customLink ms-1">
                             {league.name}
                         </Link>

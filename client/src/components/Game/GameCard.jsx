@@ -1,6 +1,7 @@
-import { Image, Row, Col, Card} from 'react-bootstrap';
+import { Row, Col, Card} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './GameStyles.css';
+import FallbackImage from '../CommonUI/FallbackImage';
 
 const formatDate = (date) => {
   const formattedDate = new Date(date);
@@ -57,7 +58,7 @@ const GameCard = ({ GameData }) => {
           <Row>
             <Col className='text-end'>
               <span className='me-1'>{GameData.teams.home.name}</span>
-              <Image loading="lazy" src={GameData.teams.home.logo} className='imageResize'/>
+              <FallbackImage type='team' src={GameData.teams.home.logo} className='imageResize'/>
             </Col>
 
             <Col className="text-center">
@@ -84,7 +85,7 @@ const GameCard = ({ GameData }) => {
             </Col>
 
             <Col className='text-start'>
-              <Image loading="lazy" src={GameData.teams.away.logo} className='imageResize'/>
+              <FallbackImage type='team' src={GameData.teams.away.logo} className='imageResize'/>
               <span className='ms-1'>{GameData.teams.away.name}</span>
             </Col>
           </Row>
