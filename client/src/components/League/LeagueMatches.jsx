@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Row, Container, Image } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import useApiRequest from '../../hooks/useApiRequest';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import { fetchLeagueResults, fetchLeagueList } from '../../services/CompetitionService';

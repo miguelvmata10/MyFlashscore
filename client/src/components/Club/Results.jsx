@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Row, Container, Image } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import useApiRequest from '../../hooks/useApiRequest';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import { fetchTeamResults } from "../../services/TeamsService"

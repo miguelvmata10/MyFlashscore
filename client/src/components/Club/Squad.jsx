@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import ElementCard from '../CommonUI/ElementCard';
 import { fetchSquadInfo } from '../../services/TeamsService';
