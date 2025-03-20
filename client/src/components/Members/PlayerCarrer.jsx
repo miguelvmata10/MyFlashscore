@@ -44,13 +44,13 @@ export const PlayerCarrer = () => {
                     <tr key={index}>
                         <td>{transfer.date}</td>
                         <td>
-                            <Image className="imageResize me-2" src={transfer.teams.out.logo} />
+                            <Image className="imageResize me-2" loading='lazy' src={transfer.teams.out.logo} />
                             <Link to={`/team/${transfer.teams.out.id}`} className="customLink ms-1">
                                 {transfer.teams.out.name}
                             </Link>
                         </td>
                         <td>
-                            <Image className="imageResize me-2" src={transfer.teams.in.logo} />
+                            <Image className="imageResize me-2" loading='lazy' src={transfer.teams.in.logo} />
                             <Link to={`/team/${transfer.teams.in.id}`} className="customLink ms-1">
                                 {transfer.teams.in.name}
                             </Link>
@@ -307,7 +307,7 @@ export const PlayerStatistics = ({season}) => {
                 {stats.map((stat, index) => (
                     <Accordion.Item eventKey={index.toString()} key={index} className='bg-transparent'>
                         <Accordion.Header>
-                            <Image src={stat.league.logo} className="me-2 imageResize" />
+                            <Image src={stat.league.logo} loading='lazy' className="me-2 imageResize" />
                             {stat.league.name} ({stat.league.season})
                         </Accordion.Header>
                         <Accordion.Body>

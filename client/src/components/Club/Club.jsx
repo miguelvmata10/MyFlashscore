@@ -45,7 +45,7 @@ const Club = () => {
         <Container className="container p-5 rounded-4">
             <Row className="align-items-center mb-3">
                 <Col xs="auto">
-                    <Image src={clubData[0]?.team?.logo} width={60} alt="Logo do clube" />
+                    <Image src={clubData[0]?.team?.logo} loading='lazy' width={60} alt="Logo do clube" />
                 </Col>
                 <Col>
                     <h3 className="mb-2">{clubData[0]?.team?.name}</h3>
@@ -53,7 +53,7 @@ const Club = () => {
                     <span>Capacidade: {clubData[0]?.venue?.capacity}</span>
                 </Col>
                 <Col xs="auto">
-                    <Image src={clubData[0]?.venue?.image} width={160} style={{ borderRadius: '10%' }} />
+                    <Image src={clubData[0]?.venue?.image} loading='lazy' width={160} style={{ borderRadius: '10%' }} />
                 </Col>
             </Row>
             <Row>

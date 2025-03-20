@@ -80,7 +80,7 @@ const TeamLeaguesSelector = ({componentToRender}) => {
                     <Dropdown.Toggle variant="danger" id="dropdown-basic">
                         {selectedLeague ? (
                             <>
-                                <Image className="imageResize me-2" src={selectedLeagueLogo} />
+                                <Image className="imageResize me-2" loading='lazy' src={selectedLeagueLogo} />
                                 {selectedLeague}
                             </>
                         ) : (
@@ -90,7 +90,7 @@ const TeamLeaguesSelector = ({componentToRender}) => {
                     <Dropdown.Menu className="bg-dark text-white">
                         {currentTeamLeagues.map((league) => (
                             <Dropdown.Item key={league.id} eventKey={league.name} className="bg-dark text-white">
-                                <Image className="imageResize me-2" src={league.logo} /> {league.name}
+                                <Image className="imageResize me-2" loading='lazy' src={league.logo} /> {league.name}
                             </Dropdown.Item>
                         ))}
                     </Dropdown.Menu>

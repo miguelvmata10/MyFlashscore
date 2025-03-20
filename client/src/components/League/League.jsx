@@ -51,7 +51,7 @@ const League = () => {
         <Container className="container p-5 rounded-4">
             <Row className="align-items-center mb-3">
                 <Col xs="auto">
-                    <Image src={leagueData[0]?.league?.logo} width={60} alt="Logo da liga" />
+                    <Image src={leagueData[0]?.league?.logo} loading='lazy' width={60} alt="Logo da liga" />
                 </Col>
                 <Col>
                     <h4 className="mb-2">{leagueData[0]?.league?.name}</h4>

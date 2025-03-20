@@ -89,7 +89,7 @@ const GameSummary = ({ events, homeTeam }) => {
           <Link to={`/player/${event.player.id}`} className='customLink'>
             {event.player.name} 
           </Link>
-          {eventImage && <Image src={eventImage} style={{ width: '25px', height: '25px', objectFit: 'contain' }}/>}
+          {eventImage && <Image src={eventImage} loading='lazy' style={{ width: '25px', height: '25px', objectFit: 'contain' }}/>}
           {formatTime(event.time.elapsed, event.time.extra)}
         </div>
       );
@@ -97,7 +97,7 @@ const GameSummary = ({ events, homeTeam }) => {
     return (
       <div className='text-start gap-2'>
         {formatTime(event.time.elapsed, event.time.extra)}
-        {eventImage && <Image src={eventImage} style={{ width: '25px', height: '25px', objectFit: 'contain' }} />}
+        {eventImage && <Image src={eventImage} loading='lazy' style={{ width: '25px', height: '25px', objectFit: 'contain' }} />}
         <Link to={`/player/${event.player.id}`} className='customLink'>
             {event.player.name} 
         </Link>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/esm/Container';
-import { ButtonGroup, Button, Image, Row, Col } from 'react-bootstrap';
+import { ButtonGroup, Button, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import useApiRequest from '../../hooks/useApiRequest';
@@ -39,7 +39,7 @@ const Sidebar = ({topLeaguesIDs}) => {
             <ButtonGroup vertical>
                 {leagues.map((topLeague) => (
                     <Button className='d-flex mb-2' as={Link} to={`/league/${topLeague.league.id}`} key={topLeague.league.id}>
-                        <Image className='imageResize' src={topLeague.league.logo} />
+                        <Image className='imageResize' loading='lazy' src={topLeague.league.logo} />
                         <span className='ms-2'>{topLeague.league.name}</span>
                     </Button>
                 ))}

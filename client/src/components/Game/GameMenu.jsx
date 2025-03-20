@@ -64,7 +64,8 @@ const GameMenu = () => {
           <div className="bg-white rounded-4 d-inline-flex justify-content-center align-items-center p-2" 
             style={{ width: '100px', height: '100px', maxWidth: '100%', aspectRatio: '1/1' }}>
               <Image 
-              src={game.teams.home.logo}  
+              src={game.teams.home.logo} 
+              loading='lazy' 
               fluid 
               className="mx-auto" 
               style={{ maxWidth: '80%', maxHeight: '80%' }}
@@ -89,7 +90,8 @@ const GameMenu = () => {
           <div className="bg-white rounded-4 d-inline-flex justify-content-center align-items-center p-2" 
             style={{ width: '100px', height: '100px', maxWidth: '100%', aspectRatio: '1/1' }}>
               <Image 
-              src={game.teams.away.logo} 
+              src={game.teams.away.logo}
+              loading='lazy' 
               fluid 
               className="mx-auto" 
               style={{ maxWidth: '80%', maxHeight: '80%' }}

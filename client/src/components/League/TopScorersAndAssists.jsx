@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useButtonGroup from '../../hooks/useButtonGroup';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { Table, Image, Row, Col } from 'react-bootstrap';
+import { Table, Image, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import './Statistics.css';
@@ -75,7 +75,7 @@ const TopScorersAndAssists = ({ season }) => {
                 <tr key={playerData?.id} className='p-2'>
                   <td>{index + 1}</td>
                   <td>
-                    <Image className='imageResize' src={playerData.photo} />
+                    <Image className='imageResize' loading='lazy' src={playerData.photo} />
                     <span className='ms-3'>
                       <Link to={`/player/${playerData?.id}`} className="customLink">
                         {playerData?.name || 'N/A'}

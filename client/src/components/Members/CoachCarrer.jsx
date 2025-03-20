@@ -22,7 +22,7 @@ export const CoachCarrer = ({carrer}) => {
                 <td>{job.start}</td>
                 <td>{job.end ? job.end : '-'}</td>
                 <td>
-                  <Image className="imageResize me-2" src={job.team.logo}/>
+                  <Image className="imageResize me-2" loading='lazy' src={job.team.logo}/>
                   <Link to={`/team/${job.team.id}`} className="customLink ms-1">{job.team.name}</Link>
                 </td>
               </tr>

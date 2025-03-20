@@ -42,7 +42,7 @@ const CoachProfile = () => {
         <Container className="container p-5 rounded-4">
             <Row className="align-items-center mb-3">
                 <Col xs="auto">
-                    <Image src={coach.photo} width={110} alt="Foto do treinador" style={{ borderRadius: '10%' }}/>
+                    <Image src={coach.photo} width={110} loading='lazy' alt="Foto do treinador" style={{ borderRadius: '10%' }}/>
                 </Col>
                 <Col>
                 <h3 className="mb-2">{coach.name}</h3>

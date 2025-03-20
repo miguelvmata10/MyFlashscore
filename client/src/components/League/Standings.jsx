@@ -58,7 +58,7 @@ const Standings = ({ season }) => {
                   <tr className="p-2" key={rank}>
                       <td>{rank}</td>
                       <td>
-                          <Image className="imageResize" src={teamLogo} alt="Team logo" />
+                          <Image className="imageResize" loading='lazy' src={teamLogo} alt="Team logo" />
                           <span className="ms-3">
                               <Link to={`/team/${teamID}`} className="customLink">
                                   {teamName}
