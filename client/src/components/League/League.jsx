@@ -56,36 +56,37 @@ const League = () => {
                 </Col>
                 <Col>
                     <h4 className="mb-2">{leagueData[0]?.league?.name}</h4>
-                    <h6>{currentSeason ? `${currentSeason.year} / ${currentSeason.year + 1}` : 'Nenhuma época atual encontrada'}</h6>
                 </Col>
             </Row>
             <Row>
-                <ButtonGroup size="md">
-                    <Button
-                        className={isActiveButton('classificacoes')}
-                        onClick={() => handleButtonState('classificacoes')}
-                    >
-                        Classificações
-                    </Button>
-                    <Button
-                        className={isActiveButton('resultados')}
-                        onClick={() => handleButtonState('resultados')}
-                    >
-                        Resultados
-                    </Button>
-                    <Button 
-                        className={isActiveButton('lista')}
-                        onClick={() => handleButtonState('lista')}
-                    >
-                        Lista
-                    </Button>
-                    <Button
-                        className={isActiveButton('marcadores')}
-                        onClick={() => handleButtonState('marcadores')}
-                    >
-                        Marcadores
-                    </Button>
-                </ButtonGroup>
+                <div className="overflow-auto">
+                    <ButtonGroup className="w-100">
+                        <Button
+                            className={isActiveButton('classificacoes')}
+                            onClick={() => handleButtonState('classificacoes')}
+                        >
+                            Classificações
+                        </Button>
+                        <Button
+                            className={isActiveButton('resultados')}
+                            onClick={() => handleButtonState('resultados')}
+                        >
+                            Resultados
+                        </Button>
+                        <Button 
+                            className={isActiveButton('lista')}
+                            onClick={() => handleButtonState('lista')}
+                        >
+                            Lista
+                        </Button>
+                        <Button
+                            className={isActiveButton('marcadores')}
+                            onClick={() => handleButtonState('marcadores')}
+                        >
+                            Marcadores
+                        </Button>
+                    </ButtonGroup>
+                </div>
                 <hr />
             </Row>
             <Row>{renderComponent()}</Row>

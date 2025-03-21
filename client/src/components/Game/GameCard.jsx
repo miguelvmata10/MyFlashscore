@@ -88,6 +88,7 @@ const GameCard = ({ GameData }) => {
               <FallbackImage type='team' src={GameData.teams.away.logo} className='imageResize'/>
               <span className='ms-1'>{GameData.teams.away.name}</span>
             </Col>
+            
           </Row>
         </Card.Body>
       </Card>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Badge } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import useApiRequest from '../../hooks/useApiRequest';
@@ -7,6 +7,23 @@ import LoadingScreen from '../CommonUI/LoadingScreen';
 import { fetchLeagueStanding } from '../../services/CompetitionService';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
+
+const formatBadgeGame = (letter) => {
+    switch (letter) {
+        case 'W':
+            return <Badge bg="success">{letter}</Badge>
+        case 'L':
+            return <Badge bg="danger">{letter}</Badge>
+        case 'D':
+            return <Badge bg="secondary">{letter}</Badge>
+        default:
+            return <Badge bg="dark">{letter}</Badge>
+    }
+}
+
+const formatTeamForm = (form) => {
+    return form.split('').map(letter => formatBadgeGame(letter));
+}
 
 const Standings = ({ season }) => {
     const { leagueID } = useParams();
@@ -23,62 +40,64 @@ const Standings = ({ season }) => {
     if (!teams || teams.length === 0 ) return <NotFound />;
     
     return (
-        <Table striped hover responsive variant="dark">
-          <thead>
-              <tr>
-                <th>º</th>
-                <th>Equipa</th>
-                <th>PJ</th>
-                <th>V</th>
-                <th>E</th>
-                <th>D</th>
-                <th>G</th>
-                <th>DG</th>
-                <th>P</th>
-                <th>Forma</th>
-              </tr>
-          </thead>
-          <tbody>
-            {teams[0].league.standings[0].map((team) => {
-              const teamData = team?.all;
-              const teamName = team?.team?.name || 'N/A';
-              const teamID = team?.team?.id || 'N/A';
-              const teamLogo = team?.team?.logo || ''; 
-              const rank = team?.rank || 'N/A';
-              const gamesPlayed = teamData?.played ?? 'N/A';
-              const gamesWon = teamData?.win ?? 'N/A';
-              const gamesDrawn = teamData?.draw ?? 'N/A';
-              const gamesLost = teamData?.lose ?? 'N/A';
-              const goalsFor = teamData?.goals?.for ?? 0;
-              const goalsAgainst = teamData?.goals?.against ?? 0;
-              const goalDifference = goalsFor - goalsAgainst;
-              const points = team?.points ?? 'N/A';
-              const form = team?.form || 'N/A';
-
-              return (
-                  <tr className="p-2" key={rank}>
-                      <td>{rank}</td>
-                      <td>
-                          <FallbackImage className="imageResize" type='team' src={teamLogo} alt="Team logo" />
-                          <span className="ms-3">
-                              <Link to={`/team/${teamID}`} className="customLink">
-                                  {teamName}
-                              </Link>
-                          </span>
-                      </td>
-                      <td>{gamesPlayed}</td>
-                      <td>{gamesWon}</td>
-                      <td>{gamesDrawn}</td>
-                      <td>{gamesLost}</td>
-                      <td>{`${goalsFor}:${goalsAgainst}`}</td>
-                      <td>{goalDifference}</td>
-                      <td>{points}</td>
-                      <td>{form}</td>
+        <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
+            <Table striped hover variant="dark" className='text-center'>
+              <thead>
+                  <tr>
+                    <th>º</th>
+                    <th className='text-start'>Equipa</th>
+                    <th>PJ</th>
+                    <th>V</th>
+                    <th>E</th>
+                    <th>D</th>
+                    <th>G</th>
+                    <th>DG</th>
+                    <th>P</th>
+                    <th>Forma</th>
                   </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+              </thead>
+              <tbody>
+                {teams[0].league.standings[0].map((team) => {
+                  const teamData = team?.all;
+                  const teamName = team?.team?.name || 'N/A';
+                  const teamID = team?.team?.id || 'N/A';
+                  const teamLogo = team?.team?.logo || ''; 
+                  const rank = team?.rank || 'N/A';
+                  const gamesPlayed = teamData?.played ?? 'N/A';
+                  const gamesWon = teamData?.win ?? 'N/A';
+                  const gamesDrawn = teamData?.draw ?? 'N/A';
+                  const gamesLost = teamData?.lose ?? 'N/A';
+                  const goalsFor = teamData?.goals?.for ?? 0;
+                  const goalsAgainst = teamData?.goals?.against ?? 0;
+                  const goalDifference = goalsFor - goalsAgainst;
+                  const points = team?.points ?? 'N/A';
+                  const form = team?.form || 'N/A';
+
+                  return (
+                      <tr className="p-2" key={rank}>
+                          <td>{rank}</td>
+                          <td className='text-start'>
+                              <FallbackImage className="imageResize" type='team' src={teamLogo} alt="Team logo" />
+                              <span className="ms-3">
+                                  <Link to={`/team/${teamID}`} className="customLink">
+                                      {teamName}
+                                  </Link>
+                              </span>
+                          </td>
+                          <td>{gamesPlayed}</td>
+                          <td>{gamesWon}</td>
+                          <td>{gamesDrawn}</td>
+                          <td>{gamesLost}</td>
+                          <td>{`${goalsFor}:${goalsAgainst}`}</td>
+                          <td>{goalDifference}</td>
+                          <td>{points}</td>
+                          <td style={{ minWidth: '120px' }}>{formatTeamForm(form)}</td>
+                      </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+        </div>
     );
 };
 

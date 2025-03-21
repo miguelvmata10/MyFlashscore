@@ -57,26 +57,28 @@ const Club = () => {
                 </Col>
             </Row>
             <Row>
-                <ButtonGroup size="md">
-                    <Button
-                        className={isActiveButton('equipa')}
-                        onClick={() => handleButtonState('equipa')}
-                    >
-                        Equipa
-                    </Button>
-                    <Button
-                        className={isActiveButton('estatisticas')}
-                        onClick={() => handleButtonState('estatisticas')}
-                    >
-                        Estatisticas
-                    </Button>
-                    <Button 
-                        className={isActiveButton('jogos')} 
-                        onClick={() => handleButtonState('jogos')}
-                    >
-                        Jogos
-                    </Button>
-                </ButtonGroup>
+                <div className="overflow-auto">
+                    <ButtonGroup className='w-100'>
+                        <Button
+                            className={isActiveButton('equipa')}
+                            onClick={() => handleButtonState('equipa')}
+                        >
+                            Equipa
+                        </Button>
+                        <Button
+                            className={isActiveButton('estatisticas')}
+                            onClick={() => handleButtonState('estatisticas')}
+                        >
+                            Estatisticas
+                        </Button>
+                        <Button 
+                            className={isActiveButton('jogos')} 
+                            onClick={() => handleButtonState('jogos')}
+                        >
+                            Jogos
+                        </Button>
+                    </ButtonGroup>
+                </div>
                 <hr />
             </Row>
             <Row>
