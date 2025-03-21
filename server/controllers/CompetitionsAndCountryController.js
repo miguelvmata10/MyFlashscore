@@ -66,7 +66,7 @@ const getLeagueStandings = async (req, res) => {
     try {
         const data = await apiFootballReq('standings' , {league: leagueID, season: season});
         if (!data.response || data.response.length === 0) {
-            return res.status(404).json({error: `Nenhuma tabela classificativa com os dados: ${league} e ${season}`})
+            return res.status(404).json({error: `Nenhuma tabela classificativa com os dados: ${leagueID} e ${season}`})
         }
         res.status(200).json(data);
     } catch (error) {
@@ -82,7 +82,7 @@ const getLeagueTopScorers = async (req, res) => {
     try {
         const data = await apiFootballReq('players/topscorers', {league: leagueID, season: season});
         if (!data.response || data.response.length === 0) {
-            return res.status(404).json({error: `Nenhuma tabela classificativa com os dados: ${league} e ${season}`})
+            return res.status(404).json({error: `Nenhuma tabela classificativa com os dados: ${leagueID} e ${season}`})
         }
         res.status(200).json(data);
     } catch (error) {
@@ -98,7 +98,7 @@ const getLeagueTopAssists = async (req, res) => {
     try {
         const data = await apiFootballReq('players/topassists', {league: leagueID, season: season});
         if (!data.response || data.response.length === 0) {
-            return res.status(404).json({error: `Nenhuma tabela classificativa com os dados: ${league} e ${season}`})
+            return res.status(404).json({error: `Nenhuma tabela classificativa com os dados: ${leagueID} e ${season}`})
         }
         res.status(200).json(data);
     } catch (error) {
@@ -128,7 +128,7 @@ const getNextLeagueGames = async (req, res) => {
     try {
         const data = await apiFootballReq('fixtures', {league: leagueID, next: next});
         if (!data.response || data.response.length === 0) {
-            return res.status(404).json({error: `Não há jogos para: ${league}`})
+            return res.status(404).json({error: `Não há jogos para: ${leagueID}`})
         }
         res.status(200).json(data);
     } catch (error) {
