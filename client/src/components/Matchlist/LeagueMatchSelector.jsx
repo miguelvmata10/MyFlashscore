@@ -80,7 +80,7 @@ const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
                     <h5 className='border-start border-danger border-4 ps-2 py-1 bg-transparent bg-opacity-50 rounded-start'>
                         Principais ligas
                     </h5>
-                    <MatchList leagueGames={topLeagueGames} type='topLeagues'/>
+                    <MatchList leagueGames={topLeagueGames} />
                 </>
             )}
 
@@ -89,7 +89,7 @@ const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
                     <h5 className='border-start border-danger border-4 ps-2 py-1 bg-transparent bg-opacity-50 rounded-start mt-4'>
                         Outras ligas
                     </h5>
-                    <MatchList leagueGames={otherLeagueGames} type='otherLeagues'/>
+                    <MatchList leagueGames={otherLeagueGames} />
                 </>
             )}
         </Container>

@@ -4,14 +4,10 @@ import GameCard from '../Game/GameCard';
 import './Matchlist.css';
 import FallbackImage from '../CommonUI/FallbackImage';
 
-const MatchList = ({leagueGames, type}) => {
-    // apenas as top leagues estarão abertas por default
-    // as ligas com menos importância estarão 'fechadas' para poupar o nº de imagens da API
-    const accordionAlwaysOpen = type === 'topLeagues' ? true : false;
-    const defaultActiveKeys = type === 'topLeagues' ? Array.from({ length: leagueGames.length }, (_, index) => String(index)) : [];
-
+const MatchList = ({ leagueGames }) => {
+    
     return (
-        <Accordion defaultActiveKey={defaultActiveKeys} alwaysOpen={accordionAlwaysOpen}>
+        <Accordion alwaysOpen >
             {leagueGames.map((league, index) => (
                 <Accordion.Item eventKey={String(index)} key={index} className='bg-transparent mb-2'>
                     <Accordion.Header>
