@@ -1,17 +1,15 @@
 import React, { useEffect } from 'react';
+import { Button, ButtonGroup, Table, Row, Container, Badge } from 'react-bootstrap';
+import { useParams, Link } from 'react-router-dom';
 import useButtonGroup from '../../hooks/useButtonGroup';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { Table, Row } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
-import Container from 'react-bootstrap/esm/Container';
-import './Statistics.css';
-import { Link } from "react-router-dom";
-import LoadingScreen from '../CommonUI/LoadingScreen';
 import useApiRequest from '../../hooks/useApiRequest';
-import { fetchTopScorers, fetchTopAssisters } from '../../services/CompetitionService';
+import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
+import { fetchTopScorers, fetchTopAssisters } from '../../services/CompetitionService';
+import { formatBadge } from '../../utils/helpers';
+import './Statistics.css';
+
 
 const TopScorersAndAssists = ({ season }) => {
   const { leagueID } = useParams();
@@ -50,49 +48,53 @@ const TopScorersAndAssists = ({ season }) => {
             </Button>
         </ButtonGroup> 
       <Row>
-        <Table striped hover responsive variant="dark">
-          <thead>
-            <tr>
-              <th>º</th>
-              <th>Jogador</th>
-              <th>Equipa</th>
-              <th>PJ</th>
-              <th>G</th>
-              <th>A</th>
-              <th>N</th>
-            </tr>
-          </thead>
-          <tbody>
-            {dataToDisplay.map((player, index) => {
-              const playerData = player?.player;
-              const stats = player?.statistics?.[0]; 
-              const teamName = stats?.team?.name || 'N/A'; 
-              const gamesAppearances = stats?.games?.appearences || 'N/A';
-              const goalsTotal = stats?.goals?.total || 0;
-              const assistsTotal = stats?.goals?.assists || 0;
-              const rating = stats?.games?.rating ? parseFloat(stats.games.rating).toFixed(1) : 'N/A';
+        <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
+          <Table striped hover responsive variant="dark" className='text-center'>
+            <thead>
+              <tr>
+                <th>º</th>
+                <th className='text-start'>Jogador</th>
+                <th className='text-start'>Equipa</th>
+                <th>PJ</th>
+                <th>G</th>
+                <th>A</th>
+                <th>N</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dataToDisplay.map((player, index) => {
+                const playerData = player?.player;
+                const stats = player?.statistics?.[0]; 
+                const teamName = stats?.team?.name || 'N/A'; 
+                const gamesAppearances = stats?.games?.appearences || 'N/A';
+                const goalsTotal = stats?.goals?.total || 0;
+                const assistsTotal = stats?.goals?.assists || 0;
+                const rating = stats?.games?.rating ? parseFloat(stats.games.rating).toFixed(1) : 'N/A';
 
-              return (
-                <tr key={playerData?.id} className='p-2'>
-                  <td>{index + 1}</td>
-                  <td>
-                    <FallbackImage className='imageResize' type='player' src={playerData.photo} />
-                    <span className='ms-3'>
-                      <Link to={`/player/${playerData?.id}`} className="customLink">
-                        {playerData?.name || 'N/A'}
-                      </Link>
-                    </span>
-                  </td>
-                  <td>{teamName}</td>
-                  <td>{gamesAppearances}</td>
-                  <td>{goalsTotal}</td>
-                  <td>{assistsTotal}</td>
-                  <td>{rating}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+                return (
+                  <tr key={playerData?.id} className='p-2'>
+                    <td>{index + 1}</td>
+                    <td className='text-start'>
+                      <FallbackImage className='imageResize' type='player' src={playerData.photo} />
+                      <span className='ms-3'>
+                        <Link to={`/player/${playerData?.id}`} className="customLink">
+                          {playerData?.name || 'N/A'}
+                        </Link>
+                      </span>
+                    </td>
+                    <td className='text-start'>{teamName}</td>
+                    <td>{gamesAppearances}</td>
+                    <td>{goalsTotal}</td>
+                    <td>{assistsTotal}</td>
+                    <td>
+                      <Badge bg={formatBadge(rating)}>{rating}</Badge>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </div>
       </Row>
     </Container>
   )
