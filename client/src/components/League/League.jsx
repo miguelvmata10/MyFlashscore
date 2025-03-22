@@ -30,10 +30,19 @@ const League = () => {
     if (error) return <p>Erro: {error.message}</p>;
     if (!leagueData || leagueData.length === 0) return <NotFound />;
 
+    // armazena o ano da temporada atual em current season
+    const currentSeason = leagueData[0]?.seasons.find(season => season.current);
+    // booleano que verifica se a liga tem classificação
+    const hasStandings = currentSeason?.coverage?.standings;
+    // a liga pode ser 'League' ou 'Cup'
+    const leagueType = leagueData[0]?.league?.type;
+
     const renderComponent = () => {
         switch (selected) {
             case 'classificacoes':
-                return <Standings season={currentSeason.year} />;
+                // há ligas que são 'Cup', mas mesmo assim têm classificação
+                // p.ex -> Champions League é 'Cup' mas tem fase de liga 
+                return <Standings season={currentSeason.year} type={leagueType} hasStandings={hasStandings} />;
             case 'resultados':
                 return <LeagueMatches type='pastGames' />;
             case 'lista':
@@ -44,9 +53,6 @@ const League = () => {
                 return <div>Erro</div>;
         }
     };
-
-    // armazena o ano da temporada atual em current season
-    const currentSeason = leagueData[0].seasons.find(season => season.current);
 
     return (
         <Container className="container p-5 rounded-4">
@@ -89,7 +95,9 @@ const League = () => {
                 </div>
                 <hr />
             </Row>
-            <Row>{renderComponent()}</Row>
+            <Row>
+                {renderComponent()}
+            </Row>
         </Container>
     );
 };
