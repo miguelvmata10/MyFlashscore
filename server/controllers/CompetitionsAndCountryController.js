@@ -137,6 +137,21 @@ const getNextLeagueGames = async (req, res) => {
     }
 }
 
+const getLeagueRounds = async (req, res) => {
+    const leagueID = req.params.id;
+    const { season } = req.query;
+    try {
+        const data = await apiFootballReq('fixtures/rounds', {league: leagueID, season: season});
+        if (!data.response || data.response.length === 0) {
+            return res.status(404).json({error: `Sem roundas para a liga com os dados: ${leagueID} e ${season}`})
+        }
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Erro ao obter as rondas da liga: ', error);
+        res.status(500).json({error: 'Erro interno do servidor'});
+    }
+}
+
 module.exports = {
     getCountries,
     getLeagues,
@@ -146,7 +161,8 @@ module.exports = {
     getLeagueTopScorers,
     getLeagueTopAssists,
     getLastLeagueGames,
-    getNextLeagueGames
+    getNextLeagueGames,
+    getLeagueRounds
 };
 
 

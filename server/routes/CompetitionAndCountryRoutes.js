@@ -31,4 +31,7 @@ router.get('/league/results/:id', competitionAndCountryController.getLastLeagueG
 // rota que retorna os próximos 20 jogos da respetiva liga
 router.get('/league/list/:id', competitionAndCountryController.getNextLeagueGames);
 
+// rota que retorna as rondas da respetiva liga
+router.get('/league/rounds/:id', competitionAndCountryController.getLeagueRounds);
+
 module.exports = router;

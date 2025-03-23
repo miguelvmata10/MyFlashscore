@@ -40,6 +40,14 @@ export const fetchLeagueList = (leagueID) => {
     return apiRequest(`/competitions/league/list/${leagueID}`);
 };
 
+export const fetchLeagueRounds = (leagueID, season) => {
+    return apiRequest(`/competitions/league/rounds/${leagueID}`, {
+        params: {
+            season: season
+        }
+    });
+}
+
 
 
 
