@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Row, Col } from 'react-bootstrap';
-import Standings from './Standings';
+import Standings from './Standings/Standings';
 import TopScorersAndAssists from './TopScorersAndAssists';
 import LeagueMatches from './LeagueMatches';
 import LoadingScreen from '../CommonUI/LoadingScreen';
