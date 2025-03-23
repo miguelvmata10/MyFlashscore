@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useButtonGroup from '../../hooks/useButtonGroup';
 import Container from 'react-bootstrap/esm/Container';
@@ -16,9 +16,8 @@ import FallbackImage from '../CommonUI/FallbackImage';
 
 const League = () => {
     const { leagueID } = useParams();
-    const { selected, handleButtonState, isActiveButton } = useButtonGroup('classificacoes');
-
     const { data: leagueData, loading, error, fetchData } = useApiRequest(fetchLeagueData);
+    const { selected, handleButtonState, isActiveButton } = useButtonGroup('classificacoes');
 
     useEffect(() => {
         if (leagueID) {
@@ -29,6 +28,8 @@ const League = () => {
     if (loading) return <LoadingScreen />;
     if (error) return <p>Erro: {error.message}</p>;
     if (!leagueData || leagueData.length === 0) return <NotFound />;
+
+    console.log('LEAGUE DATA: ', leagueData);
 
     // armazena o ano da temporada atual em current season
     const currentSeason = leagueData[0]?.seasons.find(season => season.current);
@@ -42,6 +43,9 @@ const League = () => {
             case 'classificacoes':
                 // há ligas que são 'Cup', mas mesmo assim têm classificação
                 // p.ex -> Champions League é 'Cup' mas tem fase de liga 
+                return <Standings season={currentSeason.year} type={leagueType} hasStandings={hasStandings} />;
+            case 'rondas':
+                // é ativado apenas quando type === 'Cup' e hasStandings === 'false' 
                 return <Standings season={currentSeason.year} type={leagueType} hasStandings={hasStandings} />;
             case 'resultados':
                 return <LeagueMatches type='pastGames' />;
@@ -58,7 +62,9 @@ const League = () => {
         <Container className="container p-5 rounded-4">
             <Row className="align-items-center mb-3">
                 <Col xs="auto">
-                    <FallbackImage src={leagueData[0]?.league?.logo} type='league' width={60} alt="Logo da liga" />
+                    <FallbackImage src={leagueData[0]?.league?.logo} type='league' alt="Logo da liga" 
+                        style={{width: '70px', height: '70px', objectFit: 'contain'}} 
+                    />
                 </Col>
                 <Col>
                     <h4 className="mb-2">{leagueData[0]?.league?.name}</h4>
@@ -67,12 +73,20 @@ const League = () => {
             <Row>
                 <div className="overflow-auto">
                     <ButtonGroup className="w-100">
-                        <Button
-                            className={isActiveButton('classificacoes')}
-                            onClick={() => handleButtonState('classificacoes')}
-                        >
-                            Classificações
-                        </Button>
+                        {hasStandings === false && leagueType === 'Cup' ? (
+                            <Button
+                                className={isActiveButton('rondas')}
+                                onClick={() => handleButtonState('rondas')}
+                            >
+                                Rondas
+                            </Button>) : (
+                            <Button
+                                className={isActiveButton('classificacoes')}
+                                onClick={() => handleButtonState('classificacoes')}
+                            >
+                                Classificações
+                            </Button>)
+                        }
                         <Button
                             className={isActiveButton('resultados')}
                             onClick={() => handleButtonState('resultados')}
