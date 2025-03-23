@@ -30,7 +30,25 @@ const getGameDetails = async (req, res) => {
     }
 };
 
+// Endpoint que retorna os jogos de uma ronda de uma determinada liga
+const getRoundGames = async (req, res) => {
+    const leagueID = req.params.id;
+    const { season, round } = req.query;
+    
+    try {
+        const data = await apiFootballReq('fixtures', {league: leagueID, season: season, round: round});
+        if (!data.response || data.response.length === 0) {
+            return res.status(404).json({error: `Nenhum jogo com o id ${leagueID}`})
+        }
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Erro ao obter os jogos: ', error);
+        res.status(500).json({error: 'Erro interno do servidor'});
+    }
+};
+
 module.exports = {
     getGamesPerDay,
     getGameDetails,
+    getRoundGames,
 };
