@@ -1,0 +1,44 @@
+.custom-button {
+    gap: 8px;                  
+}
+
+.custom-button .btn {
+    background-color: transparent;
+    border-radius: 5px;
+}
+.custom-button .btn:hover {
+    cursor: pointer;           
+}
+
+.custom-button .btn.active {
+    background-color: #ff4037;
+    color: #ffffff;
+}
+.custom-button .btn.active:hover {
+    color: #ffffff;
+    background-color: #ff4037;
+}
+
+/* estilização dos botões de ronda da liga */
+.round-button {
+    gap: 8px;
+}
+
+.round-button .btn {
+    background-color: rgb(103, 103, 109);
+}
+.round-button .btn:hover {
+    background-color: rgb(78, 78, 82);
+    cursor: pointer;   
+    color: #ffffff;        
+}
+
+.round-button .btn.active {
+    background-color: #ff4037;
+    color: #ffffff;
+}
+
+.round-button .btn.active:hover {
+    color: #ffffff;
+    background-color: #ff4037;
+}
