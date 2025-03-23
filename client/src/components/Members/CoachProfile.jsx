@@ -6,7 +6,8 @@ import { fetchCoachData } from '../../services/PeopleService';
 import { Container, Row, Col } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
-import { CoachCarrer, CoachTrophies } from './CoachCarrer';
+import CoachCarrer from './CoachCarrer/CoachCarrer';
+import CoachTrophies from './CoachCarrer/CoachTrophies';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
@@ -75,4 +76,5 @@ const CoachProfile = () => {
         </Container>
     )
 }
+
 export default CoachProfile

@@ -6,7 +6,12 @@ import { fetchPlayerData } from '../../services/PeopleService';
 import { Container, Row, Col } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
-import { PlayerCarrer, PlayerTrophies, PlayerDetails, PlayerSeasonSelector } from './PlayerCarrer';
+
+import PlayerCarrer from './PlayerCarrer/PlayerCarrer';
+import PlayerTrophies from './PlayerCarrer/PlayerTrophies';
+import PlayerDetails from './PlayerCarrer/PlayerDetails';
+import PlayerSeasonSelector from './PlayerCarrer/PlayerSeasonSelector';
+
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
