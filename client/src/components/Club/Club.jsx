@@ -45,7 +45,9 @@ const Club = () => {
         <Container className="container p-5 rounded-4">
             <Row className="align-items-center mb-3">
                 <Col xs="auto">
-                    <FallbackImage src={clubData[0]?.team?.logo} type='team' width={60} alt="Logo do clube" />
+                    <FallbackImage src={clubData[0]?.team?.logo} type='team' alt="Logo do clube"
+                        style={{width: '70px', height: '70px', objectFit: 'contain'}}
+                    />
                 </Col>
                 <Col>
                     <h3 className="mb-2">{clubData[0]?.team?.name}</h3>
