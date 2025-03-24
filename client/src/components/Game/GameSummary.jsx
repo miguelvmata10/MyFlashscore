@@ -32,24 +32,29 @@ const GameSummary = ({ events, homeTeam }) => {
     const extraTime = event.time.extra || 0;
     const timeElapsed = event.time.elapsed;
 
-    if (event.comments === "Penalty Shootout" ) {
-      return 'Pénaltis';
+    if (event.comments === "Penalty Shootout") {
+        return 'Pénaltis';
     }
 
-    if (timeElapsed <= 45 && extraTime === 0 || timeElapsed === 45 && extraTime !== 0 ) {
-      return '1ª Parte';
+    if (timeElapsed <= 45 || (timeElapsed === 45 && extraTime > 0)) {
+        return '1ª Parte';
     }
 
-    if (timeElapsed <= 90 && extraTime === 0 && timeElapsed >= 45 || timeElapsed === 90 && extraTime !== 0 ) {
-      return '2ª Parte';
+    if (timeElapsed <= 90 || (timeElapsed === 90 && extraTime > 0)) {
+        return '2ª Parte';
     }
 
-    if (timeElapsed <= 120 && extraTime === 0 && timeElapsed >= 90 || timeElapsed === 120 && extraTime !== 0 ) {
-      return 'Prolongamento';
+    if (timeElapsed <= 105 || (timeElapsed === 105 && extraTime > 0)) {
+        return 'Prolongamento - 1ª Parte';
+    }
+
+    if (timeElapsed <= 120 || (timeElapsed === 120 && extraTime > 0)) {
+        return 'Prolongamento - 2ª Parte';
     }
 
     return 'Pós jogo';
-  }
+};
+
 
   const formatTime = (elapsed, extra) => {
     if (!extra) {
@@ -69,6 +74,16 @@ const GameSummary = ({ events, homeTeam }) => {
       }
 
       groupPeriod[period].push(event);
+    });
+
+    // Ordena os eventos dentro de cada período pelo tempo (elapsed + extra)
+    // para me certificar de que os eventos são mostrados na ordem correta
+    Object.keys(groupPeriod).forEach(period => {
+      groupPeriod[period].sort((a, b) => {
+        const timeA = a.time.elapsed + (a.time.extra || 0);
+        const timeB = b.time.elapsed + (b.time.extra || 0);
+        return timeA - timeB;
+      });
     });
 
     return groupPeriod;
