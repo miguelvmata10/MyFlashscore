@@ -23,3 +23,32 @@
     color: #ffffff;
     background-color: #ff4037;
 }
+
+/* Media queries para os lineups */
+@media (max-width: 768px) {
+    .player-image {
+        width: 6vw;
+        height: 6vw;
+        min-width: 30px;
+        min-height: 30px;
+    }
+
+    .player-badge {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .player-image {
+        width: 5vw;
+        height: 5vw;
+        min-width: 20px;
+        min-height: 20px;
+    }
+
+    .player-badge {
+        font-size: 0.7rem; 
+        min-width: 40px; 
+        text-align: center;
+    }
+}
