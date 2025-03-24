@@ -2,6 +2,8 @@ import { Row, Col, Badge, Container } from 'react-bootstrap';
 import default_player_logo from '../../assets/FallbackImages/default_player_logo.png';
 import { Link } from 'react-router-dom';
 import { formatBadge } from '../../utils/helpers';
+import TeamsLineupDisplay from './TeamsLineupDisplay';
+import NotFound from '../CommonUI/NotFound';
 
 const PlayersList = ({ teamData, type, title }) => {
   return (
@@ -51,6 +53,7 @@ const PlayersList = ({ teamData, type, title }) => {
   );
 };
 
+
 const GameLineups = ({ lineups, players }) => {
 
   const mergedData = lineups.map(team => {
@@ -90,22 +93,34 @@ const GameLineups = ({ lineups, players }) => {
     };
   });
 
-  console.log('mergedData:', mergedData);
+  console.log('mergedData', mergedData);
+  
+  // só poderei mostrar o 11 inicial de forma gráfica (TeamsLineupDisplay) se tiver a
+  // formação tática da equipa e se tiver o grid e posição de todos os jogadores dos 11's 
+  // iniciais de ambas as equipas 
+  const isValidData = mergedData.every(teamData => {
+    const hasTeamFormation = teamData.teamFormation !== null;
+    const hasValidPlayers = teamData.startXI.every(player => player.pos && player.grid);
+
+    return hasTeamFormation && hasValidPlayers;
+  });
 
   return (
     <Container fluid>
       {mergedData.length === 0 ? (
-        <div className="text-center p-4 fw-bold rounded-4" style={{ backgroundColor: '#4e4e4b', color: 'white' }}>
-          Nenhum evento disponível
-        </div>
+        <NotFound />
       ) : (
         <div>
-          <div className='d-flex justify-content-between align-items-center mb-1 rounded-3 p-2 mb-2' style={{ backgroundColor: '#4e4e4b', color: 'white' }}>
-            <span className='fw-bold'>{mergedData[0].teamFormation}</span>
-            <h6 className='m-0 text-center'>Formações</h6>
-            <span className='fw-bold'>{mergedData[1].teamFormation}</span>
-          </div>
-          {/* <TacticalFormationDisplay homeTeamData={mergedData[0]} awayTeamData={mergedData[1]} /> */}
+          {isValidData &&
+            <>
+              <div className='d-flex justify-content-between align-items-center mb-1 rounded-3 p-2 mb-2' style={{ backgroundColor: '#4e4e4b', color: 'white' }}>
+                <span className='fw-bold'>{mergedData[0].teamFormation}</span>
+                <h6 className='m-0 text-center'>Formações</h6>
+                <span className='fw-bold'>{mergedData[1].teamFormation}</span>
+              </div>
+              <TeamsLineupDisplay homeTeamData={mergedData[0]} awayTeamData={mergedData[1]} />
+            </>
+          }
           <PlayersList teamData={mergedData} type='startXI' title='Equipa inicial' />
           <PlayersList teamData={mergedData} type='substitutes' title='Suplentes' />
         </div>
