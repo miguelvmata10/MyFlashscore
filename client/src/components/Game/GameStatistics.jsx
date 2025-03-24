@@ -54,9 +54,9 @@ const GameStatistics = ({stats}) => {
         </div>
       ) : (
         <div className='text-center p-4 fw-bold rounded-4' style={{ backgroundColor: '#4e4e4b', color: 'white' }}>
-          <h4 className='d-flex fw-bold justify-content-center align-content-center mb-1'>
+          <h5 className='d-flex fw-bold justify-content-center align-content-center mb-1'>
             Visão geral da partida
-          </h4>
+          </h5>
           <div className='p-4'>
             {formattedStats.map((stat, index) => (
               <div key={index} className='mb-4'>
