@@ -29,7 +29,6 @@ const GameMenu = () => {
   if (!gameData || gameData.length === 0) return <NotFound />;
 
   const game = gameData[0];
-  console.log('papapapa: ', game);
 
   const renderComponent = () => {
     switch (selected) {
