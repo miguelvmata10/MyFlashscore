@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import useApiRequest from '../../../hooks/useApiRequest';
-import { fetchRoundGames } from '../../../services/GameService';
-import LoadingScreen from '../../CommonUI/LoadingScreen';
-import NotFound from '../../CommonUI/NotFound';
-import GameCard from '../../Game/GameCard';
+import useApiRequest from '../../../../hooks/useApiRequest';
+import { fetchRoundGames } from '../../../../services/GameService';
+import LoadingScreen from '../../../CommonUI/LoadingScreen';
+import NotFound from '../../../CommonUI/NotFound';
+import GameCard from '../../../Game/GameCard';
 
 const DisplayCupRoundGames = ({ round, season }) => {
     const { leagueID } = useParams();

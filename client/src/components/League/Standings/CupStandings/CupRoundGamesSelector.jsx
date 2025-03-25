@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { ButtonGroup, Row, Button } from 'react-bootstrap';
-import useButtonGroup from '../../../hooks/useButtonGroup';
+import useButtonGroup from '../../../../hooks/useButtonGroup';
 import DisplayCupRoundGames from './DisplayCupRoundGames';
 
 const CupRoundGamesSelector = ( { leagueRounds, season }) => {
@@ -17,7 +17,7 @@ const CupRoundGamesSelector = ( { leagueRounds, season }) => {
         }
     }, []);
 
-    const renderComponent = () => {
+    const renderCupRoundGames = () => {
         const foundRound = leagueRounds.find(round => round === selected);
         return foundRound ? <DisplayCupRoundGames season={season} round={foundRound} /> : <div>Erro</div>;
     };
@@ -27,7 +27,7 @@ const CupRoundGamesSelector = ( { leagueRounds, season }) => {
             <Row>
                 <div className="overflow-auto mb-3" ref={scrollContainerRef}>
                     <ButtonGroup className='mb-1 round-button w-100' size="sm">
-                        {leagueRounds.map(( round, index) => (
+                        {leagueRounds.map(( round, index ) => (
                             <Button
                                 className={`${isActiveButton(round)} text-nowrap rounded-2`}
                                 onClick={() => handleButtonState(round)}
@@ -40,7 +40,7 @@ const CupRoundGamesSelector = ( { leagueRounds, season }) => {
                 </div>
             </Row>
             <Row>
-                {renderComponent()}
+                {renderCupRoundGames()}
             </Row>
         </div>
     );

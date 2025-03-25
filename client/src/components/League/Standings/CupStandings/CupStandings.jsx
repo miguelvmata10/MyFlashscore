@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import useApiRequest from '../../../hooks/useApiRequest';
-import { fetchLeagueRounds } from '../../../services/CompetitionService';
-import LoadingScreen from '../../CommonUI/LoadingScreen';
+import useApiRequest from '../../../../hooks/useApiRequest';
+import { fetchLeagueRounds } from '../../../../services/CompetitionService';
+import LoadingScreen from '../../../CommonUI/LoadingScreen';
 import DisplayCupStandings from './DisplayCupStandings';
 
 const CupStandings = ({ teams, hasStandings, type, season}) => {
