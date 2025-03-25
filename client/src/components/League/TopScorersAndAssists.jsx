@@ -34,7 +34,7 @@ const TopScorersAndAssists = ({ season }) => {
   const dataToDisplay = selected === 'marcadores' ? topScorers : topAssisters;
 
   if (!dataToDisplay || dataToDisplay.length === 0) {
-    return <div>Não temos dados para esta época. Sorry!</div>
+    return <NotFound />
   }
 
   return (
