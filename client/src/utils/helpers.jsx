@@ -38,3 +38,14 @@ export const formatTeamForm = (form) => {
       </span>
   ));
 }
+
+ // Função para gerar cores dinâmicas
+export const generateColors = (num) => {
+  const colors = [];
+  const colorPalette = ['#004682 ', '#1ea9ed', '#7e0028', '#b8860b', '#bd0000', '#ff4040', '#FF9E9D', '#F5D300', '#7E8F7C']; 
+  for (let i = 0; i < num; i++) {
+      // Se o número de dados for maior que o número de cores disponíveis, então reutiliza as cores
+      colors.push(colorPalette[i % colorPalette.length]);
+  }
+  return colors;
+}
