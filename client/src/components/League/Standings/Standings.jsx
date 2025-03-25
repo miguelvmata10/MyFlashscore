@@ -4,8 +4,8 @@ import useApiRequest from '../../../hooks/useApiRequest';
 import { fetchLeagueStanding } from '../../../services/CompetitionService';
 import LoadingScreen from '../../CommonUI/LoadingScreen';
 import NotFound from '../../CommonUI/NotFound';
-import LeagueStandings from './LeagueStandings';
-import CupStandings from './CupStandings';
+import LeagueStandings from './LeagueStandings/LeagueStandings';
+import CupStandings from './CupStandings/CupStandings';
 import '../LeagueStyles.css';
 
 const Standings = ({ season, type, hasStandings }) => {
@@ -48,6 +48,7 @@ const Standings = ({ season, type, hasStandings }) => {
         const teams = group.map((team) => {
             const teamData = team?.all;
             const teamName = team?.team?.name || 'N/A';
+            const teamStandingDescription = team?.description;
             const groupName = team?.group;
             const teamID = team?.team?.id || 'N/A';
             const teamLogo = team?.team?.logo || ''; 
@@ -64,6 +65,7 @@ const Standings = ({ season, type, hasStandings }) => {
 
             return {
                 teamName,
+                teamStandingDescription,
                 groupName,
                 teamID,
                 teamLogo,
