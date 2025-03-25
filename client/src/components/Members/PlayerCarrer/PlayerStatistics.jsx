@@ -25,9 +25,9 @@ const PlayerStatistics = ({season}) => {
         if (!playerStatistics || playerStatistics.length === 0) return; 
             const stats = playerStatistics[0].statistics;
             const uniqueClubs = {};
-            
+
             stats.forEach(({team}) => {
-                if (!uniqueClubs[team.id]) {
+                if (!uniqueClubs[team.id] && team && team.name) {
                     uniqueClubs[team.id] = {
                         id: team.id,
                         name: team.name,
