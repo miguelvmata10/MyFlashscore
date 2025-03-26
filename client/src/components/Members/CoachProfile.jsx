@@ -54,21 +54,23 @@ const CoachProfile = () => {
                 </Col>
             </Row>
             <Row>
-            <ButtonGroup size="md">
-                <Button
-                    className={isActiveButton('carreira')}
-                    onClick={() => handleButtonState('carreira')}
-                >
-                    Carreira
-                </Button>
-                <Button
-                    className={isActiveButton('trofeus')}
-                    onClick={() => handleButtonState('trofeus')}
-                >
-                    Troféus
-                </Button>
-            </ButtonGroup>
-            <hr />
+                <div className="overflow-auto">
+                    <ButtonGroup size="md" className="w-100">
+                        <Button
+                            className={isActiveButton('carreira')}
+                            onClick={() => handleButtonState('carreira')}
+                        >
+                            Carreira
+                        </Button>
+                        <Button
+                            className={isActiveButton('trofeus')}
+                            onClick={() => handleButtonState('trofeus')}
+                        >
+                            Troféus
+                        </Button>
+                    </ButtonGroup>
+                </div>
+                <hr />
             </Row>
             <Row>
                 {renderComponent()}

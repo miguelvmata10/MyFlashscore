@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import useButtonGroup from '../../hooks/useButtonGroup';
 import useApiRequest from '../../hooks/useApiRequest';
@@ -59,32 +59,34 @@ const PlayerProfile = () => {
                 </Col>
             </Row>
             <Row>
-                <ButtonGroup size="md">
-                    <Button
-                        className={isActiveButton('estatisticas')}
-                        onClick={() => handleButtonState('estatisticas')}
-                    >
-                        Estatisticas
-                    </Button>
-                    <Button
-                        className={isActiveButton('trofeus')}
-                        onClick={() => handleButtonState('trofeus')}
-                    >
-                        Troféus
-                    </Button>
-                    <Button 
-                        className={isActiveButton('transferencias')} 
-                        onClick={() => handleButtonState('transferencias')}
-                    >
-                        Transferências
-                    </Button>
-                    <Button
-                        className={isActiveButton('detalhes')}
-                        onClick={() => handleButtonState('detalhes')}
-                    >
-                        Detalhes
-                    </Button>
-                </ButtonGroup>
+                <div className="overflow-auto">
+                    <ButtonGroup size="md" className="w-100">
+                        <Button
+                            className={isActiveButton('estatisticas')}
+                            onClick={() => handleButtonState('estatisticas')}
+                        >
+                            Estatisticas
+                        </Button>
+                        <Button
+                            className={isActiveButton('trofeus')}
+                            onClick={() => handleButtonState('trofeus')}
+                        >
+                            Troféus
+                        </Button>
+                        <Button 
+                            className={isActiveButton('transferencias')} 
+                            onClick={() => handleButtonState('transferencias')}
+                        >
+                            Transferências
+                        </Button>
+                        <Button
+                            className={isActiveButton('detalhes')}
+                            onClick={() => handleButtonState('detalhes')}
+                        >
+                            Detalhes
+                        </Button>
+                    </ButtonGroup>
+                </div>
                 <hr />
             </Row>
             <Row>
