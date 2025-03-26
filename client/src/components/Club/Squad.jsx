@@ -31,8 +31,8 @@ const Squad = ({teamID}) => {
         <>
             <h4>Guarda-redes</h4>
             <Row className='g-1'>
-                {goalkeepers.map(player => (
-                    <Col md={4}>
+                {goalkeepers.map((player, index) => (
+                    <Col md={4} key={index}>
                         <ElementCard 
                             role='player'
                             id={player.id}
@@ -40,15 +40,14 @@ const Squad = ({teamID}) => {
                             name={player.name}
                             number={player.number}
                             age={player.age}
-                            key={player.id}
                         />
                     </Col>
                 ))}
             </Row>
             <h4>Defesas</h4>
             <Row className='g-1'>
-                {defenders.map(player => (
-                    <Col md={4}>
+                {defenders.map((player, index) => (
+                    <Col md={4} key={index}>
                         <ElementCard
                             role='player'
                             id={player.id}
@@ -56,7 +55,6 @@ const Squad = ({teamID}) => {
                             name={player.name}
                             number={player.number}
                             age={player.age}
-                            key={player.id}
                         />
                     </Col>
                 ))}
@@ -64,8 +62,8 @@ const Squad = ({teamID}) => {
     
             <h4>Médios</h4>
             <Row className='g-1'>
-                {midfielders.map(player => (
-                    <Col md={4}>
+                {midfielders.map((player, index) => (
+                    <Col md={4} key={index}>
                         <ElementCard
                             role='player'
                             id={player.id}
@@ -73,7 +71,6 @@ const Squad = ({teamID}) => {
                             name={player.name}
                             number={player.number}
                             age={player.age}
-                            key={player.id}
                         />
                     </Col>
                 ))}
@@ -81,8 +78,8 @@ const Squad = ({teamID}) => {
     
             <h4>Avançados</h4>
             <Row className='g-1'>
-                {forwards.map(player => (
-                    <Col md={4}>
+                {forwards.map((player, index) => (
+                    <Col md={4} key={index}>
                         <ElementCard
                             role='player'
                             id={player.id}
@@ -90,7 +87,6 @@ const Squad = ({teamID}) => {
                             name={player.name}
                             number={player.number}
                             age={player.age}
-                            key={player.id}
                         />
                     </Col>
                 ))}

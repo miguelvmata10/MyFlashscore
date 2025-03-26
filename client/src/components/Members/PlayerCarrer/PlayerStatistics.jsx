@@ -50,8 +50,8 @@ const PlayerStatistics = ({season}) => {
         <Container>
             {/* Clubes onde o jogador jogou na época */}
             <Row>
-                {Object.values(uniqueClubs).map((club) => (
-                    <Col>
+                {Object.values(uniqueClubs).map((club, index) => (
+                    <Col key={index}>
                         <ElementCard 
                             role='team'
                             id={club.id}
