@@ -4,7 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { Row, Container } from 'react-bootstrap';
 import { fetchTeamLeagues } from '../../services/TeamsService';
 import useApiRequest from '../../hooks/useApiRequest';
-import SquadStatistics from './SquadStatistics';
+import SquadStatistics from './SquadStatistics/SquadStatistics';
 import Results from './Results';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
