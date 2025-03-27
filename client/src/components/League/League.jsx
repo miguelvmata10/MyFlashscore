@@ -61,11 +61,11 @@ const League = () => {
     return (
         <Container className="container p-5 rounded-4">
             <Row className="align-items-center mb-3">
-                <Col xs="auto">
+                {leagueData[0].league.logo && <Col xs="auto">
                     <FallbackImage src={leagueData[0]?.league?.logo} type='league' alt="Logo da liga" 
                         style={{width: '70px', height: '70px', objectFit: 'contain'}} 
                     />
-                </Col>
+                </Col>}
                 <Col>
                     <h4 className="mb-2">{leagueData[0]?.league?.name}</h4>
                 </Col>
