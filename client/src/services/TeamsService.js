@@ -25,3 +25,10 @@ export const fetchTeamResults = (teamID, league, season) => {
         season: season,
     }});
 };
+
+export const fetchTeamLastResults = (teamID, league, season) => {
+    return apiRequest(`/teams/lastTeamResults/${teamID}`, {params: {
+        league: league,
+        season: season,
+    }});
+};

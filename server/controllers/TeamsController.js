@@ -81,10 +81,32 @@ const getSquadResults = async (req, res) => {
     }
 }
 
+const getTeamLastFiveResults = async (req, res) => {
+    const team = req.params.teamID;
+    const { league, season } = req.query;
+    const last = 5;
+    try {
+        const data = await apiFootballReq('fixtures', {
+            team: team,
+            league: league,
+            season: season,
+            last: last
+        });
+        if (!data.response || data.response.length === 0) {
+            return res.status(404).json({error: `Não há resultados para a equipa ${team} na liga ${league} em ${season}.`})
+        }
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Erro ao obter os resultados da equipa: ', error);
+        res.status(500).json({error: 'Erro interno do servidor'});
+    }
+}
+
 module.exports = {
     getTeamsInfo,
     getSquadPlayers,
     getTeamLeagues,
     getTeamStatistics,
     getSquadResults,
+    getTeamLastFiveResults,
 }

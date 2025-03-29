@@ -19,4 +19,7 @@ router.get('/teamStatistics/:teamID', teamsController.getTeamStatistics);
 // rota que retorna os resultados de uma equipa numa determinada liga
 router.get('/teamResults/:teamID', teamsController.getSquadResults);
 
+// rota que retorna os últimos 5 resultados de uma equipa numa determinada liga
+router.get('/lastTeamResults/:teamID', teamsController.getTeamLastFiveResults);
+
 module.exports = router;
