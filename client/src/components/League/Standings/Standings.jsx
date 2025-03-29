@@ -6,7 +6,6 @@ import LoadingScreen from '../../CommonUI/LoadingScreen';
 import NotFound from '../../CommonUI/NotFound';
 import LeagueStandings from './LeagueStandings/LeagueStandings';
 import CupStandings from './CupStandings/CupStandings';
-import '../LeagueStyles.css';
 
 const Standings = ({ season, type, hasStandings }) => {
     const { leagueID } = useParams();

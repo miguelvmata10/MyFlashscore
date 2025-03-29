@@ -8,8 +8,6 @@ import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
 import { fetchTopScorers, fetchTopAssisters } from '../../services/CompetitionService';
 import { formatBadge } from '../../utils/helpers';
-import './LeagueStyles.css';
-
 
 const TopScorersAndAssists = ({ season }) => {
   const { leagueID } = useParams();
