@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 import useApiRequest from '../../hooks/useApiRequest';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import { fetchLeagueResults, fetchLeagueList } from '../../services/CompetitionService';
-import GameCard from '../Game/GameCard';
+import GameCard from '../Game/GameCard/GameCard';
 import NotFound from '../CommonUI/NotFound';
 
 const LeagueMatches = ({ type }) => {
