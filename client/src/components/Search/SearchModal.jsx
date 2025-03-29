@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Modal, Button as BootstrapButton } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import ToastNotification from '../CommonUI/ToastNotification';
+import GenericModal from '../CommonUI/GenericModal';
 
 const SearchModal = ({ show, onClose }) => {
 
@@ -73,13 +73,8 @@ const SearchModal = ({ show, onClose }) => {
     return (
         <>
             <ToastNotification showToast={showToast} setShowToast={setShowToast} error={error} />
-            <Modal show={show} onHide={handleClose} size="md" centered>
-            <Modal.Header closeButton className="bg-dark text-white" style={{ borderBottom: 'none' }}>
-                <Modal.Title id="contained-modal-title-vcenter">
-                Procura
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body className="bg-dark text-white modal-body">
+            
+            <GenericModal show={show} handleClose={handleClose} title='Search' hasFooter={true} footerFunction={handleSearch} footerButtonName='Search'>
                 <InputGroup className="mb-3">
                     <Form.Control 
                         aria-label="Text input with dropdown button"
@@ -107,15 +102,7 @@ const SearchModal = ({ show, onClose }) => {
                         </Dropdown.Item>
                     </DropdownButton>
                 </InputGroup>
-            </Modal.Body>
-            <Modal.Footer className="bg-dark text-white modal-footer">
-                <BootstrapButton 
-                    className='btn-custom'
-                    onClick={handleSearch}>
-                        Pesquisar
-                </BootstrapButton>
-            </Modal.Footer>
-            </Modal>
+            </GenericModal>
         </>
     );
 };
