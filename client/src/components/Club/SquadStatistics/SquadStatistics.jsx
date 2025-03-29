@@ -5,10 +5,9 @@ import { fetchTeamStatistics } from '../../../services/TeamsService';
 import LoadingScreen from '../../CommonUI/LoadingScreen';
 import useApiRequest from '../../../hooks/useApiRequest';
 import NotFound from '../../CommonUI/NotFound';
-import PointsPerGameOverview from './PointsPerGameOverview';
 import GenericStatsTable from './GenericStatsTable';
-import GamesModal from './GamesModal';
-import GoalsModal from './GoalsModal';
+import GamesModal from './SquadGamesStatistics/GamesModal';
+import GoalsModal from './SquadGoalsStatistics/GoalsModal';
 import { generateColors } from '../../../utils/helpers';
 import { Doughnut, Bar, Line } from 'react-chartjs-2';
 
@@ -49,7 +48,7 @@ const SquadStatistics = ({leagueID, season}) => {
                   Ver mais 
                 </Button>
               </div>
-              <GamesModal show={showGamesModal} onClose={() => handleCloseModal("games")} />
+              <GamesModal show={showGamesModal} statistics={statistics} onClose={() => handleCloseModal("games")} />
           </Col>
           <Col>
               <h6 className="text-center">Goals</h6> 
@@ -59,9 +58,8 @@ const SquadStatistics = ({leagueID, season}) => {
                   Ver mais 
                 </Button>
               </div>
-              <GoalsModal show={showGoalsModal} onClose={() => handleCloseModal("goals")} />
+              <GoalsModal show={showGoalsModal} statistics={statistics} onClose={() => handleCloseModal("goals")} />
           </Col>
-          <PointsPerGameOverview fixtures={statistics.fixtures} />
       </Row>
     </Container>
   )
