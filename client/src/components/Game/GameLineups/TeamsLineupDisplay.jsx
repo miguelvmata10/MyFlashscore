@@ -1,9 +1,9 @@
 import { Badge, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { formatBadge } from '../../utils/helpers';
-import FootballField from '../../assets/GameImages/FootballField.png'
-import FallbackImage from '../CommonUI/FallbackImage'; 
-import './GameStyles.css';
+import { formatBadge } from '../../../utils/helpers';
+import FootballField from '../../../assets/GameImages/FootballField.png'
+import FallbackImage from '../../CommonUI/FallbackImage';
+import '../GameStyles.css';
 
 const PlayerLineupCard = ({ player }) => {
     const MAX_NAME_LENGTH = 8;

@@ -1,9 +1,9 @@
 import { Row, Col, Badge, Container } from 'react-bootstrap';
-import default_player_logo from '../../assets/FallbackImages/default_player_logo.png';
+import default_player_logo from '../../../assets/FallbackImages/default_player_logo.png';
 import { Link } from 'react-router-dom';
-import { formatBadge } from '../../utils/helpers';
+import { formatBadge } from '../../../utils/helpers';
 import TeamsLineupDisplay from './TeamsLineupDisplay';
-import NotFound from '../CommonUI/NotFound';
+import NotFound from '../../CommonUI/NotFound';
 
 const PlayersList = ({ teamData, type, title }) => {
   return (
