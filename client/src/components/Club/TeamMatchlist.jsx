@@ -4,10 +4,10 @@ import { Container } from 'react-bootstrap';
 import useApiRequest from '../../hooks/useApiRequest';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import { fetchTeamResults } from "../../services/TeamsService"
-import GameCard from '../Game/GameCard';
+import GameCard from '../Game/GameCard/GameCard';
 import NotFound from '../CommonUI/NotFound';
 
-const Results = ({leagueID, season}) => {
+const TeamMatchlist = ({ leagueID, season }) => {
   const { teamID } = useParams()
   const { data: results, loading, error, fetchData } = useApiRequest(fetchTeamResults);
 
@@ -29,4 +29,4 @@ const Results = ({leagueID, season}) => {
     </Container>
   )
 }
-export default Results
+export default TeamMatchlist
