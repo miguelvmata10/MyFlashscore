@@ -8,8 +8,7 @@ import NotFound from '../../CommonUI/NotFound';
 import GenericStatsTable from './GenericStatsTable';
 import GamesModal from './SquadGamesStatistics/GamesModal';
 import GoalsModal from './SquadGoalsStatistics/GoalsModal';
-import { generateColors } from '../../../utils/helpers';
-import { Doughnut, Bar, Line } from 'react-chartjs-2';
+import LastLeagueGames from './LastLeagueGames';
 
 const SquadStatistics = ({leagueID, season}) => {
   const { teamID } = useParams();
@@ -35,31 +34,49 @@ const SquadStatistics = ({leagueID, season}) => {
   if (error) return <p>Erro: {error.message}</p>;
   if (!statistics) return <NotFound />;
 
-  console.log('STATS: ', statistics);
+  const GameAndGoalStats = () => {
+    return (
+      <>
+        {['games', 'goals'].map((type) => {
+          const title = type === 'games' ? 'Games' : 'Goals';
+          const textPosition = type === 'games' ? 'start' : 'end';
+          const showTypeModal = type === 'games' ? showGamesModal : showGoalsModal;
+
+          return (
+            <Col key={type}>
+              <h6 className="text-center">{title}</h6>
+              <GenericStatsTable statistics={statistics} typeOfTable={type} />
+              <div className={`text-${textPosition} mb-2`}>
+                <Button variant="outline-secondary" size="sm" onClick={() => handleShowModal(type)}>
+                  Ver mais
+                </Button>
+              </div>
+              {type === 'games' ? (
+                  <GamesModal show={showTypeModal} statistics={statistics} onClose={() => handleCloseModal(type)} />
+                ) : (
+                  <GoalsModal show={showTypeModal} statistics={statistics} onClose={() => handleCloseModal(type)} />
+                ) 
+              }
+            </Col>
+          );
+        })}
+      </>
+    );
+  };
 
   return (
     <Container className="p-2 mt-2 rounded-4">
-        <Row>
-          <Col>
-              <h6 className="text-center">Games</h6> 
-              <GenericStatsTable statistics={statistics} typeOfTable='games' />
-              <div className='text-start mb-2'>
-                <Button variant="outline-secondary" size="sm" onClick={() => handleShowModal("games")}>
-                  Ver mais 
-                </Button>
-              </div>
-              <GamesModal show={showGamesModal} statistics={statistics} onClose={() => handleCloseModal("games")} />
-          </Col>
-          <Col>
-              <h6 className="text-center">Goals</h6> 
-              <GenericStatsTable statistics={statistics} typeOfTable='goals' />
-              <div className='text-end mb-2'>
-                <Button variant="outline-secondary" size="sm" onClick={() => handleShowModal("goals")}>
-                  Ver mais 
-                </Button>
-              </div>
-              <GoalsModal show={showGoalsModal} statistics={statistics} onClose={() => handleCloseModal("goals")} />
-          </Col>
+      <Row className='mb-3 text-center'>
+        <Col>
+          <h6>Team standings</h6>
+        </Col>
+        <Col>
+          <h6>Last Games</h6>
+          <LastLeagueGames leagueID={leagueID} season={season} />
+        </Col>
+      </Row>
+      <Row>
+        <GameAndGoalStats />
       </Row>
     </Container>
   )
