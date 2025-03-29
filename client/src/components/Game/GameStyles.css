@@ -1,5 +1,17 @@
-.gameCard:hover{
+.bg-transparent.gameCard:hover{
     background-color: rgb(76, 80, 80) !important;
+}
+
+.bg-success.gameCard:hover{
+    background-color: rgb(88, 182, 100) !important;
+}
+
+.bg-danger.gameCard:hover{
+    background-color: rgb(243, 120, 115) !important;
+}
+
+.bg-warning.gameCard:hover{
+    background-color: rgb(243, 241, 109) !important;
 }
 
 /* Media queries para os lineups */
