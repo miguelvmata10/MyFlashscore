@@ -2,28 +2,6 @@
     background-color: rgb(76, 80, 80) !important;
 }
 
-.custom-button {
-    gap: 8px;                  
-}
-
-.custom-button .btn {
-    background-color: transparent;
-    border-radius: 5px;
-}
-.custom-button .btn:hover {
-    cursor: pointer;           
-}
-
-.custom-button .btn.active {
-    background-color: #ff4037;
-    color: #ffffff;
-}
-
-.custom-button .btn.active:hover {
-    color: #ffffff;
-    background-color: #ff4037;
-}
-
 /* Media queries para os lineups */
 @media (max-width: 768px) {
     .player-image {
