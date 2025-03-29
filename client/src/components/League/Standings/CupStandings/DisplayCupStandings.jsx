@@ -25,7 +25,7 @@ const DisplayCupStandings = ({ teams, hasStandings, type, leagueRounds, season }
         return (
             <>
                 <div className='mb-2' >
-                    <ButtonGroup className='round-button w-50' size="sm">
+                    <ButtonGroup className='secondary-custom-button w-50' size="sm">
                         <Button
                             className={isActiveButton('tabela')}
                             onClick={() => handleButtonState('tabela')}

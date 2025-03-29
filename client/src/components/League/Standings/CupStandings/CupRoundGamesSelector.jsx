@@ -26,7 +26,7 @@ const CupRoundGamesSelector = ( { leagueRounds, season }) => {
         <div>
             <Row>
                 <div className="overflow-auto mb-3" ref={scrollContainerRef}>
-                    <ButtonGroup className='mb-1 round-button w-100' size="sm">
+                    <ButtonGroup className='mb-1 secondary-custom-button w-100' size="sm">
                         {leagueRounds.map(( round, index ) => (
                             <Button
                                 className={`${isActiveButton(round)} text-nowrap rounded-2`}
