@@ -5,7 +5,7 @@ import { Row, Container } from 'react-bootstrap';
 import { fetchTeamLeagues } from '../../services/TeamsService';
 import useApiRequest from '../../hooks/useApiRequest';
 import SquadStatistics from './SquadStatistics/SquadStatistics';
-import Results from './Results';
+import TeamMatchlist from './TeamMatchlist';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
@@ -99,10 +99,10 @@ const TeamLeaguesSelector = ({componentToRender}) => {
             </Row>
             <Row>
                 {componentToRender === 'SquadStatistics' ? (
-                    <SquadStatistics leagueID={selectedLeagueID} season={selectedLeagueSeason}/>
+                    <SquadStatistics leagueID={selectedLeagueID} season={selectedLeagueSeason} />
                 ) : componentToRender === 'SquadResults' ? (
-                    <Results leagueID={selectedLeagueID} season={selectedLeagueSeason} />
-                ) : null }
+                    <TeamMatchlist leagueID={selectedLeagueID} season={selectedLeagueSeason} />
+                ) : null }       
             </Row>
         </Container>
   )

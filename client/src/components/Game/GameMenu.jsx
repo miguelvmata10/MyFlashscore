@@ -6,7 +6,7 @@ import useButtonGroup from '../../hooks/useButtonGroup';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchGame } from '../../services/GameService';
 import LoadingScreen from '../CommonUI/LoadingScreen';
-import GameLineups from './GameLineups';
+import GameLineups from './GameLineups/GameLineups';
 import GameSummary from './GameSummary';
 import GameStatistics from './GameStatistics';
 import NotFound from '../CommonUI/NotFound';

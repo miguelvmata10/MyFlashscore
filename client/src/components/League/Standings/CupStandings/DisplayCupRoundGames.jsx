@@ -5,7 +5,7 @@ import useApiRequest from '../../../../hooks/useApiRequest';
 import { fetchRoundGames } from '../../../../services/GameService';
 import LoadingScreen from '../../../CommonUI/LoadingScreen';
 import NotFound from '../../../CommonUI/NotFound';
-import GameCard from '../../../Game/GameCard';
+import GameCard from '../../../Game/GameCard/GameCard';
 
 const DisplayCupRoundGames = ({ round, season }) => {
     const { leagueID } = useParams();

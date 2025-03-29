@@ -1,6 +1,6 @@
 import { Accordion } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import GameCard from '../Game/GameCard';
+import GameCard from '../Game/GameCard/GameCard';
 import './Matchlist.css';
 import FallbackImage from '../CommonUI/FallbackImage';
 
