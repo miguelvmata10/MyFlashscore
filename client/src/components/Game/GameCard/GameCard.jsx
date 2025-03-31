@@ -13,7 +13,6 @@ const formatDate = (date) => {
 };
 
 const GameCard = ({ GameData, bgColor = "bg-transparent", cardType = 'standard'}) => {
-  console.log('GAME DATA: ', GameData);
   const formattedDate = GameData?.fixture?.date ? formatDate(GameData.fixture.date) : { gameTime: '??:??', gameDate: '??/??/????' };
   const gameStatus = GameData?.fixture?.status?.short || 'NS';
 
