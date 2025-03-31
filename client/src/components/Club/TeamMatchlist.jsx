@@ -1,24 +1,14 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import useApiRequest from '../../hooks/useApiRequest';
 import LoadingScreen from '../CommonUI/LoadingScreen';
-import { fetchTeamResults } from "../../services/TeamsService"
 import GameCard from '../Game/GameCard/GameCard';
 import NotFound from '../CommonUI/NotFound';
+import useTeamResults from '../../hooks/useTeamResults';
 
 const TeamMatchlist = ({ leagueID, season }) => {
-  const { teamID } = useParams()
-  const { data: results, loading, error, fetchData } = useApiRequest(fetchTeamResults);
+  const { results, resultsLoading, resultsError } = useTeamResults(leagueID, season);
 
-  useEffect(() => {
-    if (teamID && leagueID && season) {
-        fetchData(teamID, leagueID, season);    
-    }
-  }, [teamID, leagueID, season, fetchData])
-
-  if (loading) return <LoadingScreen />;
-  if (error) return <p>Erro: {error.message}</p>;
+  if (resultsLoading) return <LoadingScreen />;
+  if (resultsError) return <p>Erro: {resultsError.message}</p>;
   if (!results || results.length === 0) return <NotFound />;
 
   return (
