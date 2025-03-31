@@ -1,15 +1,25 @@
 import { Table, Badge, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import FallbackImage from '../../CommonUI/FallbackImage';
-import NotFound from '../../CommonUI/NotFound';
-import { formatTeamForm } from '../../../utils/helpers';
-import StandingsDescriptions from './StandingsDescriptions';
-import useStandingsDescriptions from '../../../hooks/useStandingsDescriptions';
+import FallbackImage from '../../../CommonUI/FallbackImage';
+import NotFound from '../../../CommonUI/NotFound';
+import { formatTeamForm } from '../../../../utils/helpers';
+import StandingsDescriptions from '../StandingsDescriptions';
+import useStandingsDescriptions from '../../../../hooks/useStandingsDescriptions';
 
-const StandingsTable = ({ groups, hasStandings, type }) => {
-    console.log('groups: ', groups);
+const StandingsTable = ({ groups, hasStandings, type, teamID = null }) => {
+    console.log('groups: ', groups, teamID);
+    
+    // se tem teamID significa que se trata da tabela classificativa 
+    // no menu de estatisticas de clube
+    if (teamID) {
+        groups = groups.filter((group) => {
+            // não faço a comparação por tipo, pois não têm o mesmo tipo
+            return group.teams && group.teams.some(team => team.teamID == teamID)
+        })   
+    }
+
     const { descriptionsByLeague, descriptionColorMap } = useStandingsDescriptions(groups);
-
+    
     // apenas irá mostrar o titulo do grupo, caso haja mais do que 1 grupo na liga
     const isBiggerThanOneGroup = groups.length > 1;
 
@@ -19,11 +29,12 @@ const StandingsTable = ({ groups, hasStandings, type }) => {
         return null;
     }
 
-    // necessário fazer esta verificação, pois se groups é vazio então a verificação não é feita dentro de <Standings />
+    // necessário fazer esta verificação, pois se groups é vazio então a verificação não foi feita dentro de <Standings />
     if (!hasStandings && (!groups || groups.length === 0 )) {
         return <NotFound />;
     }
-    
+
+    if (!groups || groups.length === 0) return <NotFound />;
     return (
         <>
             <div>
@@ -38,13 +49,17 @@ const StandingsTable = ({ groups, hasStandings, type }) => {
                                     <th>º</th>
                                     <th className='text-start'>Equipa</th>
                                     <th>PJ</th>
-                                    <th>V</th>
-                                    <th>E</th>
-                                    <th>D</th>
-                                    <th>G</th>
-                                    <th>DG</th>
                                     <th>P</th>
-                                    <th>Forma</th>
+                                    {!teamID && 
+                                    <>
+                                        <th>V</th>
+                                        <th>E</th>
+                                        <th>D</th>
+                                        <th>G</th>
+                                        <th>DG</th>
+                                        <th>Forma</th>
+                                    </>
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,13 +95,16 @@ const StandingsTable = ({ groups, hasStandings, type }) => {
                                             </span>
                                         </td>
                                         <td>{team.gamesPlayed}</td>
-                                        <td>{team.gamesWon}</td>
-                                        <td>{team.gamesDrawn}</td>
-                                        <td>{team.gamesLost}</td>
-                                        <td>{`${team.goalsFor}:${team.goalsAgainst}`}</td>
-                                        <td>{team.goalDifference}</td>
                                         <td>{team.points}</td>
-                                        <td style={{ minWidth: '110px' }}>{formatTeamForm(team.form)}</td>
+                                        {!teamID && 
+                                        <>
+                                            <td>{team.gamesWon}</td>
+                                            <td>{team.gamesDrawn}</td>
+                                            <td>{team.gamesLost}</td>
+                                            <td>{`${team.goalsFor}:${team.goalsAgainst}`}</td>
+                                            <td>{team.goalDifference}</td>
+                                            <td style={{ minWidth: '110px' }}>{formatTeamForm(team.form)}</td>
+                                        </>}
                                     </tr>
                                 ))}
                             </tbody>
@@ -95,7 +113,7 @@ const StandingsTable = ({ groups, hasStandings, type }) => {
                 )))} 
             </div>
             <div>
-                <StandingsDescriptions descriptionsByLeague={descriptionsByLeague} descriptionColorMap={descriptionColorMap}/>
+                {!teamID && <StandingsDescriptions descriptionsByLeague={descriptionsByLeague} descriptionColorMap={descriptionColorMap}/>}
             </div>
         </>
     );
