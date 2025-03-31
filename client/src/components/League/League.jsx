@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import useButtonGroup from '../../hooks/useButtonGroup';
+import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -9,27 +8,18 @@ import Standings from './Standings/Standings';
 import TopScorersAndAssists from './TopScorersAndAssists';
 import LeagueMatches from './LeagueMatches';
 import LoadingScreen from '../CommonUI/LoadingScreen';
-import useApiRequest from '../../hooks/useApiRequest';
-import { fetchLeagueData } from '../../services/CompetitionService';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
+import useLeagueData from '../../hooks/useLeagueData';
 
 const League = () => {
     const { leagueID } = useParams();
-    const { data: leagueData, loading, error, fetchData } = useApiRequest(fetchLeagueData);
+    const { leagueData, leagueDataLoading, leagueDataError } = useLeagueData(leagueID);
     const { selected, handleButtonState, isActiveButton } = useButtonGroup('classificacoes');
 
-    useEffect(() => {
-        if (leagueID) {
-            fetchData(leagueID);
-        }
-    }, [leagueID, fetchData]);
-
-    if (loading) return <LoadingScreen />;
-    if (error) return <p>Erro: {error.message}</p>;
+    if (leagueDataLoading) return <LoadingScreen />;
+    if (leagueDataError) return <p>Erro: {error.message}</p>;
     if (!leagueData || leagueData.length === 0) return <NotFound />;
-
-    console.log('LEAGUE DATA: ', leagueData);
 
     // armazena o ano da temporada atual em current season
     const currentSeason = leagueData[0]?.seasons.find(season => season.current);
@@ -43,10 +33,10 @@ const League = () => {
             case 'classificacoes':
                 // há ligas que são 'Cup', mas mesmo assim têm classificação
                 // p.ex -> Champions League é 'Cup' mas tem fase de liga 
-                return <Standings season={currentSeason.year} type={leagueType} hasStandings={hasStandings} />;
+                return <Standings season={currentSeason.year} type={leagueType} hasStandings={hasStandings} leagueID={leagueID} />;
             case 'rondas':
                 // é ativado apenas quando type === 'Cup' e hasStandings === 'false' 
-                return <Standings season={currentSeason.year} type={leagueType} hasStandings={hasStandings} />;
+                return <Standings season={currentSeason.year} type={leagueType} hasStandings={hasStandings} leagueID={leagueID} />;
             case 'resultados':
                 return <LeagueMatches type='pastGames' />;
             case 'lista':
