@@ -1,8 +1,8 @@
-import StandingsTable from '../StandingsTable';
+import StandingsTable from '../StandingsTable/StandingsTable';
 
-const LeagueStandings = ({ teams, hasStandings, type }) => {
+const LeagueStandings = ({ teams, hasStandings, type, teamID = null }) => {
     return (
-        <StandingsTable groups={teams} hasStandings={hasStandings} type={type} />
+        <StandingsTable groups={teams} hasStandings={hasStandings} type={type} teamID={teamID} />
     );
 }
 

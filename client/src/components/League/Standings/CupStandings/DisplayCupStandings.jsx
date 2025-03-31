@@ -1,17 +1,17 @@
 import React from 'react';
 import { ButtonGroup, Row, Button } from 'react-bootstrap';
 import useButtonGroup from '../../../../hooks/useButtonGroup';
-import StandingsTable from '../StandingsTable';
+import StandingsTable from '../StandingsTable/StandingsTable';
 import CupRoundGamesSelector from './CupRoundGamesSelector';
 import NotFound from '../../../CommonUI/NotFound';
 
-const DisplayCupStandings = ({ teams, hasStandings, type, leagueRounds, season }) => {
+const DisplayCupStandings = ({ teams, hasStandings, type, leagueRounds, season, teamID = null}) => {
     const { selected, handleButtonState, isActiveButton } = useButtonGroup('tabela');
 
     const competitionToggle = () => {
         switch (selected) {
             case 'tabela':
-                return <StandingsTable groups={ teams } hasStandings={ hasStandings } type={ type } />;
+                return <StandingsTable groups={ teams } hasStandings={ hasStandings } type={ type } teamID={teamID}/>;
             case 'rondas':
                 return <CupRoundGamesSelector leagueRounds={leagueRounds} season={season} />
             default:
@@ -49,7 +49,7 @@ const DisplayCupStandings = ({ teams, hasStandings, type, leagueRounds, season }
     
     // apenas tem standings -> dificilmente acontecerá 
     if (hasStandings && (!leagueRounds || leagueRounds.length === 0)) {
-        return <StandingsTable groups={ teams } hasStandings={ hasStandings } type={ type } />;
+        return <StandingsTable groups={ teams } hasStandings={ hasStandings } type={ type } teamID={teamID}/>;
     }
 
     // não tem standings, mas tem rondas

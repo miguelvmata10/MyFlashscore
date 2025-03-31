@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import useApiRequest from '../../../hooks/useApiRequest';
 import { fetchLeagueStanding } from '../../../services/CompetitionService';
 import LoadingScreen from '../../CommonUI/LoadingScreen';
@@ -7,8 +6,7 @@ import NotFound from '../../CommonUI/NotFound';
 import LeagueStandings from './LeagueStandings/LeagueStandings';
 import CupStandings from './CupStandings/CupStandings';
 
-const Standings = ({ season, type, hasStandings }) => {
-    const { leagueID } = useParams();
+const Standings = ({ season, type, hasStandings, leagueID, teamID = null }) => {
     const { data: teams, loading, error, fetchData } = useApiRequest(fetchLeagueStanding);
 
     useEffect(() => {
@@ -23,8 +21,8 @@ const Standings = ({ season, type, hasStandings }) => {
     // nos casos onde o array não tem dados para standings, apesar de hasStandings ser verdadeiro 
     if (!hasStandings) {
         return (
-            type === 'League' ? <LeagueStandings teams={[]} hasStandings={hasStandings} type={ type }/> : 
-            type === 'Cup' ? <CupStandings teams={[]} hasStandings={hasStandings} type={ type } season={ season }/> : 
+            type === 'League' ? <LeagueStandings teams={[]} hasStandings={hasStandings} type={ type } teamID={teamID} /> : 
+            type === 'Cup' ? <CupStandings teams={[]} hasStandings={hasStandings} type={ type } season={ season } teamID={teamID} /> : 
             <div>
                 Erro inesperado nas classificações da competição.
             </div>
@@ -88,8 +86,8 @@ const Standings = ({ season, type, hasStandings }) => {
     });
 
     return (
-        type === 'League' ? <LeagueStandings teams={groupedStandings} hasStandings={hasStandings} type={ type } /> : 
-        type === 'Cup' ? <CupStandings teams={groupedStandings} hasStandings={hasStandings} type={ type } season={ season } /> : 
+        type === 'League' ? <LeagueStandings teams={groupedStandings} hasStandings={hasStandings} type={ type } teamID={teamID} /> : 
+        type === 'Cup' ? <CupStandings teams={groupedStandings} hasStandings={hasStandings} type={ type } season={ season } teamID={teamID} /> : 
         <div>
             Erro inesperado nas classificações da competição.
         </div>
