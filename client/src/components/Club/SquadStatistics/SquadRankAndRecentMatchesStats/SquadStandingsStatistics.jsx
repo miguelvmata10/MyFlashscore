@@ -4,6 +4,9 @@ import LoadingScreen from "../../../CommonUI/LoadingScreen";
 import NotFound from "../../../CommonUI/NotFound";
 import Standings from "../../../League/Standings/Standings";
 
+// provider para passar results para dentro de Standings
+import { ResultsProvider } from '../../../../providers/ResultsContext';
+
 const SquadStandingsStatistics = ({ leagueID, results }) => {
     const { teamID } = useParams();
     const { leagueData, leagueDataLoading, leagueDataError } = useLeagueData(leagueID);
@@ -19,7 +22,9 @@ const SquadStandingsStatistics = ({ leagueID, results }) => {
     if (!hasStandings) return <NotFound />;
 
     return (
-        <Standings season={currentSeason.year} type={leagueType} hasStandings={hasStandings} leagueID={leagueID} teamID={teamID} />
+        <ResultsProvider results={results}>
+            <Standings season={currentSeason.year} type={leagueType} hasStandings={hasStandings} leagueID={leagueID} teamID={teamID} />
+        </ResultsProvider>
     )
 }
 
