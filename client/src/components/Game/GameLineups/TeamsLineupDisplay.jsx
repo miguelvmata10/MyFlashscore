@@ -64,7 +64,6 @@ const formatTeamFormation = (teamData) => {
         playersByRow[row].push({ ...player, position: column });
     });
 
-    console.log('PLAYERS PER ROW: ', playersByRow);
     return playersByRow;
 };
 
