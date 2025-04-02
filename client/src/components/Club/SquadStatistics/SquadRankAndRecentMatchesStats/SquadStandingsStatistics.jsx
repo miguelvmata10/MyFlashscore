@@ -19,7 +19,7 @@ const SquadStandingsStatistics = ({ leagueID, results }) => {
     const hasStandings = currentSeason?.coverage?.standings;
     const leagueType = leagueData[0]?.league?.type;
 
-    if (!hasStandings) return <NotFound />;
+    if ( !hasStandings || leagueType === 'Cup' ) return <NotFound />;
 
     return (
         <ResultsProvider results={results}>
