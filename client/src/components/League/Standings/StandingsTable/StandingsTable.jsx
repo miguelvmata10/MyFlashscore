@@ -6,7 +6,6 @@ import TeamStandingsTable from './TeamStandingsTable';
 import LeagueStandingsTable from './LeagueStandingsTable';
 
 const StandingsTable = ({ groups, hasStandings, type, teamID = null }) => {
-    console.log('groups: ', groups, teamID);
     const results = useResults();
     
     // se tem teamID significa que se trata da tabela classificativa 
