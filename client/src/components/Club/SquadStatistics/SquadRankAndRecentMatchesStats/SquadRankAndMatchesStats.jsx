@@ -1,7 +1,7 @@
 import { Row, Col } from 'react-bootstrap';
 import LoadingScreen from '../../../CommonUI/LoadingScreen';
 import NotFound from '../../../CommonUI/NotFound';
-import useTeamResults from '../../../../hooks/useTeamResults';
+import { useTeamResults } from '../../../../hooks/useTeamResults';
 import SquadStandingsStatistics from './SquadStandingsStatistics';
 import LastLeagueGames from './LastLeagueGames';
 

@@ -6,7 +6,7 @@ import LoadingScreen from '../../CommonUI/LoadingScreen';
 import useApiRequest from '../../../hooks/useApiRequest';
 import NotFound from '../../CommonUI/NotFound';
 import SquadRankAndMatchesStats from './SquadRankAndRecentMatchesStats/SquadRankAndMatchesStats';
-import SquadGameGoalStats from './SquadGameGoalStats';
+import SquadGameGoalStats from './SquadGameGoalsStatistics/SquadGameGoalStats';
 
 const SquadStatistics = ({leagueID, season}) => {
   const { teamID } = useParams();

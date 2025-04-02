@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import useApiRequest from './useApiRequest';
 import { fetchTeamResults } from '../services/TeamsService';
 
-const useTeamResults = ( leagueID, season ) => {
+export const useTeamResults = ( leagueID, season ) => {
   const { teamID } = useParams()
   const { data: results, loading: resultsLoading, error: resultsError, fetchData: resultsFetchData } = useApiRequest(fetchTeamResults);
 
@@ -15,4 +15,3 @@ const useTeamResults = ( leagueID, season ) => {
 
   return { results, resultsLoading, resultsError };
 }
-export default useTeamResults

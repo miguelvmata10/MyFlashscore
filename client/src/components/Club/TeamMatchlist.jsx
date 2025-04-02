@@ -2,7 +2,7 @@ import { Container } from 'react-bootstrap';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import GameCard from '../Game/GameCard/GameCard';
 import NotFound from '../CommonUI/NotFound';
-import useTeamResults from '../../hooks/useTeamResults';
+import { useTeamResults } from '../../hooks/useTeamResults';
 
 const TeamMatchlist = ({ leagueID, season }) => {
   const { results, resultsLoading, resultsError } = useTeamResults(leagueID, season);
