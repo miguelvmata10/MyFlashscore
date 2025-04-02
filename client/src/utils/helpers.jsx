@@ -1,6 +1,9 @@
 // ficheiro onde vão estar funções simples que são utilizadas em vários componentes
 import { Badge } from 'react-bootstrap';
 
+// códigos para jogos que já terminaram
+export const matchFinishedCodes = ['FT', 'AET', 'PEN'];
+
 export const formatBadge = (rating) => {
     if (rating >= 0 && rating <= 4.9) {
       return 'danger';
@@ -48,4 +51,30 @@ export const generateColors = (num) => {
       colors.push(colorPalette[i % colorPalette.length]);
   }
   return colors;
+}
+
+// Determina a cor de fundo do game card de acordo com o resultado da equipa 
+export const isTeamWinner = ({game, teamID}) => {
+  const teams = game?.teams;
+  const homeTeamGoals = game?.score?.fulltime?.home;
+  const awayTeamGoals = game?.score?.fulltime?.away;
+  const isFinished = matchFinishedCodes.includes(game?.fixture?.status?.short);
+
+  // Se os dados do jogo forem inválidos
+  if (!teams || !teams.away || !teams.home) return 'bg-transparent';
+
+  // se o jogo não acabou
+  if (!isFinished) return 'bg-transparent';
+
+  // se o jogo já acabou
+  if (teams.away.id == teamID) {
+      return teams.away.winner ? 'bg-success' : (awayTeamGoals < homeTeamGoals) ? 'bg-danger' : 'bg-warning';
+  } 
+  else if (teams.home.id == teamID) {
+      return teams.home.winner ? 'bg-success' : (homeTeamGoals < awayTeamGoals) ? 'bg-danger' : 'bg-warning';
+  } 
+  // erro -> deixa sem cor
+  else {
+      return 'bg-transparent';
+  }
 }
