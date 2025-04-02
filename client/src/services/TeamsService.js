@@ -25,3 +25,7 @@ export const fetchTeamResults = (teamID, league, season) => {
         season: season,
     }});
 };
+
+export const fetchHeadToHeadStats = (h2h) => {
+    return apiRequest('/teams/headtohead', {params: {h2h: h2h}});
+};

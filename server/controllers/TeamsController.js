@@ -81,10 +81,29 @@ const getSquadResults = async (req, res) => {
     }
 }
 
+const getSquadHeadToHead = async (req, res) => {
+    const last = 10;
+    const { h2h } = req.query;
+    try {
+        const data = await apiFootballReq('fixtures/headtohead', {
+            last: last,
+            h2h: h2h,
+        });
+        if (!data.response || data.response.length === 0) {
+            return res.status(404).json({error: `Não há resultados h2h para os ${last} jogos com ids ${h2h}.`})
+        }
+        res.status(200).json(data);
+    } catch (error) {
+        console.error('Erro ao obter os resultados da equipa: ', error);
+        res.status(500).json({error: 'Erro interno do servidor'});
+    }
+}
+
 module.exports = {
     getTeamsInfo,
     getSquadPlayers,
     getTeamLeagues,
     getTeamStatistics,
     getSquadResults,
+    getSquadHeadToHead,
 }

@@ -19,4 +19,7 @@ router.get('/teamStatistics/:teamID', teamsController.getTeamStatistics);
 // rota que retorna os resultados de uma equipa numa determinada liga
 router.get('/teamResults/:teamID', teamsController.getSquadResults);
 
+// rota para obter o h2h entre duas equipas
+router.get('/headtohead', teamsController.getSquadHeadToHead);
+
 module.exports = router;
