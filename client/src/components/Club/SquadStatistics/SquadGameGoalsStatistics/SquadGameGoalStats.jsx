@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
-import GenericStatsTable from './GenericStatsTable';
+import GenericStatsTable from '../GenericStatsTable';
 import GamesModal from './SquadGamesStatistics/GamesModal';
 import GoalsModal from './SquadGoalsStatistics/GoalsModal';
 
@@ -15,6 +15,7 @@ const SquadGameGoalStats = ({ statistics }) => {
     const handleCloseModal = ( modalType ) => {
         modalType === 'games' ? setShowGamesModal(false) : setShowGoalsModal(false);
     }
+
     return (
         <Row>
             {['games', 'goals'].map((type) => {
@@ -28,7 +29,7 @@ const SquadGameGoalStats = ({ statistics }) => {
                 <GenericStatsTable statistics={statistics} typeOfTable={type} />
                 <div className={`text-${textPosition} mb-2`}>
                     <Button variant="outline-secondary" size="sm" onClick={() => handleShowModal(type)}>
-                    Ver mais
+                        Ver mais
                     </Button>
                 </div>
                 {type === 'games' ? (

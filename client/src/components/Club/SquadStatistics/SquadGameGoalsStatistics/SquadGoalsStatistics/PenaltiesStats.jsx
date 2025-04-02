@@ -1,4 +1,4 @@
-import GenericDoughnutChart from "../../../CommonUI/Charts/GenericDoghnutChart";
+import GenericDoughnutChart from "../../../../CommonUI/Charts/GenericDoghnutChart";
 
 const PenaltiesStats = ({ penalty }) => {
     return (

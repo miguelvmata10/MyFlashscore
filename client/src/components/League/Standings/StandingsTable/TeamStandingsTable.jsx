@@ -1,47 +1,42 @@
-import { Button } from 'react-bootstrap';
+import { Badge } from 'react-bootstrap';
 import GenericStandingsTable from './GenericStandingsTable';
+import HeadToHeadButton from '../../../Club/SquadStatistics/SquadRankAndRecentMatchesStats/HeadToHeadStatistics/HeadToHeadButton';
 
-const homeTeamResult = ({teamID, otherTeamID, results}) => {
+const formatBadgeGameResult = ({isHome, homeGoals, awayGoals}) => {
+  if (homeGoals === undefined || awayGoals === undefined) {
+    return <Badge className='p-2' bg='secondary'> - </Badge>;
+  }
+
+  const didWin = isHome ? homeGoals > awayGoals : homeGoals < awayGoals;
+  const didLose = isHome ? homeGoals < awayGoals : homeGoals > awayGoals;
+  const didTie = homeGoals == awayGoals;
+
+  let bgColor = 'secondary'; // default
+  if (didWin) {
+    bgColor = 'success';
+  } else if (didTie) {
+    bgColor = 'warning';
+  } else if (didLose) {
+    bgColor = 'danger';
+  }
+
+  return <Badge className='p-2' bg={bgColor}>{homeGoals} - {awayGoals}</Badge>;
+};
+
+const getTeamResults = ({teamID, otherTeamID, results, isHome}) => {
   if (!teamID || !otherTeamID || !results) return "-";
 
-  // significa que é ele mesmo
-  if (teamID == otherTeamID) return '';
+  if ( teamID == otherTeamID) return '';
 
-  const homeGame = results.filter(game => 
-    game.teams.home.id == teamID && 
-    game.teams.away.id == otherTeamID &&
-    game.fixture.status.short === "FT"  
+  const game = results.find(game =>
+    game.teams.home.id == (isHome ? teamID : otherTeamID ) && 
+    game.teams.away.id == (isHome ? otherTeamID : teamID ) &&
+    game.fixture.status.short === "FT"
   );
 
-  if (homeGame.length === 0) return "-";
+  if (!game) return '-';
 
-  return `${homeGame[0].goals.home}-${homeGame[0].goals.away}`;
-}
-
-const awayTeamResult = ({teamID, otherTeamID, results}) => {
-  if (!teamID || !otherTeamID || !results) return "-";
-
-  // significa que é ele mesmo
-  if (teamID == otherTeamID) return '';
-
-  const awayGame = results.filter(game => 
-    game.teams.home.id == otherTeamID && 
-    game.teams.away.id == teamID &&
-    game.fixture.status.short === "FT"  
-  );
-
-  if (awayGame.length === 0) return "-";
-
-  return `${awayGame[0].goals.home}-${awayGame[0].goals.away}`;
-}
-
-const h2h = ({teamID, otherTeamID}) => {
-  // significa que é ele mesmo
-  if (teamID == otherTeamID) return '';
-
-  return (
-    <Button>H2H</Button>
-  )
+  return formatBadgeGameResult({isHome: isHome, homeGoals: game.goals.home, awayGoals: game.goals.away});
 }
 
 const TeamStandingsTable = ({ group, descriptionColorMap, teamID, results }) => {
@@ -54,9 +49,9 @@ const TeamStandingsTable = ({ group, descriptionColorMap, teamID, results }) => 
 
   const renderExtraColumns = (team) => (
     <>
-      <td>{homeTeamResult({teamID: teamID, otherTeamID: team.teamID, results: results})}</td> 
-      <td>{awayTeamResult({teamID: teamID, otherTeamID: team.teamID, results: results})}</td> 
-      <td>{h2h({teamID: teamID, otherTeamID: team.teamID})}</td> 
+      <td>{getTeamResults({teamID: teamID, otherTeamID: team.teamID, results: results, isHome: true})}</td> 
+      <td>{getTeamResults({teamID: teamID, otherTeamID: team.teamID, results: results})}</td> 
+      <td><HeadToHeadButton teamID={teamID} otherTeamID={team.teamID} /></td> 
     </>
   );
 

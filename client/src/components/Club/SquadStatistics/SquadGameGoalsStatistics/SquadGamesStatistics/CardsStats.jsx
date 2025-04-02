@@ -1,4 +1,4 @@
-import GenericLineChart from '../../../CommonUI/Charts/GenericLineChart';
+import GenericLineChart from '../../../../CommonUI/Charts/GenericLineChart';
 
 const CardsStats = ({ cards }) => {
     console.log('csa', cards)

@@ -1,4 +1,4 @@
-import GenericBarChart from "../../../CommonUI/Charts/GenericBarChart";
+import GenericBarChart from "../../../../CommonUI/Charts/GenericBarChart";
 
 const CleanSheetFailedToScoreStats = ({ statistics }) => {
   if (!statistics || !statistics.clean_sheet || !statistics.failed_to_score) {
