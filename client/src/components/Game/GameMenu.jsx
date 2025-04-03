@@ -7,7 +7,7 @@ import useApiRequest from '../../hooks/useApiRequest';
 import { fetchGame } from '../../services/GameService';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import GameLineups from './GameLineups/GameLineups';
-import GameSummary from './GameSummary';
+import GameSummary from './GameSummary/GameSummary';
 import GameStatistics from './GameStatistics';
 import NotFound from '../CommonUI/NotFound';
 import './GameStyles.css'
@@ -60,16 +60,11 @@ const GameMenu = () => {
   return (
     <Container className="container ps-5 pe-5 pt-5">
       <Row className="align-items-start justify-content-center py-3">
+        
         <Col className="text-center">
           <div className="bg-white rounded-4 d-inline-flex justify-content-center align-items-center p-2" 
             style={{ width: '100px', height: '100px', maxWidth: '100%', aspectRatio: '1/1' }}>
-              <FallbackImage 
-              src={game.teams.home.logo} 
-              type='team'
-              fluid 
-              className="mx-auto" 
-              style={{ maxWidth: '80%', maxHeight: '80%' }}
-              />
+              <FallbackImage src={game.teams.home.logo} type='team' fluid  className="mx-auto" style={{ maxWidth: '80%', maxHeight: '80%' }} />
           </div>
           <Link to={`/team/${game.teams.home.id}`} className='customLink'>
             <h5 className="mt-3">
@@ -89,13 +84,7 @@ const GameMenu = () => {
         <Col className="text-center">
           <div className="bg-white rounded-4 d-inline-flex justify-content-center align-items-center p-2" 
             style={{ width: '100px', height: '100px', maxWidth: '100%', aspectRatio: '1/1' }}>
-              <FallbackImage 
-              src={game.teams.away.logo}
-              type='team' 
-              fluid 
-              className="mx-auto" 
-              style={{ maxWidth: '80%', maxHeight: '80%' }}
-              />
+              <FallbackImage src={game.teams.away.logo} type='team' fluid className="mx-auto" style={{ maxWidth: '80%', maxHeight: '80%' }} />
           </div>
           <Link to={`/team/${game.teams.away.id}`} className='customLink'>
             <h5 className="mt-3">
