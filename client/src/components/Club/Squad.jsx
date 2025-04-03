@@ -29,7 +29,7 @@ const Squad = ({teamID}) => {
 
     return (
         <>
-            <h4>Guarda-redes</h4>
+            <h4 className='heading-border'>Guarda-redes</h4>
             <Row className='g-1'>
                 {goalkeepers.map((player, index) => (
                     <Col md={4} key={index}>
@@ -44,7 +44,7 @@ const Squad = ({teamID}) => {
                     </Col>
                 ))}
             </Row>
-            <h4>Defesas</h4>
+            <h4 className='heading-border'>Defesas</h4>
             <Row className='g-1'>
                 {defenders.map((player, index) => (
                     <Col md={4} key={index}>
@@ -60,7 +60,7 @@ const Squad = ({teamID}) => {
                 ))}
             </Row>
     
-            <h4>Médios</h4>
+            <h4 className='heading-border'>Médios</h4>
             <Row className='g-1'>
                 {midfielders.map((player, index) => (
                     <Col md={4} key={index}>
@@ -76,7 +76,7 @@ const Squad = ({teamID}) => {
                 ))}
             </Row>
     
-            <h4>Avançados</h4>
+            <h4 className='heading-border'>Avançados</h4>
             <Row className='g-1'>
                 {forwards.map((player, index) => (
                     <Col md={4} key={index}>

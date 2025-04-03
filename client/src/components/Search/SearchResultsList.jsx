@@ -10,11 +10,8 @@ const SearchResultsList = ({data, name}) => {
             (name === 'Clube' && (!data.clube || data.clube.length === 0)) ||
             (name === 'Competicao' && (!data.competicao || data.competicao.length === 0))
         ) {
-            console.log('Nenhum dado disponível:', data);
             return <p>Nenhum dado disponível.</p>;
         }
-
-        console.log(data.jogador);
 
         switch (name) {
             case 'Jogador':
@@ -90,7 +87,7 @@ const SearchResultsList = ({data, name}) => {
 
     return (
         <div>
-            <h4 className='mb-4'>Resultados</h4>
+            <h4 className='mb-4 heading-border'>Resultados</h4>
             {renderData()}
         </div>
     )

@@ -113,3 +113,14 @@ body, #root {
     color: #ffffff;
     background-color: #ff4037;
 }
+
+
+.heading-border {
+    border-left: 4px solid var(--bs-danger); /* Equivalente a border-start border-danger border-4 */
+    padding-left: 0.5rem; /* Equivalente a ps-2 */
+    padding-top: 0.25rem; /* Equivalente a py-1 */
+    padding-bottom: 0.25rem;
+    background-color: transparent; /* bg-transparent */
+    border-top-left-radius: 0.25rem; /* rounded-start */
+    border-bottom-left-radius: 0.25rem;
+}

@@ -24,12 +24,12 @@ const LeagueMatches = ({ type }) => {
   if (!games || games.length === 0 ) return <NotFound />;
 
   return (
-    <Container className='mt-4'>
+    <Container className='mt-2'>
       <div>
         {type === 'pastGames' ? (
-          <h5>Ultimos {games.length} jogos da liga:</h5>
+          <h5 className='heading-border'>Last {games.length} games </h5>
         ) : type === 'upcomingGames' ? (
-          <h5>Próximos {games.length} jogos da liga:</h5>
+          <h5 className='heading-border'>Next {games.length} games </h5>
         ) : null }
       </div>
       {games.map((game, gameIndex) => (

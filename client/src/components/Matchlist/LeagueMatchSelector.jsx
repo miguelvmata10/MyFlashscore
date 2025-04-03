@@ -76,21 +76,21 @@ const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
     return (
         <Container className=''>
             {topLeagueGames.length > 0 && (
-                <>
-                    <h5 className='border-start border-danger border-4 ps-2 py-1 bg-transparent bg-opacity-50 rounded-start'>
+                <div className='mb-3'>
+                    <h5 className='heading-border'>
                         Principais ligas
                     </h5>
                     <MatchList leagueGames={topLeagueGames} />
-                </>
+                </div>
             )}
 
             {otherLeagueGames.length > 0 && (
-                <>
-                    <h5 className='border-start border-danger border-4 ps-2 py-1 bg-transparent bg-opacity-50 rounded-start mt-4'>
+                <div>
+                    <h5 className='heading-border'>
                         Outras ligas
                     </h5>
                     <MatchList leagueGames={otherLeagueGames} />
-                </>
+                </div>
             )}
         </Container>
     )

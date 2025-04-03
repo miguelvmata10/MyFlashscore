@@ -25,7 +25,7 @@ const PlayerTrophies = () => {
     
     return (
         <Container fluid className="container rounded-4">
-            <h3 className='mb-3'><b>{filteredPlayerTrophies.length} troféus ganhos</b></h3>
+            <h5 className='mb-3 heading-border'>{filteredPlayerTrophies.length} trophies won</h5>
 
             {filteredPlayerTrophies.length > 0 && (
                 <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
