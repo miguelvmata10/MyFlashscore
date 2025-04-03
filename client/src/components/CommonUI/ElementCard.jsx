@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import '../CommonUI/ElementCard.css';
 import FallbackImage from './FallbackImage';
+import './ElementCard.css';
 
 // possiveis 'role': player, coach, team e league
 const ElementCard = ({ role, id, photo, name, number, age }) => {
@@ -17,10 +18,7 @@ const ElementCard = ({ role, id, photo, name, number, age }) => {
             <Col xs="auto">
               <FallbackImage 
                   src={photo}
-                  type={role === 'player' || role === 'coach' ? 'player' : 
-                    role === 'team' ? 'team' 
-                    : 'league' 
-                  } 
+                  type={role === 'player' || role === 'coach' ? 'player' : role === 'team' ? 'team' : 'league' } 
                   className={`cardImage ${roleClass}`}
                   alt={`Imagem do ${name}`}
               />
@@ -30,8 +28,8 @@ const ElementCard = ({ role, id, photo, name, number, age }) => {
                   <Card.Title>{name}</Card.Title>
                   {role === 'player' && (
                     <Card.Text>
-                      Número: {number} <br />
-                      Idade: {age}
+                      Age: {age} <br />
+                      Nº {number} 
                     </Card.Text>
                   )}
               </Card.Body>
