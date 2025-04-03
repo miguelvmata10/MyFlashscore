@@ -1,8 +1,9 @@
 import { Badge } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import GenericStandingsTable from './GenericStandingsTable';
 import HeadToHeadButton from '../../../Club/SquadStatistics/SquadRankAndRecentMatchesStats/HeadToHeadStatistics/HeadToHeadButton';
 
-const formatBadgeGameResult = ({isHome, homeGoals, awayGoals}) => {
+const formatBadgeGameResult = ({ isHome, homeGoals, awayGoals, fixtureID }) => {
   if (homeGoals === undefined || awayGoals === undefined) {
     return <Badge className='p-2' bg='secondary'> - </Badge>;
   }
@@ -20,10 +21,15 @@ const formatBadgeGameResult = ({isHome, homeGoals, awayGoals}) => {
     bgColor = 'danger';
   }
 
-  return <Badge className='p-2' bg={bgColor}>{homeGoals} - {awayGoals}</Badge>;
+  return (
+    <Link to={`/game/${fixtureID}`} className="customLink ms-1">
+      <Badge className='p-2' bg={bgColor}>{homeGoals} - {awayGoals}</Badge>                                   
+    </Link>
+  )
 };
 
 const getTeamResults = ({teamID, otherTeamID, results, isHome}) => {
+  console.log('jogo', results);
   if (!teamID || !otherTeamID || !results) return "-";
 
   if ( teamID == otherTeamID) return '';
@@ -36,7 +42,12 @@ const getTeamResults = ({teamID, otherTeamID, results, isHome}) => {
 
   if (!game) return '-';
 
-  return formatBadgeGameResult({isHome: isHome, homeGoals: game.goals.home, awayGoals: game.goals.away});
+  return formatBadgeGameResult({
+    isHome: isHome, 
+    homeGoals: game.goals.home, 
+    awayGoals: game.goals.away, 
+    fixtureID: game.fixture.id
+  });
 }
 
 const TeamStandingsTable = ({ group, descriptionColorMap, teamID, results }) => {
