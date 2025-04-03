@@ -1,9 +1,10 @@
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import LoadingScreen from '../../../CommonUI/LoadingScreen';
 import NotFound from '../../../CommonUI/NotFound';
 import { useTeamResults } from '../../../../hooks/useTeamResults';
 import SquadStandingsStatistics from './SquadStandingsStatistics';
 import LastLeagueGames from './LastLeagueGames';
+import { Info } from 'lucide-react';
 
 const SquadRankAndMatchesStats = ({leagueID, season}) => {
     const { results, resultsLoading, resultsError } = useTeamResults(leagueID, season);
@@ -15,7 +16,13 @@ const SquadRankAndMatchesStats = ({leagueID, season}) => {
     return (
         <Row className='mb-3'>
             <Col>
-                <h6 className='text-center'>Team standings</h6>
+                <div className='d-flex justify-content-center'>
+                    <h6>Team standings 
+                        <OverlayTrigger placement="top" overlay={<Tooltip>Only available for leagues</Tooltip>}>
+                            <Info size={14} className="text-secondary ms-1" />
+                        </OverlayTrigger>
+                    </h6>
+                </div>
                 <SquadStandingsStatistics leagueID={leagueID} results={results} />
             </Col>
             <Col>
