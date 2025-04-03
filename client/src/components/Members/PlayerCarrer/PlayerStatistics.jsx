@@ -76,22 +76,22 @@ const PlayerStatistics = ({season}) => {
                                 <Table striped hover responsive variant="dark" className='text-center'>
                                     <thead>
                                         <tr>
-                                            <th>Jogos</th>
-                                            <th>Minutos</th>
-                                            <th>Gols</th>
-                                            <th>Assistências</th>
-                                            <th>Cartões Amarelos</th>
-                                            <th>Cartões Vermelhos</th>
+                                            <th>Games</th>
+                                            <th>Minutes</th>
+                                            <th>Goals</th>
+                                            <th>Assists</th>
+                                            <th>Yellow cards</th>
+                                            <th>Red cards</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{stat.games.appearences}</td>
-                                            <td>{stat.games.minutes}</td>
-                                            <td>{stat.goals.total}</td>
-                                            <td>{stat.goals.assists}</td>
-                                            <td>{stat.cards.yellow}</td>
-                                            <td>{stat.cards.red}</td>
+                                            <td>{stat.games.appearences ?? 0}</td>
+                                            <td>{stat.games.minutes ?? 0}</td>
+                                            <td>{stat.goals.total ?? 0}</td>
+                                            <td>{stat.goals.assists ?? 0}</td>
+                                            <td>{stat.cards.yellow ?? 0}</td>
+                                            <td>{stat.cards.red ?? 0}</td>
                                         </tr>
                                     </tbody>
                                 </Table>
