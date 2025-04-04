@@ -7,10 +7,10 @@ const searchEntity = async (req, res) => {
 
     // Mapear os tipos para os caminhos da API
     const endpointsMap = {
-        Jogador: 'players/profiles',
-        Treinador: 'coachs',
-        Clube: 'teams',
-        Competicao: 'leagues',
+        player: 'players/profiles',
+        coach: 'coachs',
+        club: 'teams',
+        competition: 'leagues',
     };
 
     const endpoint = endpointsMap[type];
@@ -21,7 +21,7 @@ const searchEntity = async (req, res) => {
 
     try {
         // necessário pois apenas o endpoint para Jogador usa paginação
-        const params = type === 'Jogador' ? { search: inputValue, page } : { search: inputValue };
+        const params = type === 'player' ? { search: inputValue, page } : { search: inputValue };
         const data = await apiFootballReq(endpoint, params);
 
         // Caso não tenha dados, tratar no frontend 

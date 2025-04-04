@@ -10,7 +10,7 @@ import GenericModal from '../CommonUI/GenericModal';
 const SearchModal = ({ show, onClose }) => {
 
     const navigate = useNavigate();
-    const [ name, setName ] = useState('Jogador');
+    const [ name, setName ] = useState('player');
     const [ inputValue, setInputValue ] = useState('');
     const [ error, setError ] = useState('');
     const [ showToast, setShowToast ] = useState(false);
@@ -28,12 +28,12 @@ const SearchModal = ({ show, onClose }) => {
 
     const validadeInput = (name, input) => {
         // A API exige um tamanho minimo de 4 caracteres na pesquisa de um treinador
-        const minLength = name === 'Treinador' ? 4 : 3;
+        const minLength = name === 'coach' ? 4 : 3;
 
         if (input.trim() === '') {
             return 'entryInput';
         } else if (input.trim().length < minLength) {
-            return name === 'Treinador' ? 'minLengthTreinador' : 'minLengthDefault';;
+            return name === 'coach' ? 'minLengthTreinador' : 'minLengthDefault';;
         } else if (/[^a-zA-Z0-9 ]/g.test(input)) {
             return 'invalidQuery';
         } else {
@@ -53,7 +53,7 @@ const SearchModal = ({ show, onClose }) => {
             setShowToast(false);
             onClose();
             setInputValue('');
-            navigate(`/${name}/${encodeURIComponent(inputValue)}`);
+            navigate(`/search/${name}/${encodeURIComponent(inputValue)}`);
         }
     }
 
@@ -83,22 +83,22 @@ const SearchModal = ({ show, onClose }) => {
                         onKeyDown={handleKeyPress}
                     />
                     <DropdownButton
-                    variant="outline-secondary"
-                    title={name}
-                    id="input-group-dropdown-2"
-                    align="end"
+                        variant="outline-secondary"
+                        title={name}
+                        id="input-group-dropdown-2"
+                        align="end"
                     >
-                        <Dropdown.Item onClick={() => handleSelect('Jogador')}>
-                            Jogador
+                        <Dropdown.Item onClick={() => handleSelect('player')}>
+                            Player
                         </Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleSelect('Treinador')}>
-                            Treinador
+                        <Dropdown.Item onClick={() => handleSelect('coach')}>
+                            Coach
                         </Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleSelect('Clube')}>
-                            Clube
+                        <Dropdown.Item onClick={() => handleSelect('club')}>
+                            Club
                         </Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleSelect('Competicao')}>
-                            Competição
+                        <Dropdown.Item onClick={() => handleSelect('competition')}>
+                            Competition
                         </Dropdown.Item>
                     </DropdownButton>
                 </InputGroup>

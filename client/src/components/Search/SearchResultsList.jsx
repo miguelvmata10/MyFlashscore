@@ -1,94 +1,109 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { Pagination } from 'react-bootstrap';
 import ElementCard from '../CommonUI/ElementCard';
+import NotFound from '../CommonUI/NotFound';
+import './SearchStyles.css';
 
-const SearchResultsList = ({data, name}) => {
+const SearchResultsList = ({ data, type, setPage }) => {
+
     const renderData = () => {
-        if (
-            (name === 'Jogador' && (!data.jogador || data.jogador.length === 0)) ||
-            (name === 'Treinador' && (!data.treinador || data.treinador.length === 0)) ||
-            (name === 'Clube' && (!data.clube || data.clube.length === 0)) ||
-            (name === 'Competicao' && (!data.competicao || data.competicao.length === 0))
-        ) {
-            return <p>Nenhum dado disponível.</p>;
+        const results = data[type];
+
+        if ( !results || results.length === 0 ) return <NotFound />;
+
+        return (
+            <Row className="g-3">
+              {results.map((item) => {
+                switch (type) {
+                  case 'player':
+                    return (
+                      <Col key={item.player.id} md={6}>
+                        <ElementCard
+                          role="player"
+                          id={item.player.id}
+                          photo={item.player.photo}
+                          name={item.player.name}
+                          number={item.player.number}
+                          age={item.player.age}
+                        />
+                      </Col>
+                    );
+                  case 'coach':
+                    return (
+                      <Col key={item.id} md={6}>
+                        <ElementCard
+                          role="coach"
+                          id={item.id}
+                          photo={item.photo}
+                          name={item.name}
+                        />
+                      </Col>
+                    );
+                  case 'club':
+                    return (
+                      <Col key={item.team.id} md={6}>
+                        <ElementCard
+                          role="team"
+                          id={item.team.id}
+                          photo={item.team.logo}
+                          name={item.team.name}
+                        />
+                      </Col>
+                    );
+                  case 'competition':
+                    return (
+                      <Col key={item.league.id} md={6}>
+                        <ElementCard
+                          role="league"
+                          id={item.league.id}
+                          photo={item.league.logo}
+                          name={item.league.name}
+                        />
+                      </Col>
+                    );
+                  default:
+                    return null;
+                }
+              })}
+            </Row>
+        );
+    };
+
+    const renderPagination = () => {
+        if (!data.pagination) return null;
+
+        const { currentPage, totalPages } = data.pagination;
+
+        if (totalPages <= 1) return null; 
+
+        let active = Number(currentPage);
+
+        let items = [];
+        for (let number = 1; number <= totalPages; number++) {
+            items.push(
+                <Pagination.Item key={number} active={number === active} onClick={() => setPage(number)} className='pagination-dark'>
+                    {number}
+                </Pagination.Item>,
+            );
         }
 
-        switch (name) {
-            case 'Jogador':
-                return (
-                    <Row className='g-3'>
-                        {data.jogador.map((player) => (
-                            <Col key={player.player.id} md={4}>
-                                <ElementCard 
-                                    role='player'
-                                    id={player.player.id}
-                                    photo={player.player.photo}
-                                    name={player.player.name}
-                                    number={player.player.number}
-                                    age={player.player.age}
-                                    key={player.player.id}
-                                />
-                            </Col>
-                        ))}
-                    </Row>
-                );
-            case 'Treinador':
-                return (
-                    <Row className='g-3'>
-                        {data.treinador.map((coach) => (
-                            <Col key={coach.id} md={4}>
-                                <ElementCard 
-                                    role='coach'
-                                    id={coach.id}
-                                    photo={coach.photo}
-                                    name={coach.name}
-                                    key={coach.id}
-                                />
-                            </Col>
-                        ))}
-                    </Row>
-                );
-            case 'Clube':
-                return (
-                    <Row className='g-3'>
-                        {data.clube.map((team) => (
-                            <Col key={team.team.id} md={4}>
-                                <ElementCard 
-                                    role='team'
-                                    id={team.team.id}
-                                    photo={team.team.logo}
-                                    name={team.team.name}
-                                    key={team.team.id}
-                                />
-                            </Col>
-                        ))}
-                    </Row>
-                );
-            case 'Competicao':
-                return (
-                    <Row className='g-3'>
-                        {data.competicao.map((league) => (
-                            <Col key={league.league.id} md={4}>
-                                <ElementCard 
-                                    role='league'
-                                    id={league.league.id}
-                                    photo={league.league.logo}
-                                    name={league.league.name}
-                                    key={league.league.id}
-                                />
-                            </Col>
-                        ))}
-                    </Row>
-                );
-            default:
-                return null;
-        }
+        return (
+            <div className="d-flex justify-content-center mt-4">
+                <Pagination size="md" className="pagination-dark">
+                    <Pagination.Prev disabled={currentPage == 1} onClick={() => setPage(currentPage - 1)} className="pagination-dark-nav" />
+                        {items}
+                    <Pagination.Next disabled={currentPage == totalPages} onClick={() => setPage(currentPage + 1)} className="pagination-dark-nav"/>
+                </Pagination>
+            </div>
+        );
     };
 
     return (
         <div>
             <h4 className='mb-4 heading-border'>Resultados</h4>
             {renderData()}
+            {renderPagination()}
         </div>
     )
 }
