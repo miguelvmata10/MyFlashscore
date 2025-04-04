@@ -14,13 +14,20 @@ const PlayerLineupCard = ({ player }) => {
 
     return (
       <div className='text-white'>
-        <div className='d-flex justify-content-center'>
-            <FallbackImage 
-                src={player.photo}
-                type='player'
-                className='rounded-5 player-image'
-                style={{ maxWidth: '45px', maxHeight: '45px' }}
-            />
+        <div className='d-flex justify-content-center mb-2' style={{ position: 'relative' }}>
+            <div>
+                <FallbackImage 
+                    src={player.photo}
+                    type='player'
+                    className='rounded-5 player-image'
+                    style={{ maxWidth: '45px', maxHeight: '45px' }}
+                />
+            </div>
+            <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', bottom: '-10px'}} >
+                {player.rating !== 'N/A' ? <Badge bg={formatBadge(player.rating)} className='player-badge'>
+                    {player.rating}
+                </Badge> : ""}
+            </div>
         </div>
         <div>
             <div className='fw-bold'>
@@ -42,9 +49,6 @@ const PlayerLineupCard = ({ player }) => {
                     )}
                 </Badge>
             </div>
-          {player.rating !== 'N/A' ? <Badge bg={formatBadge(player.rating)} className='player-badge'>
-            {player.rating}
-          </Badge> : ""}
         </div>
       </div>
     );
