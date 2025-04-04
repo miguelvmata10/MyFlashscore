@@ -24,7 +24,7 @@ const PlayerTrophies = () => {
     const filteredPlayerTrophies = playerTrophies.filter(trophy => trophy.place === 'Winner');
     
     return (
-        <Container fluid className="container rounded-4">
+        <Container>
             <h5 className='mb-3 heading-border'>{filteredPlayerTrophies.length} trophies won</h5>
 
             {filteredPlayerTrophies.length > 0 && (

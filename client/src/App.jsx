@@ -10,6 +10,7 @@ import PlayerProfile from './components/Members/PlayerProfile';
 import CoachProfile from './components/Members/CoachProfile';
 import SearchResults from './components/Search/SearchResults';
 import GameMenu from './components/Game/GameMenu';
+import BackButton from './components/CommonUI/BackButton';
 
 function App() {
   // IDs das top leagues
@@ -34,16 +35,19 @@ function App() {
             <Sidebar topLeaguesIDs={topLeaguesIDs} orientation='horizontal'/>
           </Col>
 
-          <Col xs={12} md={9} className="menu p-2 rounded-4 mb-2">
-            <Routes>
-              <Route path="/" element={<MatchDateSelector topLeaguesIDs={topLeaguesIDs} />} />
-              <Route path="/league/:leagueID" element={<League />} />
-              <Route path="/team/:teamID" element={<Club />} />
-              <Route path="/player/:playerID" element={<PlayerProfile />} />
-              <Route path="/coach/:coachID" element={<CoachProfile />} />
-              <Route path="/:name/:inputValue" element={<SearchResults />} />
-              <Route path="/game/:fixtureID" element={<GameMenu />} />
-            </Routes>
+          <Col xs={12} md={9} className="menu rounded-4 mb-2">
+            <BackButton />
+            <Container className="container p-4 rounded-4">
+              <Routes>
+                <Route path="/" element={<MatchDateSelector topLeaguesIDs={topLeaguesIDs} />} />
+                <Route path="/league/:leagueID" element={<League />} />
+                <Route path="/team/:teamID" element={<Club />} />
+                <Route path="/player/:playerID" element={<PlayerProfile />} />
+                <Route path="/coach/:coachID" element={<CoachProfile />} />
+                <Route path="/search/:type/:inputValue" element={<SearchResults />} />
+                <Route path="/game/:fixtureID" element={<GameMenu />} />
+              </Routes>
+            </Container>
           </Col>
         </Row>
       </Container>

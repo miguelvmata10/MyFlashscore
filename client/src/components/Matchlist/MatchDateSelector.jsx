@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Dropdown } from 'react-bootstrap';
+import { Row, Dropdown } from 'react-bootstrap';
 import { BsCalendar3 } from 'react-icons/bs'; 
 import LeagueMatchSelector from "./LeagueMatchSelector";
 
@@ -62,36 +62,34 @@ const MatchDateSelector = ({topLeaguesIDs}) => {
   }
   
   return ( 
-    <Container>
-      <div className="ps-5 pe-5 pb-5 pt-3">
-        <Row className="text-end">
-            <Dropdown onSelect={handleDropdownSelect} className="mb-2">
-                <Dropdown.Toggle 
-                  variant="danger" 
-                  id="dropdown-basic"
-                  className="date-selector-btn"
-                >
-                    <BsCalendar3 className="me-2" />
-                    {selectedDate ? formatDisplayDate(selectedDate) : "Selecione uma data"}
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="bg-dark text-white">
-                    {lastSevenDays.map((day) => (
-                        <Dropdown.Item 
-                          key={day} 
-                          eventKey={day} 
-                          className="bg-dark text-white"
-                        >
-                            {formatDisplayDate(day)}
-                        </Dropdown.Item>
-                    ))}
-                </Dropdown.Menu>
-            </Dropdown>
-        </Row>
-        <Row>
-          <LeagueMatchSelector date={selectedDate} topLeaguesIDs={topLeaguesIDs} />
-        </Row>
-      </div>
-    </Container>
+    <>
+      <Row className="text-end">
+          <Dropdown onSelect={handleDropdownSelect} className="mb-2">
+              <Dropdown.Toggle 
+                variant="danger" 
+                id="dropdown-basic"
+                className="date-selector-btn"
+              >
+                  <BsCalendar3 className="me-2" />
+                  {selectedDate ? formatDisplayDate(selectedDate) : "Selecione uma data"}
+              </Dropdown.Toggle>
+              <Dropdown.Menu className="bg-dark text-white">
+                  {lastSevenDays.map((day) => (
+                      <Dropdown.Item 
+                        key={day} 
+                        eventKey={day} 
+                        className="bg-dark text-white"
+                      >
+                          {formatDisplayDate(day)}
+                      </Dropdown.Item>
+                  ))}
+              </Dropdown.Menu>
+          </Dropdown>
+      </Row>
+      <Row>
+        <LeagueMatchSelector date={selectedDate} topLeaguesIDs={topLeaguesIDs} />
+      </Row>
+    </>
   )
 }
 

@@ -58,7 +58,7 @@ const GameMenu = () => {
   }
 
   return (
-    <Container className="container ps-5 pe-5 pt-5">
+    <Container>
       <Row className="align-items-start justify-content-center py-3">
         
         <Col className="text-center">

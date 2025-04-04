@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import useButtonGroup from '../../hooks/useButtonGroup';
 import useApiRequest from '../../hooks/useApiRequest';
 import { fetchCoachData } from '../../services/PeopleService';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import CoachCarrer from './CoachCarrer/CoachCarrer';
@@ -41,7 +41,7 @@ const CoachProfile = () => {
   };
 
     return (
-        <Container className="container p-5 rounded-4">
+        <Container>
             <Row className="align-items-center mb-3">
                 <Col xs="auto">
                     <FallbackImage src={coach.photo} width={110} type='player' alt="Foto do treinador" style={{ borderRadius: '10%' }}/>

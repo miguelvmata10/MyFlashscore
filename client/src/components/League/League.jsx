@@ -1,9 +1,8 @@
 import useButtonGroup from '../../hooks/useButtonGroup';
 import { useParams } from 'react-router-dom';
-import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import Standings from './Standings/Standings';
 import TopScorersAndAssists from './TopScorersAndAssists';
 import LeagueMatches from './LeagueMatches';
@@ -49,7 +48,7 @@ const League = () => {
     };
 
     return (
-        <Container className="container p-5 rounded-4">
+        <Container>
             <Row className="align-items-center mb-3">
                 {leagueData[0].league.logo && <Col xs="auto">
                     <FallbackImage src={leagueData[0]?.league?.logo} type='league' alt="Logo da liga" 

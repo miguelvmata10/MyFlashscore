@@ -42,7 +42,7 @@ const Club = () => {
     };
 
     return (
-        <Container className="container p-5 rounded-4">
+        <Container>
             <Row className="align-items-center mb-3">
                 <Col xs="auto">
                     <FallbackImage src={clubData[0]?.team?.logo} type='team' alt="Logo do clube"
