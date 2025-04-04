@@ -13,26 +13,25 @@ const ElementCard = ({ role, id, photo, name, number, age }) => {
 
   return (
     <Link to={`/${role}/${id}`} className='customCardLink'>
-      <Card className="elementCard p-3">
-        <Row className="align-items-center">
-            <Col xs="auto">
+      <Card className="elementCard" style={{ height: '80px' }}>
+        <Row className="ps-2 align-items-center h-100">
+            <Col xs="auto" style={{ paddingRight: '15px' }}>
               <FallbackImage 
                   src={photo}
                   type={role === 'player' || role === 'coach' ? 'player' : role === 'team' ? 'team' : 'league' } 
-                  className={`cardImage ${roleClass}`}
+                  className={`${roleClass}`}
                   alt={`Imagem do ${name}`}
+                  style={{ width: '50px', height: '50px', objectFit: 'contain' }}
               />
             </Col>
-            <Col>
-              <Card.Body className="elementCardBody">
-                  <Card.Title>{name}</Card.Title>
-                  {role === 'player' && (
-                    <Card.Text>
-                      Age: {age} <br />
-                      Nº {number} 
-                    </Card.Text>
-                  )}
-              </Card.Body>
+            <Col className='ps-0 elementCardBody'>
+              <div style={{ fontWeight: 'bold', color: 'white' }}>
+                {name}
+              </div>
+              <div className='text-secondary' style={{ fontSize: '14px' }}>
+                {role === 'player' && age ? `Age: ${age}` : ''} 
+                {role === 'player' && number ? (age ? ` • Nº ${number}` : `Nº ${number}`) : ''}
+              </div>
             </Col>
         </Row>
       </Card>
