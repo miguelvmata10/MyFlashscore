@@ -42,7 +42,7 @@ const getCoachTrophies = async (req, res) => {
     }
 }
 
-const getPlayerTranfers = async (req, res) => {
+const getPlayerTransfers = async (req, res) => {
     const playerID = req.params.id;
     try {
         const data = await apiFootballReq('transfers', {player: playerID});
@@ -106,7 +106,7 @@ module.exports = {
     getPlayerProfileByID,
     getCoachProfileByID,
     getCoachTrophies,
-    getPlayerTranfers,
+    getPlayerTransfers,
     getPlayerTrophies,
     getPlayerSeasonsAvailable,
     getPlayerStatistics,
