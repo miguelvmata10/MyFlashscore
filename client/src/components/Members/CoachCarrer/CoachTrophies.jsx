@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 import { fetchCoachTrophies } from '../../../services/PeopleService';
 import LoadingScreen from '../../CommonUI/LoadingScreen';
@@ -24,8 +24,8 @@ const CoachTrophies = () => {
   const filteredCoachTrophies = coachTrophies.filter(trophy => trophy.place === 'Winner');
 
   return (
-    <>
-      <h2 className='mb-3'><b>{filteredCoachTrophies.length} troféus ganhos</b></h2>
+    <Container>
+      <h5 className='mb-3 heading-border'>{filteredCoachTrophies.length} trophies won</h5>
 
       {filteredCoachTrophies.length > 0 && (
         <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
@@ -49,7 +49,7 @@ const CoachTrophies = () => {
           </Table>
         </div>
       )}
-    </>
+    </Container>
   );
 }
 
