@@ -1,13 +1,16 @@
 import { Toast, ToastContainer } from 'react-bootstrap';
 
-const ToastNotification = ({showToast, setShowToast, error}) => {
+const ToastNotification = ({showToast, setShowToast, message, type}) => {
   return (
     <ToastContainer position="top-center" className="p-3">
-    <Toast bg="danger" onClose={() => setShowToast(false)} show={showToast} delay={3000} autohide>
+    <Toast bg="danger" onClose={() => setShowToast(false)} show={showToast} delay={5000} autohide>
         <Toast.Header>
-          <strong className="me-auto">Erro</strong>
+          {type === 'warning' ? 
+            (<strong className="me-auto">Warning ⚠️</strong>) : 
+            (<strong className="me-auto">Error ❌</strong>)
+          }
         </Toast.Header>
-        <Toast.Body>{error}</Toast.Body>
+        <Toast.Body>{message}</Toast.Body>
     </Toast>
 </ToastContainer>
   );
