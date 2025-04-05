@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import useApiRequest from './useApiRequest';
-import { fetchTeamResults } from '../services/TeamsService';
+import { fetchTeamResults } from '../../services/TeamsService';
 
 export const useTeamResults = ( leagueID, season ) => {
   const { teamID } = useParams()

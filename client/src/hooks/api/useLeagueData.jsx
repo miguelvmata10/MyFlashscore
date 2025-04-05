@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import useApiRequest from './useApiRequest';
-import { fetchLeagueData } from '../services/CompetitionService';
+import { fetchLeagueData } from '../../services/CompetitionService';
 
 const useLeagueData = ( leagueID ) => {
     const { data: leagueData, loading: leagueDataLoading, error: leagueDataError, fetchData: leagueDataFetchData } = useApiRequest(fetchLeagueData);
