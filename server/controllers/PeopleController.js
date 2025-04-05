@@ -1,106 +1,40 @@
-const apiFootballReq = require('../services/apiFootball');
+const fetchData = require('../utils/fetchData');
 
-const getPlayerProfileByID = async (req, res) => {
+const getPlayerProfileByID = (req, res) => {
     const playerID = req.params.id;
-    try {
-        const data = await apiFootballReq('players/profiles', {player: playerID});
-        if (!data.response || data.response.length === 0) {
-            return res.status(404).json({error: `Nenhum jogador com o id definido: ${playerID}`});
-        }
-        res.status(200).json(data);
-    } catch (error) {
-        console.error('Erro ao obter o jogador: ', error);
-        res.status(500).json({error: 'Erro interno do servidor'}); 
-    }
+    fetchData('players/profiles', { player: playerID }, res);
 };
 
-const getCoachProfileByID = async (req, res) => {
+const getCoachProfileByID = (req, res) => {
     const coachID = req.params.id;
-    try {
-        const data = await apiFootballReq('coachs', {id: coachID});
-        if (!data.response || data.response.length === 0) {
-            return res.status(404).json({error: `Nenhum treinador com o id definido: ${coachID}`});
-        }
-        res.status(200).json(data);
-    } catch (error) {
-        console.error('Erro ao obter o treinador: ', error);
-        res.status(500).json({error: 'Erro interno do servidor'});
-    }
-}
+    fetchData('coachs', { id: coachID }, res);
+};
 
-const getCoachTrophies = async (req, res) => {
+const getCoachTrophies = (req, res) => {
     const coachID = req.params.id;
-    try {
-        const data = await apiFootballReq('trophies', {coach: coachID});
-        if (!data.response || data.response.length === 0) {
-            return res.status(404).json({error: `Nenhum treinador com o id definido: ${coachID}`});
-        }
-        res.status(200).json(data);
-    } catch (error) {
-        console.error('Erro ao obter o jogador: ', error);
-        res.status(500).json({error: 'Erro interno do servidor'});
-    }
-}
+    fetchData('trophies', { coach: coachID }, res);
+};
 
-const getPlayerTransfers = async (req, res) => {
+const getPlayerTransfers = (req, res) => {
     const playerID = req.params.id;
-    try {
-        const data = await apiFootballReq('transfers', {player: playerID});
-        if (!data.response || data.response.length === 0) {
-            return res.status(404).json({error: `Nenhum jogador com o id definido: ${playerID}`});
-        }
-        res.status(200).json(data);
-    } catch (error) {
-        console.error('Erro ao obter o jogador: ', error);
-        res.status(500).json({error: 'Erro interno do servidor'});
-    }
-}
+    fetchData('transfers', { player: playerID }, res);
+};
 
-const getPlayerTrophies = async (req, res) => {
+const getPlayerTrophies = (req, res) => {
     const playerID = req.params.id;
-    try {
-        const data = await apiFootballReq('trophies', {player: playerID});
-        if (!data.response || data.response.length === 0) {
-            return res.status(404).json({error: `Nenhum jogador com o id definido: ${playerID}`});
-        }
-        res.status(200).json(data);
-    } catch (error) {
-        console.error('Erro ao obter o jogador: ', error);
-        res.status(500).json({error: 'Erro interno do servidor'});
-    }
-}
+    fetchData('trophies', { player: playerID }, res);
+};
 
-const getPlayerSeasonsAvailable = async (req, res) => {
+const getPlayerSeasonsAvailable = (req, res) => {
     const playerID = req.params.id;
-    try {
-        const data = await apiFootballReq('players/seasons', {player: playerID});
-        if (!data.response || data.response.length === 0) {
-            return res.status(404).json({error: `Nenhum jogador com o id definido: ${playerID}`});
-        }
-        res.status(200).json(data);
-    } catch (error) {
-        console.error('Erro ao obter o jogador: ', error);
-        res.status(500).json({error: 'Erro interno do servidor'});
-    }
-}
+    fetchData('players/seasons', { player: playerID }, res);
+};
 
-const getPlayerStatistics = async (req, res) => {
+const getPlayerStatistics = (req, res) => {
     const playerID = req.params.id;
     const { season } = req.query;
-    try {
-        const data = await apiFootballReq('players', {
-            id: playerID,
-            season: season
-        });
-        if (!data.response || data.response.length === 0) {
-            return res.status(404).json({error: `Não há dados para o jogador ${playerID} em ${season}.`})
-        }
-        res.status(200).json(data);
-    } catch (error) {
-        console.error('Erro ao obter as estatisticas do jogador: ', error);
-        res.status(500).json({error: 'Erro interno do servidor'});
-    }
-}
+    fetchData('players', { id: playerID, season: season }, res);
+};
 
 module.exports = {
     getPlayerProfileByID,
