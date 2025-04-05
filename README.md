@@ -8,6 +8,14 @@ The project consists of two main parts:
 
 > 🔒 API keys are not included in the repository. See the individual `README.md` files inside `client/` and `server/` for setup instructions.
 
+--- 
+
+# Application Demo
+
+Check out the interaction with the app in this video, where a preview of the app is available:
+
+[![Watch the video](https://drive.google.com/file/d/1PP6ntlYdj6PQ5C_nyTetQ2avpLvAdIsM/view?usp=sharing)
+
 ---
 
 ## 🗂️ Project Structure
