@@ -9,8 +9,9 @@ import Club from './components/Club/Club';
 import PlayerProfile from './components/Members/PlayerProfile';
 import CoachProfile from './components/Members/CoachProfile';
 import SearchResults from './components/Search/SearchResults';
-import GameMenu from './components/Game/GameMenu';
+import GameMenu from './components/Game/GameMenu/GameMenu';
 import BackButton from './components/CommonUI/BackButton';
+import ToastAPInotification from './components/CommonUI/ToastAPInotification';
 
 function App() {
   // IDs das top leagues
@@ -19,6 +20,7 @@ function App() {
   return (
     <Router>
       <Container className='d-flex flex-column align-items-center' style={{ maxWidth: "1100px" }}>
+        <ToastAPInotification />
         <div className="w-100">
           <Container style={{ maxWidth: "1100px" }}>
             <Navbar />
