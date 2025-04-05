@@ -1,4 +1,5 @@
 import { Container, ProgressBar } from 'react-bootstrap';
+import NotFound from '../CommonUI/NotFound';
 
 const GameStatistics = ({stats}) => {
   const formatStats = () => {
@@ -8,22 +9,22 @@ const GameStatistics = ({stats}) => {
     const away = stats[1].statistics || []; // estatísticas da equipa de fora
 
     const categories = [
-      { key: "expected_goals", label: "Golos esperados (xG)", isPercentage: false },
-      { key: "Ball Possession", label: "Posse de bola (%)", isPercentage: true },
-      { key: "Total Shots", label: "Remates totais" },
-      { key: "Shots on Goal", label: "Remates à baliza" },
-      { key: "Shots off Goal", label: "Remates fora" },
-      { key: "Shots insidebox", label: "Remates dentro de área" },
-      { key: "Shots outsidebox", label: "Remates fora de área"},
-      { key: "Blocked Shots", label: "Remates bloqueados" },
-      { key: "Fouls", label: "Faltas" },
-      { key: "Corner Kicks", label: "Cantos" },
-      { key: "Offsides", label: "Foras de jogo" },
-      { key: "Yellow Cards", label: "Cartões amarelos" },
-      { key: "Red Cards", label: "Cartões vermelhos" },
-      { key: "Goalkeeper Saves", label: "Defesas do guarda-redes" },
-      { key: "Total passes", label: "Passes totais" },
-      { key: "Passes accurate", label: "Passes certos" },
+      { key: "expected_goals", label: "Expected goals (xG)" },
+      { key: "Ball Possession", label: "Ball possession (%)", isPercentage: true },
+      { key: "Total Shots", label: "Total shots" },
+      { key: "Shots on Goal", label: "Shots on goal" },
+      { key: "Shots off Goal", label: "Shots off goal" },
+      { key: "Shots insidebox", label: "Shots inside box" },
+      { key: "Shots outsidebox", label: "Shots outside box"},
+      { key: "Blocked Shots", label: "Blocked shots" },
+      { key: "Fouls", label: "Fouls" },
+      { key: "Corner Kicks", label: "Corners" },
+      { key: "Offsides", label: "Offsides" },
+      { key: "Yellow Cards", label: "Yellow Cards" },
+      { key: "Red Cards", label: "Red cards" },
+      { key: "Goalkeeper Saves", label: "GK saves" },
+      { key: "Total passes", label: "Total passes" },
+      { key: "Passes accurate", label: "Accurate passes" },
     ]
 
     return categories.map(({key, label, isPercentage}) => {
@@ -49,13 +50,11 @@ const GameStatistics = ({stats}) => {
   return (
     <Container>
       {Object.keys(formattedStats).length === 0 ? (
-        <div className="text-center p-4 fw-bold rounded-4" style={{ backgroundColor: '#4e4e4b', color: 'white' }}>
-          Nenhum evento disponível
-        </div>
+        <NotFound />
       ) : (
         <div className='text-center p-4 fw-bold rounded-4' style={{ backgroundColor: '#4e4e4b', color: 'white' }}>
           <h5 className='d-flex fw-bold justify-content-center align-content-center mb-1'>
-            Visão geral da partida
+            Top stats
           </h5>
           <div className='p-4'>
             {formattedStats.map((stat, index) => (

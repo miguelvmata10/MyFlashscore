@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 import { Link, useParams } from "react-router-dom";
 import { fetchPlayerTransfers } from '../../../services/PeopleService';
 import LoadingScreen from '../../CommonUI/LoadingScreen';
-import useApiRequest from '../../../hooks/useApiRequest';
+import useApiRequest from '../../../hooks/api/useApiRequest';
 import NotFound from '../../CommonUI/NotFound';
 import FallbackImage from '../../CommonUI/FallbackImage';
 
@@ -34,10 +34,10 @@ const PlayerCarrer = () => {
             <Table striped hover responsive variant="dark" className='text-center'>
                 <thead>
                     <tr>
-                        <th>Data</th>
-                        <th>De</th>
-                        <th>Para</th>
-                        <th>Valor</th>
+                        <th>Date</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,6 +62,6 @@ const PlayerCarrer = () => {
                 </tbody>
             </Table>
         </div>
-    ) : <h3><b>Sem registo de transferências</b></h3>;
+    ) : <h5 className='mb-3 heading-border'>No record of transfers</h5>;
 }
 export default PlayerCarrer

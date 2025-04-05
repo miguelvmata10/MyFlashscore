@@ -5,11 +5,11 @@ const LeagueStandingsTable = ({ group, descriptionColorMap}) => {
 
   const columns = [
     { header: 'V', key: 'gamesWon' },
-    { header: 'E', key: 'gamesDrawn' },
-    { header: 'D', key: 'gamesLost' },
+    { header: 'D', key: 'gamesDrawn' },
+    { header: 'L', key: 'gamesLost' },
     { header: 'G', key: 'goals' },
-    { header: 'DG', key: 'goalDifference' },
-    { header: 'Forma', key: 'form' }
+    { header: 'GD', key: 'goalDifference' },
+    { header: 'Form', key: 'form' }
   ];
   
   const renderExtraColumns = (team) => (

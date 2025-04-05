@@ -3,7 +3,7 @@ import { Container, Table } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 import { fetchPlayerTrophies } from '../../../services/PeopleService';
 import LoadingScreen from '../../CommonUI/LoadingScreen';
-import useApiRequest from '../../../hooks/useApiRequest';
+import useApiRequest from '../../../hooks/api/useApiRequest';
 import NotFound from '../../CommonUI/NotFound';
 
 const PlayerTrophies = () => {
@@ -32,9 +32,9 @@ const PlayerTrophies = () => {
                     <Table striped hover responsive variant="dark" className='text-center'>
                         <thead>
                             <tr>
-                                <th>Época</th>
-                                <th>País</th>
-                                <th>Competição</th>
+                                <th>Season</th>
+                                <th>Country</th>
+                                <th>League</th>
                             </tr>
                         </thead>
                         <tbody>

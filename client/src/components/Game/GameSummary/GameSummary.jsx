@@ -12,12 +12,12 @@ const GameSummary = ({ events, homeTeam }) => {
     const timeElapsed = event.time.elapsed;
 
     if (event.comments === "Penalty Shootout") return 'Pénaltis';
-    if (timeElapsed <= 45 || (timeElapsed === 45 && extraTime > 0)) return '1ª Parte';
-    if (timeElapsed <= 90 || (timeElapsed === 90 && extraTime > 0)) return '2ª Parte';
-    if (timeElapsed <= 105 || (timeElapsed === 105 && extraTime > 0)) return 'Prolongamento - 1ª Parte';
-    if (timeElapsed <= 120 || (timeElapsed === 120 && extraTime > 0)) return 'Prolongamento - 2ª Parte';
+    if (timeElapsed <= 45 || (timeElapsed === 45 && extraTime > 0)) return '1st Half';
+    if (timeElapsed <= 90 || (timeElapsed === 90 && extraTime > 0)) return '2nd Half';
+    if (timeElapsed <= 105 || (timeElapsed === 105 && extraTime > 0)) return 'Extra time - 1st Half';
+    if (timeElapsed <= 120 || (timeElapsed === 120 && extraTime > 0)) return 'Extra time - 2nd Half';
 
-    return 'Pós jogo';
+    return 'Post game';
   };
 
   const eventsByPeriod = useMemo(() => {

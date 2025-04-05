@@ -1,18 +1,18 @@
 import React from 'react';
 import { ButtonGroup, Row, Button } from 'react-bootstrap';
-import useButtonGroup from '../../../../hooks/useButtonGroup';
+import useButtonGroup from '../../../../hooks/ui/useButtonGroup';
 import StandingsTable from '../StandingsTable/StandingsTable';
 import CupRoundGamesSelector from './CupRoundGamesSelector';
 import NotFound from '../../../CommonUI/NotFound';
 
 const DisplayCupStandings = ({ teams, hasStandings, type, leagueRounds, season, teamID = null}) => {
-    const { selected, handleButtonState, isActiveButton } = useButtonGroup('tabela');
+    const { selected, handleButtonState, isActiveButton } = useButtonGroup('standings');
 
     const competitionToggle = () => {
         switch (selected) {
-            case 'tabela':
+            case 'standings':
                 return <StandingsTable groups={ teams } hasStandings={ hasStandings } type={ type } teamID={teamID}/>;
-            case 'rondas':
+            case 'rounds':
                 return <CupRoundGamesSelector leagueRounds={leagueRounds} season={season} />
             default:
                 return <div>Erro</div>;
@@ -27,16 +27,16 @@ const DisplayCupStandings = ({ teams, hasStandings, type, leagueRounds, season, 
                 <div className='mb-2' >
                     <ButtonGroup className='secondary-custom-button w-50' size="sm">
                         <Button
-                            className={isActiveButton('tabela')}
-                            onClick={() => handleButtonState('tabela')}
+                            className={isActiveButton('standings')}
+                            onClick={() => handleButtonState('standings')}
                         >
-                            Tabela
+                            Standings
                         </Button>
                         <Button
-                            className={isActiveButton('rondas')}
-                            onClick={() => handleButtonState('rondas')}
+                            className={isActiveButton('rounds')}
+                            onClick={() => handleButtonState('rounds')}
                         >
-                            Rondas
+                            Rounds
                         </Button>
                     </ButtonGroup>
                 </div>

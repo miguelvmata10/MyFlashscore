@@ -8,9 +8,9 @@ const CoachCarrer = ({carrer}) => {
         <Table striped hover variant="dark" className='text-center'>
           <thead>
               <tr>
-                <th>De</th>
-                <th>Até</th>
-                <th>Clube</th>
+                <th>Start</th>
+                <th>Finish</th>
+                <th>Club</th>
               </tr>
           </thead>
           <tbody>

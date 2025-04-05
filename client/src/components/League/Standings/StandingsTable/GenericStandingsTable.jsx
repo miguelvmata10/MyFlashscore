@@ -8,8 +8,8 @@ const GenericStandingsTable = ({ group, descriptionColorMap, columns, renderExtr
       <thead>
         <tr>
           <th>º</th>
-          <th className='text-start'>Equipa</th>
-          <th>PJ</th>
+          <th className='text-start'>Team</th>
+          <th>GP</th>
           <th>P</th>
           {columns.map((column, index) => (
             <th key={index}>{column.header}</th>

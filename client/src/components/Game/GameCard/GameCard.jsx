@@ -21,12 +21,12 @@ const GameCard = ({ GameData, bgColor = "bg-transparent", cardType = 'standard'}
 
   // Define os grupos de estados do jogo -> estados de jogos problemáticos (adiados, cancelados, etc...)
   const statusMessages = {
-    PST: 'Adiado',
-    CANC: 'Cancelado',
-    ABD: 'Abandonado',
+    PST: 'Postponed',
+    CANC: 'Canceled',
+    ABD: 'Abandoned',
     SUSP: `${GameData?.goals?.home ?? '?'} - ${GameData?.goals?.away ?? '?'} (SUSP)`,
-    WO: 'Não realizado',
-    AWD: 'Não realizado'
+    WO: 'Walkover (n/ played)',
+    AWD: 'Technical loss (n/ played)'
   };
 
   const renderGameStatus = () => {

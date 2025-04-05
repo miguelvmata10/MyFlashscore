@@ -20,7 +20,7 @@ const MatchDateSelector = ({topLeaguesIDs}) => {
     const date = new Date(dateString);
     
     // Array com abreviações dos dias da semana 
-    const weekdays = ['DO', 'SE', 'TE', 'QU', 'QI', 'SE', 'SA'];
+    const weekdays = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
     
     // Obtém a abreviação do dia da semana
     const weekday = weekdays[date.getDay()];

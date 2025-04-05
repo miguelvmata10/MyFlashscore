@@ -20,11 +20,11 @@ const SearchModal = ({ show, onClose }) => {
     };
 
     const errorMessages = {
-        entryInput: 'Por favor, escreva algo antes de pesquisar.',
-        minLengthTreinador: 'Para pesquisar um treinador tem de escrever pelo menos 4 caracteres.',
-        minLengthDefault: 'Tem de escrever pelo menos 3 caracteres.',
-        invalidQuery: 'A pesquisa não pode conter caracteres especiais.'
-    }
+        entryInput: 'Please enter something before searching.',
+        minLengthTreinador: 'To search for a coach, you must enter at least 4 characters.',
+        minLengthDefault: 'You must enter at least 3 characters.',
+        invalidQuery: 'The search cannot contain special characters.'
+    };
 
     const validadeInput = (name, input) => {
         // A API exige um tamanho minimo de 4 caracteres na pesquisa de um treinador
@@ -72,7 +72,7 @@ const SearchModal = ({ show, onClose }) => {
 
     return (
         <>
-            <ToastNotification showToast={showToast} setShowToast={setShowToast} error={error} />
+            <ToastNotification showToast={showToast} setShowToast={setShowToast} message={error} type='error' />
             
             <GenericModal show={show} handleClose={handleClose} title='Search' hasFooter={true} footerFunction={handleSearch} footerButtonName='Search'>
                 <InputGroup className="mb-3">
@@ -89,16 +89,16 @@ const SearchModal = ({ show, onClose }) => {
                         align="end"
                     >
                         <Dropdown.Item onClick={() => handleSelect('player')}>
-                            Player
+                            player
                         </Dropdown.Item>
                         <Dropdown.Item onClick={() => handleSelect('coach')}>
-                            Coach
+                            coach
                         </Dropdown.Item>
                         <Dropdown.Item onClick={() => handleSelect('club')}>
-                            Club
+                            club
                         </Dropdown.Item>
                         <Dropdown.Item onClick={() => handleSelect('competition')}>
-                            Competition
+                            competition
                         </Dropdown.Item>
                     </DropdownButton>
                 </InputGroup>
