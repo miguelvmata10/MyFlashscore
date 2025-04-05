@@ -78,3 +78,16 @@ export const isTeamWinner = ({game, teamID}) => {
       return 'bg-transparent';
   }
 }
+
+// formata da data de um jogo
+export const formatGameDate = (date) => {
+  const formattedDate = new Date(date);
+
+  const year = formattedDate.getFullYear();
+  const month = String(formattedDate.getMonth() + 1).padStart(2, '0');
+  const day = String(formattedDate.getDate()).padStart(2, '0');
+  const hours = String(formattedDate.getHours()).padStart(2, '0');
+  const minutes = String(formattedDate.getMinutes()).padStart(2, '0');
+
+  return `${year}-${month}-${day} ${hours}h${minutes}`;
+}
