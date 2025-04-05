@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import useApiRequest from '../../hooks/useApiRequest';
+import useApiRequest from '../../hooks/api/useApiRequest';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import { fetchLeagueResults, fetchLeagueList } from '../../services/CompetitionService';
 import GameCard from '../Game/GameCard/GameCard';
 import NotFound from '../CommonUI/NotFound';
+import ErrorBanner from '../CommonUI/ErrorBanner';
 
 const LeagueMatches = ({ type }) => {
   const { leagueID } = useParams()
@@ -20,7 +21,7 @@ const LeagueMatches = ({ type }) => {
   }, [leagueID, fetchData, type])
 
   if (loading) return <LoadingScreen />;
-  if (error) return <p>Erro: {error.message}</p>;
+  if (error) return <ErrorBanner errorMessage={error.message} />;
   if (!games || games.length === 0 ) return <NotFound />;
 
   return (

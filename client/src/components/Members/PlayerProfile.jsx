@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import useButtonGroup from '../../hooks/useButtonGroup';
-import useApiRequest from '../../hooks/useApiRequest';
+import useButtonGroup from '../../hooks/ui/useButtonGroup';
+import useApiRequest from '../../hooks/api/useApiRequest';
 import { fetchPlayerData } from '../../services/PeopleService';
 import { Row, Col, Container } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -15,10 +15,11 @@ import PlayerSeasonSelector from './PlayerCarrer/PlayerSeasonSelector';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
+import ErrorBanner from '../CommonUI/ErrorBanner';
 
 const PlayerProfile = () => {
     const { playerID } = useParams();
-    const { selected, handleButtonState, isActiveButton } = useButtonGroup('estatisticas');
+    const { selected, handleButtonState, isActiveButton } = useButtonGroup('statistics');
     const { data: playerData, loading, error, fetchData } = useApiRequest(fetchPlayerData);
 
     useEffect(() => {
@@ -28,18 +29,18 @@ const PlayerProfile = () => {
     }, [playerID, fetchData]);
 
     if (loading) return <LoadingScreen />;
-    if (error) return <p>Erro: {error.message}</p>;
+    if (error) return <ErrorBanner errorMessage={error.message} />;
     if (!playerData || playerData.length === 0 ) return <NotFound />;
 
     const renderComponent = () => {
         switch (selected) {
-            case 'estatisticas':
+            case 'statistics':
                 return <PlayerSeasonSelector />;
-            case 'trofeus':
+            case 'trophies':
                 return <PlayerTrophies />
-            case 'transferencias':
+            case 'transfers':
                 return <PlayerCarrer />
-            case 'detalhes':
+            case 'details':
                 return <PlayerDetails details={playerData[0]}/>
             default:
                 return <div>Erro</div>;
@@ -52,7 +53,7 @@ const PlayerProfile = () => {
         <Container>
             <Row className="align-items-center mb-3">
                 <Col xs="auto">
-                    <FallbackImage src={player.photo} width={110} type='player' alt="Foto do jogador" style={{ borderRadius: '10%' }}/>
+                    <FallbackImage src={player.photo} width={100} type='player' style={{ borderRadius: '10%' }}/>
                 </Col>
                 <Col>
                     <h3 className="mb-2">{player.name}</h3>
@@ -62,28 +63,28 @@ const PlayerProfile = () => {
                 <div className="overflow-auto">
                     <ButtonGroup size="md" className="w-100">
                         <Button
-                            className={isActiveButton('estatisticas')}
-                            onClick={() => handleButtonState('estatisticas')}
+                            className={isActiveButton('statistics')}
+                            onClick={() => handleButtonState('statistics')}
                         >
-                            Estatisticas
+                            Statistics
                         </Button>
                         <Button
-                            className={isActiveButton('trofeus')}
-                            onClick={() => handleButtonState('trofeus')}
+                            className={isActiveButton('trophies')}
+                            onClick={() => handleButtonState('trophies')}
                         >
-                            Troféus
+                            Trophies
                         </Button>
                         <Button 
-                            className={isActiveButton('transferencias')} 
-                            onClick={() => handleButtonState('transferencias')}
+                            className={isActiveButton('transfers')} 
+                            onClick={() => handleButtonState('transfers')}
                         >
-                            Transferências
+                            Transfers
                         </Button>
                         <Button
-                            className={isActiveButton('detalhes')}
-                            onClick={() => handleButtonState('detalhes')}
+                            className={isActiveButton('details')}
+                            onClick={() => handleButtonState('details')}
                         >
-                            Detalhes
+                            Details
                         </Button>
                     </ButtonGroup>
                 </div>

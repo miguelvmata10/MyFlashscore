@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import useApiRequest from '../../../hooks/useApiRequest';
+import useApiRequest from '../../../hooks/api/useApiRequest';
 import { fetchLeagueStanding } from '../../../services/CompetitionService';
 import LoadingScreen from '../../CommonUI/LoadingScreen';
 import NotFound from '../../CommonUI/NotFound';
 import LeagueStandings from './LeagueStandings/LeagueStandings';
 import CupStandings from './CupStandings/CupStandings';
+import ErrorBanner from '../../CommonUI/ErrorBanner';
 
 const Standings = ({ season, type, hasStandings, leagueID, teamID = null }) => {
     const { data: teams, loading, error, fetchData } = useApiRequest(fetchLeagueStanding);
@@ -31,7 +32,7 @@ const Standings = ({ season, type, hasStandings, leagueID, teamID = null }) => {
 
     // esta parte só será executada se a competição tiver classificações disponíveis
     if (loading) return <LoadingScreen />;
-    if (error) return <p>Erro: {error.message}</p>;
+    if (error) return <ErrorBanner errorMessage={error.message} />;
     if (!teams || teams.length === 0 ) return <NotFound />;
 
     // garantir que há standings

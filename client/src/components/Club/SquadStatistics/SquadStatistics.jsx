@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { fetchTeamStatistics } from '../../../services/TeamsService';
 import LoadingScreen from '../../CommonUI/LoadingScreen';
-import useApiRequest from '../../../hooks/useApiRequest';
+import useApiRequest from '../../../hooks/api/useApiRequest';
 import NotFound from '../../CommonUI/NotFound';
 import SquadRankAndMatchesStats from './SquadRankAndRecentMatchesStats/SquadRankAndMatchesStats';
 import SquadGameGoalStats from './SquadGameGoalsStatistics/SquadGameGoalStats';
+import ErrorBanner from '../../CommonUI/ErrorBanner';
 
 const SquadStatistics = ({leagueID, season}) => {
   const { teamID } = useParams();
@@ -19,7 +20,7 @@ const SquadStatistics = ({leagueID, season}) => {
   }, [teamID, leagueID, season, fetchData])
 
   if (loading) return <LoadingScreen />;
-  if (error) return <p>Erro: {error.message}</p>;
+  if (error) return <ErrorBanner errorMessage={error.message} />;
   if (!statistics) return <NotFound />;
 
   return (

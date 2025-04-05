@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import useApiRequest from '../../../../hooks/useApiRequest';
+import useApiRequest from '../../../../hooks/api/useApiRequest';
 import { fetchLeagueRounds } from '../../../../services/CompetitionService';
 import LoadingScreen from '../../../CommonUI/LoadingScreen';
 import DisplayCupStandings from './DisplayCupStandings';
+import ErrorBanner from '../../../CommonUI/ErrorBanner';
 
 const CupStandings = ({ teams, hasStandings, type, season, teamID = null }) => {
     const { leagueID } = useParams();
@@ -16,7 +17,7 @@ const CupStandings = ({ teams, hasStandings, type, season, teamID = null }) => {
     }, [leagueID, season, fetchData]);
 
     if (loading) return <LoadingScreen />;
-    if (error) return <p>Erro: {error.message}</p>;
+    if (error) return <ErrorBanner errorMessage={error.message} />;
 
     return (
         <DisplayCupStandings

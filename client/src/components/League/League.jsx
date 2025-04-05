@@ -1,23 +1,22 @@
-import useButtonGroup from '../../hooks/useButtonGroup';
+import useButtonGroup from '../../hooks/ui/useButtonGroup';
 import { useParams } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, ButtonGroup, Button } from 'react-bootstrap';
 import Standings from './Standings/Standings';
 import TopScorersAndAssists from './TopScorersAndAssists';
 import LeagueMatches from './LeagueMatches';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
-import useLeagueData from '../../hooks/useLeagueData';
+import useLeagueData from '../../hooks/api/useLeagueData';
+import ErrorBanner from '../CommonUI/ErrorBanner';
 
 const League = () => {
     const { leagueID } = useParams();
     const { leagueData, leagueDataLoading, leagueDataError } = useLeagueData(leagueID);
-    const { selected, handleButtonState, isActiveButton } = useButtonGroup('classificacoes');
+    const { selected, handleButtonState, isActiveButton } = useButtonGroup('standings');
 
     if (leagueDataLoading) return <LoadingScreen />;
-    if (leagueDataError) return <p>Erro: {error.message}</p>;
+    if (leagueDataError) return <ErrorBanner errorMessage={error.message} />;
     if (!leagueData || leagueData.length === 0) return <NotFound />;
 
     // armazena o ano da temporada atual em current season
@@ -29,18 +28,18 @@ const League = () => {
 
     const renderComponent = () => {
         switch (selected) {
-            case 'classificacoes':
+            case 'standings':
                 // há ligas que são 'Cup', mas mesmo assim têm classificação
                 // p.ex -> Champions League é 'Cup' mas tem fase de liga 
                 return <Standings season={currentSeason.year} type={leagueType} hasStandings={hasStandings} leagueID={leagueID} />;
-            case 'rondas':
+            case 'rounds':
                 // é ativado apenas quando type === 'Cup' e hasStandings === 'false' 
                 return <Standings season={currentSeason.year} type={leagueType} hasStandings={hasStandings} leagueID={leagueID} />;
-            case 'resultados':
+            case 'results':
                 return <LeagueMatches type='pastGames' />;
-            case 'lista':
+            case 'list':
                 return <LeagueMatches type='upcomingGames' />;
-            case 'marcadores':
+            case 'scorers':
                 return <TopScorersAndAssists season={currentSeason.year} />;
             default:
                 return <div>Erro</div>;
@@ -51,7 +50,7 @@ const League = () => {
         <Container>
             <Row className="align-items-center mb-3">
                 {leagueData[0].league.logo && <Col xs="auto">
-                    <FallbackImage src={leagueData[0]?.league?.logo} type='league' alt="Logo da liga" 
+                    <FallbackImage src={leagueData[0]?.league?.logo} type='league' 
                         style={{width: '70px', height: '70px', objectFit: 'contain'}} 
                     />
                 </Col>}
@@ -64,35 +63,35 @@ const League = () => {
                     <ButtonGroup className="w-100">
                         {hasStandings === false && leagueType === 'Cup' ? (
                             <Button
-                                className={isActiveButton('rondas')}
-                                onClick={() => handleButtonState('rondas')}
+                                className={isActiveButton('rounds')}
+                                onClick={() => handleButtonState('rounds')}
                             >
-                                Rondas
+                                Rounds
                             </Button>) : (
                             <Button
-                                className={isActiveButton('classificacoes')}
-                                onClick={() => handleButtonState('classificacoes')}
+                                className={isActiveButton('standings')}
+                                onClick={() => handleButtonState('standings')}
                             >
-                                Classificações
+                                Standings
                             </Button>)
                         }
                         <Button
-                            className={isActiveButton('resultados')}
-                            onClick={() => handleButtonState('resultados')}
+                            className={isActiveButton('results')}
+                            onClick={() => handleButtonState('results')}
                         >
-                            Resultados
+                            Results
                         </Button>
                         <Button 
-                            className={isActiveButton('lista')}
-                            onClick={() => handleButtonState('lista')}
+                            className={isActiveButton('list')}
+                            onClick={() => handleButtonState('list')}
                         >
-                            Lista
+                            List
                         </Button>
                         <Button
-                            className={isActiveButton('marcadores')}
-                            onClick={() => handleButtonState('marcadores')}
+                            className={isActiveButton('scorers')}
+                            onClick={() => handleButtonState('scorers')}
                         >
-                            Marcadores
+                            Scorers
                         </Button>
                     </ButtonGroup>
                 </div>

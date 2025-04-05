@@ -1,16 +1,17 @@
 import { Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import LoadingScreen from '../../../CommonUI/LoadingScreen';
 import NotFound from '../../../CommonUI/NotFound';
-import { useTeamResults } from '../../../../hooks/useTeamResults';
+import { useTeamResults } from '../../../../hooks/api/useTeamResults';
 import SquadStandingsStatistics from './SquadStandingsStatistics';
 import LastLeagueGames from './LastLeagueGames';
 import { Info } from 'lucide-react';
+import ErrorBanner from '../../../CommonUI/ErrorBanner';
 
 const SquadRankAndMatchesStats = ({leagueID, season}) => {
     const { results, resultsLoading, resultsError } = useTeamResults(leagueID, season);
 
     if (resultsLoading) return <LoadingScreen />;
-    if (resultsError) return <p>Erro: {resultsError.message}</p>;
+    if (resultsError) return <ErrorBanner errorMessage={resultsError.message} />;
     if (!results || results.length === 0) return <NotFound />;
 
     return (

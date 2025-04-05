@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import useButtonGroup from '../../hooks/useButtonGroup';
-import useApiRequest from '../../hooks/useApiRequest';
+import useButtonGroup from '../../hooks/ui/useButtonGroup';
+import useApiRequest from '../../hooks/api/useApiRequest';
 import { fetchCoachData } from '../../services/PeopleService';
-import { Row, Col, Container } from 'react-bootstrap';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Button from 'react-bootstrap/Button';
+import { Row, Col, Container, ButtonGroup, Button } from 'react-bootstrap';
 import CoachCarrer from './CoachCarrer/CoachCarrer';
 import CoachTrophies from './CoachCarrer/CoachTrophies';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
+import ErrorBanner from '../CommonUI/ErrorBanner';
 
 const CoachProfile = () => {
   const { coachID } = useParams();
-  const { selected, handleButtonState, isActiveButton } = useButtonGroup('carreira');
+  const { selected, handleButtonState, isActiveButton } = useButtonGroup('carrer');
   const { data: coachData, loading, error, fetchData } = useApiRequest(fetchCoachData);
 
   useEffect(() => {
@@ -24,16 +23,16 @@ const CoachProfile = () => {
   }, [coachID, fetchData]);
 
   if (loading) return <LoadingScreen />;
-  if (error) return <p>Erro: {error.message}</p>;
+  if (error) return <ErrorBanner errorMessage={error.message} />;
   if (!coachData || coachData.length === 0 ) return <NotFound />;
 
   const coach = coachData[0];
 
   const renderComponent = () => {
     switch (selected) {
-        case 'carreira':
+        case 'carrer':
             return <CoachCarrer carrer={coach.career}/>
-        case 'trofeus':
+        case 'trophies':
             return <CoachTrophies />
         default:
             return <div>Erro</div>;
@@ -48,25 +47,24 @@ const CoachProfile = () => {
                 </Col>
                 <Col>
                 <h3 className="mb-2">{coach.name}</h3>
-                <span>Cargo: Treinador</span><br />
-                <span>Idade: {coach.birth.date} ({coach.age})</span><br />
-                <span>Nacionalidade: {coach.nationality}</span><br />
+                <span>Age: {coach.birth.date} ({coach.age})</span><br />
+                <span>Country: {coach.nationality}</span><br />
                 </Col>
             </Row>
             <Row>
                 <div className="overflow-auto">
                     <ButtonGroup size="md" className="w-100">
                         <Button
-                            className={isActiveButton('carreira')}
-                            onClick={() => handleButtonState('carreira')}
+                            className={isActiveButton('carrer')}
+                            onClick={() => handleButtonState('carrer')}
                         >
-                            Carreira
+                            Carrer
                         </Button>
                         <Button
-                            className={isActiveButton('trofeus')}
-                            onClick={() => handleButtonState('trofeus')}
+                            className={isActiveButton('trophies')}
+                            onClick={() => handleButtonState('trophies')}
                         >
-                            Troféus
+                            Trophies
                         </Button>
                     </ButtonGroup>
                 </div>

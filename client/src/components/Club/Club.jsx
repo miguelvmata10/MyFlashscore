@@ -1,21 +1,22 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import useButtonGroup from '../../hooks/useButtonGroup';
+import useButtonGroup from '../../hooks/ui/useButtonGroup';
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Row, Col } from 'react-bootstrap';
 import Squad from './Squad';
 import TeamLeaguesSelector from './TeamLeaguesSelector';
-import useApiRequest from '../../hooks/useApiRequest';
+import useApiRequest from '../../hooks/api/useApiRequest';
 import { fetchClubData } from '../../services/TeamsService';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
+import ErrorBanner from '../CommonUI/ErrorBanner';
 
 const Club = () => {
     const { teamID } = useParams();
-    const { selected, handleButtonState, isActiveButton } = useButtonGroup('equipa');
+    const { selected, handleButtonState, isActiveButton } = useButtonGroup('squad');
     const { data: clubData, loading, error, fetchData } = useApiRequest(fetchClubData);
 
     useEffect(() => {
@@ -25,16 +26,16 @@ const Club = () => {
     }, [teamID, fetchData]);
 
     if (loading) return <LoadingScreen />;
-    if (error) return <p>Erro: {error.message}</p>;
+    if (error) return <ErrorBanner errorMessage={error.message} />;
     if (!clubData || clubData.length === 0) return <NotFound />;
 
     const renderComponent = () => {
         switch (selected) {
-            case 'equipa':
+            case 'squad':
                 return <Squad teamID={teamID} />;
-            case 'estatisticas':
+            case 'statistics':
                 return <TeamLeaguesSelector componentToRender='SquadStatistics'/>
-            case 'jogos':
+            case 'games':
                 return <TeamLeaguesSelector componentToRender='SquadResults'/>
             default:
                 return <div>Erro</div>;
@@ -54,7 +55,7 @@ const Club = () => {
                     <span>{clubData[0]?.venue?.name}</span><br />
                     <span>Capacidade: {clubData[0]?.venue?.capacity}</span>
                 </Col>
-                <Col xs="auto">
+                <Col xs="auto" className='d-none d-lg-block'>
                     {clubData[0]?.venue?.image && <FallbackImage src={clubData[0]?.venue?.image} width={160} style={{ borderRadius: '10%' }} />}
                 </Col>
             </Row>
@@ -62,22 +63,22 @@ const Club = () => {
                 <div className="overflow-auto">
                     <ButtonGroup className='w-100'>
                         <Button
-                            className={isActiveButton('equipa')}
-                            onClick={() => handleButtonState('equipa')}
+                            className={isActiveButton('squad')}
+                            onClick={() => handleButtonState('squad')}
                         >
-                            Equipa
+                            Squad
                         </Button>
                         <Button
-                            className={isActiveButton('estatisticas')}
-                            onClick={() => handleButtonState('estatisticas')}
+                            className={isActiveButton('statistics')}
+                            onClick={() => handleButtonState('statistics')}
                         >
-                            Estatisticas
+                            Statistics
                         </Button>
                         <Button 
-                            className={isActiveButton('jogos')} 
-                            onClick={() => handleButtonState('jogos')}
+                            className={isActiveButton('games')} 
+                            onClick={() => handleButtonState('games')}
                         >
-                            Jogos
+                            Games
                         </Button>
                     </ButtonGroup>
                 </div>

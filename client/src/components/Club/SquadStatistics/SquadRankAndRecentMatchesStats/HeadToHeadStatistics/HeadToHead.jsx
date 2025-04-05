@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import useApiRequest from '../../../../../hooks/useApiRequest';
+import useApiRequest from '../../../../../hooks/api/useApiRequest';
 import { fetchHeadToHeadStats } from '../../../../../services/TeamsService';
 import LoadingScreen from '../../../../CommonUI/LoadingScreen';
 import NotFound from '../../../../CommonUI/NotFound';
 import HeadToHeadModal from './HeadToHeadModal';
+import ErrorBanner from '../../../../CommonUI/ErrorBanner';
 
 const HeadToHead = ({ h2h, show, onClose }) => {
     const { data: headToheadData, loading, error, fetchData } = useApiRequest(fetchHeadToHeadStats);
@@ -15,7 +16,7 @@ const HeadToHead = ({ h2h, show, onClose }) => {
     }, [h2h, fetchData])
 
     if (loading) return <LoadingScreen />;
-    if (error) return <p>Erro: {error.message}</p>;
+    if (error) return <ErrorBanner errorMessage={error.message} />
     if (!headToheadData) return <NotFound />;
 
     return (

@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useApiRequest from '../../hooks/useApiRequest';
+import useApiRequest from '../../hooks/api/useApiRequest';
 import { fetchSearchData } from '../../services/SearchService';
 import SearchResultsList from './SearchResultsList';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
 import { Container } from 'react-bootstrap';
+import ErrorBanner from '../CommonUI/ErrorBanner';
 
 const SearchResults = () => {
     const { type, inputValue } = useParams();
@@ -28,7 +29,7 @@ const SearchResults = () => {
     }, [page])
    
     if (loading) return <LoadingScreen />;
-    if (error) return <p>Erro: {error.message}</p>;
+    if (error) return <ErrorBanner errorMessage={error.message} />;
     if (!searchData || searchData.length === 0 ) return <NotFound />;
 
     return (

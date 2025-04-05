@@ -2,9 +2,11 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import MatchList from './MatchList';
-import useApiRequest from '../../hooks/useApiRequest';
+import useApiRequest from '../../hooks/api/useApiRequest';
 import { fetchGamesPerDay } from '../../services/GameService';
+import NotFound from '../CommonUI/NotFound';
 import './MatchList.css';
+import ErrorBanner from '../CommonUI/ErrorBanner';
 
 const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
     const [ topLeagueGames, setTopLeagueGames] = useState([]);
@@ -70,15 +72,15 @@ const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
     }, [gamesByLeague, games]);
 
     if (loading) return <LoadingScreen />;
-    if (error) return <p>Erro: {error.message}</p>;
-    if (!games) return <p>Nenhum dado disponível.</p>;
+    if (error) return <ErrorBanner errorMessage={error.message} />;
+    if (!games) return <NotFound />;
     
     return (
         <Container className=''>
             {topLeagueGames.length > 0 && (
                 <div className='mb-3'>
                     <h5 className='heading-border'>
-                        Principais ligas
+                        Top leagues
                     </h5>
                     <MatchList leagueGames={topLeagueGames} />
                 </div>
@@ -87,7 +89,7 @@ const LeagueMatchSelector = ({date, topLeaguesIDs}) => {
             {otherLeagueGames.length > 0 && (
                 <div>
                     <h5 className='heading-border'>
-                        Outras ligas
+                        Other leagues
                     </h5>
                     <MatchList leagueGames={otherLeagueGames} />
                 </div>

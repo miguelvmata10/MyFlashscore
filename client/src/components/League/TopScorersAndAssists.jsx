@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
 import { Button, ButtonGroup, Table, Row, Container, Badge } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
-import useButtonGroup from '../../hooks/useButtonGroup';
-import useApiRequest from '../../hooks/useApiRequest';
+import useButtonGroup from '../../hooks/ui/useButtonGroup';
+import useApiRequest from '../../hooks/api/useApiRequest';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
 import { fetchTopScorers, fetchTopAssisters } from '../../services/CompetitionService';
 import { formatBadge } from '../../utils/helpers';
+import ErrorBanner from '../CommonUI/ErrorBanner';
 
 const TopScorersAndAssists = ({ season }) => {
   const { leagueID } = useParams();
-  const { selected, handleButtonState, isActiveButton } = useButtonGroup('marcadores');
+  const { selected, handleButtonState, isActiveButton } = useButtonGroup('scorers');
 
   const { data: topScorers, loading: loadingScorers, error: errorScorers, fetchData: fetchScorers } = useApiRequest(fetchTopScorers);
   const { data: topAssisters, loading: loadingAssisters, error: errorAssisters, fetchData: fetchAssisters } = useApiRequest(fetchTopAssisters);
@@ -24,12 +25,12 @@ const TopScorersAndAssists = ({ season }) => {
   }, [leagueID, season, fetchScorers, fetchAssisters]);
 
   if (loadingScorers || loadingAssisters) return <LoadingScreen />;
-  if (errorScorers) return <p>Erro: {errorScorers.message}</p>;
-  if (errorAssisters) return <p>Erro: {errorAssisters.message}</p>;
+  if (errorScorers) return <ErrorBanner errorMessage={errorScorers.message} />;
+  if (errorAssisters) return <ErrorBanner errorMessage={errorAssisters.message} />;
   if (!topScorers || topScorers.length === 0 ) return <NotFound />;
   if (!topAssisters || topAssisters.length === 0 ) return <NotFound />;
 
-  const dataToDisplay = selected === 'marcadores' ? topScorers : topAssisters;
+  const dataToDisplay = selected === 'scorers' ? topScorers : topAssisters;
 
   if (!dataToDisplay || dataToDisplay.length === 0) {
     return <NotFound />
@@ -38,11 +39,11 @@ const TopScorersAndAssists = ({ season }) => {
   return (
     <Container className='container rounded-4'>
         <ButtonGroup size='sm' className='custom-button mb-3'>
-            <Button className={isActiveButton('marcadores')} onClick={() => handleButtonState('marcadores')}>
-                Marcadores
+            <Button className={isActiveButton('scorers')} onClick={() => handleButtonState('scorers')}>
+                Scorers
             </Button>
-            <Button className={isActiveButton('assistentes')} onClick={() => handleButtonState('assistentes')}>
-                Assistentes
+            <Button className={isActiveButton('assisters')} onClick={() => handleButtonState('assisters')}>
+                Assisters
             </Button>
         </ButtonGroup> 
       <Row>
@@ -51,17 +52,17 @@ const TopScorersAndAssists = ({ season }) => {
             <thead>
               <tr>
                 <th>º</th>
-                <th className='text-start'>Jogador</th>
-                <th className='text-start'>Equipa</th>
-                <th>PJ</th>
+                <th className='text-start'>Player</th>
+                <th className='text-start'>Team</th>
+                <th>GP</th>
                 <th>G</th>
                 <th>A</th>
-                <th>N</th>
+                <th>R</th>
               </tr>
             </thead>
             <tbody>
               {dataToDisplay.map((player, index) => {
-                const playerData = player?.player;
+                const playerData = player?.player || 'Unknown';
                 const stats = player?.statistics?.[0]; 
                 const teamName = stats?.team?.name || 'N/A'; 
                 const gamesAppearances = stats?.games?.appearences || 'N/A';

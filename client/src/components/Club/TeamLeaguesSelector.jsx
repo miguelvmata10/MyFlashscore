@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Row, Container } from 'react-bootstrap';
 import { fetchTeamLeagues } from '../../services/TeamsService';
-import useApiRequest from '../../hooks/useApiRequest';
+import useApiRequest from '../../hooks/api/useApiRequest';
 import SquadStatistics from './SquadStatistics/SquadStatistics';
 import TeamMatchlist from './TeamMatchlist';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
+import ErrorBanner from '../CommonUI/ErrorBanner';
 
 const TeamLeaguesSelector = ({componentToRender}) => {
     const { teamID } = useParams()
@@ -60,7 +61,7 @@ const TeamLeaguesSelector = ({componentToRender}) => {
     }, [currentTeamLeagues, selectedLeague]);
 
     if (loading) return <LoadingScreen />;
-    if (error) return <p>Erro: {error.message}</p>;
+    if (error) return <ErrorBanner errorMessage={error.message} />;
     if (!leagues || leagues.length === 0 ) return <NotFound />;
 
     const handleDropdownSelect = (eventKey) => {

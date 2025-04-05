@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Container from 'react-bootstrap/esm/Container';
 import { ButtonGroup, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import useApiRequest from '../../hooks/useApiRequest';
+import useApiRequest from '../../hooks/api/useApiRequest';
 import { fetchAllLeagues } from '../../services/CompetitionService';
 import LoadingScreen from '../CommonUI/LoadingScreen';
 import NotFound from '../CommonUI/NotFound';
 import FallbackImage from '../CommonUI/FallbackImage';
+import ErrorBanner from '../CommonUI/ErrorBanner';
 
 const Sidebar = ({topLeaguesIDs, orientation}) => {
     const [ leagues, setLeagues ] = useState([]);
@@ -29,7 +29,7 @@ const Sidebar = ({topLeaguesIDs, orientation}) => {
     }, [leagueData]);
 
     if (loading) return <LoadingScreen />;
-    if (error) return <p>Erro: {error.message}</p>;
+    if (error) return <ErrorBanner errorMessage={error.message} />;
     if (!leagueData || leagueData.length === 0 ) return <NotFound />;
 
     return (
@@ -37,7 +37,7 @@ const Sidebar = ({topLeaguesIDs, orientation}) => {
             {orientation === 'vertical' ? (
                 <>
                     <div className='text-center mb-3'>
-                        <h4><b>Principais ligas</b></h4>
+                        <h5>Top leagues</h5>
                     </div>
                     <ButtonGroup vertical>
                         {leagues.map((topLeague) => (

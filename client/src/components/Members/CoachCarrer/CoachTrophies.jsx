@@ -3,8 +3,9 @@ import { Container, Table } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
 import { fetchCoachTrophies } from '../../../services/PeopleService';
 import LoadingScreen from '../../CommonUI/LoadingScreen';
-import useApiRequest from '../../../hooks/useApiRequest';
+import useApiRequest from '../../../hooks/api/useApiRequest';
 import NotFound from '../../CommonUI/NotFound';
+import ErrorBanner from '../../CommonUI/ErrorBanner';
 
 const CoachTrophies = () => {
   const { coachID } = useParams();
@@ -17,7 +18,7 @@ const CoachTrophies = () => {
   }, [coachID, fetchData]);
 
   if (loading) return <LoadingScreen />;
-  if (error) return <p>Erro: {error.message}</p>;
+  if (error) return <ErrorBanner errorMessage={error.message} />;
   if (!coachTrophies || coachTrophies.length === 0 ) return <NotFound />;
 
   // necessário filtrar apenas os troféus ganhos, pois a API retorna campeonatos ganhos e vice-campeonatos
@@ -32,9 +33,9 @@ const CoachTrophies = () => {
           <Table striped hover variant="dark" className='text-center'>
             <thead>
                 <tr>
-                  <th>Época</th>
-                  <th>País</th>
-                  <th>Competição</th>
+                  <th>Season</th>
+                  <th>Country</th>
+                  <th>League</th>
                 </tr>
             </thead>
             <tbody>

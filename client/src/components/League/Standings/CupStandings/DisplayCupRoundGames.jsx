@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import useApiRequest from '../../../../hooks/useApiRequest';
+import useApiRequest from '../../../../hooks/api/useApiRequest';
 import { fetchRoundGames } from '../../../../services/GameService';
 import LoadingScreen from '../../../CommonUI/LoadingScreen';
 import NotFound from '../../../CommonUI/NotFound';
 import GameCard from '../../../Game/GameCard/GameCard';
+import ErrorBanner from '../../../CommonUI/ErrorBanner';
 
 const DisplayCupRoundGames = ({ round, season }) => {
     const { leagueID } = useParams();
@@ -18,7 +19,7 @@ const DisplayCupRoundGames = ({ round, season }) => {
     }, [leagueID, season, round, fetchData]);
 
     if (loading) return <LoadingScreen />;
-    if (error) return <p>Erro: {error.message}</p>;
+    if (error) return <ErrorBanner errorMessage={error.message} />;
     if (!roundGames || roundGames.length === 0 ) return <NotFound />;
 
     return (
