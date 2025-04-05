@@ -14,7 +14,7 @@ The project consists of two main parts:
 
 Check out the interaction with the app in this video, where a preview of the app is available:
 
-[![Watch the video](https://drive.google.com/file/d/1PP6ntlYdj6PQ5C_nyTetQ2avpLvAdIsM/view?usp=sharing)
+[Watch the video](https://drive.google.com/file/d/1PP6ntlYdj6PQ5C_nyTetQ2avpLvAdIsM/view?usp=sharing)
 
 ---
 
