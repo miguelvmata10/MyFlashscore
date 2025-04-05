@@ -1,7 +1,7 @@
 import api from './api';
 
 export const apiRequest = async (endpoint, options = {}) => {
-    const {method = 'GET', params = {}, body = {}} = options;
+    const { method = 'GET', params = {}, body = {} } = options;
 
     try {
         const response = await api({
@@ -13,11 +13,16 @@ export const apiRequest = async (endpoint, options = {}) => {
 
         return response.data;
     } catch (error) {
-        console.error(`Erro na chamada do endpoint "${endpoint}":`, error);
-        
-        // error 404 nos componentes chegará vazio pois já envio uma resposta aqui
+        console.error(`Error while calling the "${endpoint}" endpoint:`, error);
+
         if (error.response && error.response.status === 404) {
             return [];
+        }
+
+        if (error.response && error.response.status === 500) {
+            console.error('Internal server error. Please try again later.');
+            // Throw a simple error message
+            throw new Error('Internal server error. Please try again later.');
         }
 
         throw error;
