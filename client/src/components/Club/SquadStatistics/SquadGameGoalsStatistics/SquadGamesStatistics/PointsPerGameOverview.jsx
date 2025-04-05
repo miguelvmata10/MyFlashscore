@@ -1,7 +1,6 @@
 import { Table, ProgressBar } from 'react-bootstrap';
 
 const PointsPerGameOverview = ({ fixtures }) => {
-    console.log('fd', fixtures);
     const { played = {}, draws = {}, wins = {} } = fixtures;
 
     const maxPoints = {
