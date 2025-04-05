@@ -1,6 +1,6 @@
 import { Container, Row, ButtonGroup, Button } from 'react-bootstrap';
 import NotFound from '../NotFound';
-import useButtonGroup from '../../../hooks/useButtonGroup';
+import useButtonGroup from '../../../hooks/ui/useButtonGroup';
 import { Line } from 'react-chartjs-2';
 import {
     Chart as ChartJS,

@@ -1,6 +1,6 @@
 import NotFound from '../../../CommonUI/NotFound';
 import StandingsDescriptions from '../StandingsDescriptions';
-import useStandingsDescriptions from '../../../../hooks/useStandingsDescriptions';
+import useStandingsDescriptions from '../../../../hooks/utils/useStandingsDescriptions';
 import { useResults } from '../../../../providers/ResultsContext';
 import TeamStandingsTable from './TeamStandingsTable';
 import LeagueStandingsTable from './LeagueStandingsTable';

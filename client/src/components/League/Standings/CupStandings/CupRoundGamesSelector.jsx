@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { ButtonGroup, Row, Button } from 'react-bootstrap';
-import useButtonGroup from '../../../../hooks/useButtonGroup';
+import useButtonGroup from '../../../../hooks/ui/useButtonGroup';
 import DisplayCupRoundGames from './DisplayCupRoundGames';
 
 const CupRoundGamesSelector = ( { leagueRounds, season }) => {

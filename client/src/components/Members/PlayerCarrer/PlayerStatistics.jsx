@@ -4,10 +4,9 @@ import { useParams } from "react-router-dom";
 import { fetchPlayerStatistics} from '../../../services/PeopleService';
 import ElementCard from '../../CommonUI/ElementCard';
 import LoadingScreen from '../../CommonUI/LoadingScreen';
-import useApiRequest from '../../../hooks/useApiRequest';
+import useApiRequest from '../../../hooks/api/useApiRequest';
 import NotFound from '../../CommonUI/NotFound';
 import FallbackImage from '../../CommonUI/FallbackImage';
-
 
 const PlayerStatistics = ({season}) => {
     const { playerID } = useParams();

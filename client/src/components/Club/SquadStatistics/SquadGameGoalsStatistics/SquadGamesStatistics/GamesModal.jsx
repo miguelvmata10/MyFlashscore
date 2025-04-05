@@ -1,6 +1,6 @@
 import GenericModal from '../../../../CommonUI/GenericModal';
 import { Row, ButtonGroup, Button, Container } from 'react-bootstrap';
-import useButtonGroup from '../../../../../hooks/useButtonGroup';
+import useButtonGroup from '../../../../../hooks/ui/useButtonGroup';
 import PointsPerGameOverview from './PointsPerGameOverview';
 import LineupsStats from './LineupsStats';
 import CardsStats from './CardsStats';
