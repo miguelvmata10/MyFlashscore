@@ -18,7 +18,7 @@ const TeamDisplay = ({ team }) => {
                 />
             </div>
             <Link to={`/team/${team.id}`} className='customLink'>
-                <h5 className="mt-3 ">{team.name}</h5>
+                <h5 className="mt-3 fs-6 fs-md-5">{team.name}</h5>
             </Link>
         </Col>
     );
